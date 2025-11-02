@@ -62,7 +62,7 @@
   ],
   "Case": [
     {"name":"Steel","price":2.79},
-    {"name":"Titanium","price":100},
+    {"name":"Titanium","price":99.99},
     {"name":"Iron (rusts)","price":2.79},
     {"name":"Brass","price":2.79},
     {"name":"Copper","price":2.79},
@@ -92,7 +92,7 @@
     {"name":"256gb (~32h|3200photos)","price":30}
   ],
   "Lens": [
-    {"name":"Basic","price":0},
+    {"name":"Basic","price":0.09},
     {"name":"Macro","price":4.99},
     {"name":"Fisheye","price":4.99},
     {"name":"Zoom (>10x)","price":14.99}
@@ -100,7 +100,7 @@
   "Charger": [
     {"name":"None (Use own)","price":0},
     {"name":"USBC to USBC","price":4.99},
-    {"name":"USBC to USBA","price":0}
+    {"name":"USBC to USBA","price":0.49}
   ],
   "Battery": [
     {"name":"2000mah (>10h)","price":11.99},
@@ -114,6 +114,7 @@
     {"name":"IR Lens (Permanent)","price":2.99}
   ]
 }
+
 
 
 
