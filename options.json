@@ -20,7 +20,7 @@
     {"name":"Carbon Fiber","price":14.99},
     {"name":"Fiberglass","price":9.99},
     {"name":"Reflective","price":4.99},
-    {"name":"Grey Cloth","price":0.49}
+    {"name":"Grey Cloth","price":0.39}
   ],
   "Case": [
     {"name":"Steel","price":2.79},
@@ -82,6 +82,7 @@
     {"name":"Permanent (ALL DAMAGES) (REPAIR)","price":14.99}
   ]
 }
+
 
 
 
