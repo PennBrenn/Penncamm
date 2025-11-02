@@ -41,7 +41,7 @@
     {"name":"Purple Plastic","price":1.99},
     {"name":"Pink Plastic","price":1.99},
     {"name":"Brown Plastic","price":1.99},
-    {"name":"Color fade","price":1.99},
+    {"name":"Color fade","price":1.99}
   ],
   "Storage": [
     {"name":"None","price":0},
@@ -81,6 +81,7 @@
     {"name":"Permanent (ALL DAMAGES) (REPAIR)","price":14.99}
   ]
 }
+
 
 
 
