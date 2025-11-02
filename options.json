@@ -61,30 +61,27 @@
     {"name":"Reflective","price":5}
   ],
   "Case": [
-    {"name":"Steel","price":8},
+    {"name":"Steel","price":3},
     {"name":"Titanium","price":100},
-    {"name":"Iron (rusts)","price":8},
-    {"name":"Brass","price":8},
-    {"name":"Copper","price":8},
-    {"name":"Composite","price":7},
-    {"name":"Nickel Electroplate","price":10},
-    {"name":"Copper Electroplate","price":12},
-    {"name":"Multicolor Plastic","price":5},
-    {"name":"Clear Plastic","price":4},
-    {"name":"Black Plastic","price":4},
-    {"name":"White Plastic","price":4},
-    {"name":"Red Plastic","price":4},
-    {"name":"Orange Plastic","price":4},
-    {"name":"Yellow Plastic","price":4},
-    {"name":"Green Plastic","price":4},
-    {"name":"Blue Plastic","price":4},
-    {"name":"Purple Plastic","price":4},
-    {"name":"Pink Plastic","price":4},
-    {"name":"Brown Plastic","price":4},
-    {"name":"Color fade","price":4},
-    {"name":"Clear","price":4},
-    {"name":"Gold","price":1000},
-    {"name":"Uranium","price":6700}
+    {"name":"Iron (rusts)","price":3},
+    {"name":"Brass","price":3},
+    {"name":"Copper","price":3},
+    {"name":"Composite","price":3},
+    {"name":"Nickel Electroplate","price":8},
+    {"name":"Copper Electroplate","price":8},
+    {"name":"Clear Plastic","price":2},
+    {"name":"Black Plastic","price":2},
+    {"name":"White Plastic","price":2},
+    {"name":"Red Plastic","price":2},
+    {"name":"Orange Plastic","price":2},
+    {"name":"Yellow Plastic","price":2},
+    {"name":"Green Plastic","price":2},
+    {"name":"Blue Plastic","price":2},
+    {"name":"Purple Plastic","price":2},
+    {"name":"Pink Plastic","price":2},
+    {"name":"Brown Plastic","price":2},
+    {"name":"Color fade","price":2},
+    {"name":"Clear","price":2},
   ],
   "Storage": [
     {"name":"None","price":0},
@@ -102,8 +99,8 @@
   ],
   "Charger": [
     {"name":"None (Use own)","price":0},
-    {"name":"USBC to USBC","price":6},
-    {"name":"USBC to USBA","price":3}
+    {"name":"USBC to USBC","price":5},
+    {"name":"USBC to USBA","price":0}
   ],
   "Battery": [
     {"name":"2000mah (>10h)","price":12},
@@ -111,12 +108,13 @@
   ],
   "Mounts": [
     {"name":"Gimbal","price":50},
-    {"name":"Tripod","price":20},
-    {"name":"Chest","price":20},
-    {"name":"Suction","price":20},
-    {"name":"Helmet","price":20}
+    {"name":"Tripod","price":15},
+    {"name":"Chest","price":10},
+    {"name":"Suction","price":10},
+    {"name":"Velcro","price":10}
   ]
 }
+
 
 
 
