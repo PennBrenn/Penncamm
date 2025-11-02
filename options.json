@@ -21,45 +21,6 @@
     {"name":"Fiberglass","price":9.99},
     {"name":"Reflective","price":4.99}
   ],
-  "Accent": [
-    {"name":"Tan Leather","price":0.79},
-    {"name":"Black Leather","price":0.79},
-    {"name":"Brown Leather","price":0.79},
-    {"name":"Blue Leather","price":0.79},
-    {"name":"Black Foam","price":0.79},
-    {"name":"White Foam","price":0.79},
-    {"name":"Red Foam","price":0.79},
-    {"name":"Orange Foam","price":0.79},
-    {"name":"Yellow Foam","price":0.79},
-    {"name":"Green Foam","price":0.79},
-    {"name":"Blue Foam","price":0.79},
-    {"name":"Purple Foam","price":0.79},
-    {"name":"Pink Foam","price":0.79},
-    {"name":"Brown Foam","price":0.79},
-    {"name":"Steel","price":1.99},
-    {"name":"Titanium","price":59.99},
-    {"name":"Iron (rusts)","price":1.99},
-    {"name":"Brass","price":1.99},
-    {"name":"Copper","price":1.99},
-    {"name":"Multicolor Plastic","price":0.79},
-    {"name":"Clear Plastic","price":0.79},
-    {"name":"Black Plastic","price":0.79},
-    {"name":"White Plastic","price":0.79},
-    {"name":"Red Plastic","price":0.79},
-    {"name":"Orange Plastic","price":0.79},
-    {"name":"Yellow Plastic","price":0.79},
-    {"name":"Green Plastic","price":0.79},
-    {"name":"Blue Plastic","price":0.79},
-    {"name":"Purple Plastic","price":0.79},
-    {"name":"Pink Plastic","price":0.79},
-    {"name":"Brown Plastic","price":0.79},
-    {"name":"Black Silicone","price":1.99},
-    {"name":"White Silicone","price":1.99},
-    {"name":"Clear Silicone","price":1.99},
-    {"name":"Carbon Fiber","price":14.99},
-    {"name":"Fiberglass","price":9.99},
-    {"name":"Reflective","price":4.99}
-  ],
   "Case": [
     {"name":"Steel","price":2.79},
     {"name":"Titanium","price":99.99},
@@ -69,7 +30,7 @@
     {"name":"Composite","price":2.79},
     {"name":"Nickel Electroplate","price":7.99},
     {"name":"Copper Electroplate","price":7.99},
-    {"name":"Clear Plastic","price":1.99},
+    {"name":"Clear Plastic","price":3.99},
     {"name":"Black Plastic","price":1.99},
     {"name":"White Plastic","price":1.99},
     {"name":"Red Plastic","price":1.99},
@@ -81,7 +42,6 @@
     {"name":"Pink Plastic","price":1.99},
     {"name":"Brown Plastic","price":1.99},
     {"name":"Color fade","price":1.99},
-    {"name":"Clear","price":1.99}
   ],
   "Storage": [
     {"name":"None","price":0},
@@ -121,6 +81,7 @@
     {"name":"Permanent (ALL DAMAGES) (REPAIR)","price":14.99}
   ]
 }
+
 
 
 
