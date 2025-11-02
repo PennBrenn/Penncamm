@@ -46,7 +46,7 @@
   ],
   "Storage": [
     {"name":"None","price":0.00},
-    {"name":"Standard (1 < gb < 64) [I will try to get you more]","price":1.99},
+    {"name":"Standard (>4 gb)","price":1.99},
     {"name":"16gb (~1h|200photos)","price":10},
     {"name":"32gb (~3h|400photos)","price":15},
     {"name":"64gb (~6h|800photos)","price":20},
@@ -83,6 +83,7 @@
     {"name":"Permanent (ALL DAMAGES) (REPAIR)","price":14.99}
   ]
 }
+
 
 
 
