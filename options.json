@@ -31,7 +31,7 @@
     {"name":"Nickel Electroplate","price":7.99},
     {"name":"Copper Electroplate","price":7.99},
     {"name":"Clear Plastic","price":3.99},
-    {"name":"Black Plastic","price":1.99},
+    {"name":"Black Plastic","price":0.99},
     {"name":"White Plastic","price":1.99},
     {"name":"Red Plastic","price":1.99},
     {"name":"Orange Plastic","price":1.99},
@@ -81,6 +81,7 @@
     {"name":"Permanent (ALL DAMAGES) (REPAIR)","price":14.99}
   ]
 }
+
 
 
 
