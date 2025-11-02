@@ -445,7 +445,7 @@
       const labor = 10;
       let total = parts + labor;
       Object.keys(selected).forEach(cat => {
-        selected[cat].forEach(it => 20 += (Number(it.price) || 0));
+        selected[cat].forEach(it => total += (Number(it.price) || 0));
       });
 
       // update button
@@ -548,6 +548,7 @@
 </style>
 </body>
 </html>
+
 
 
 
