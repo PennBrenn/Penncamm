@@ -52,7 +52,7 @@
     {"name":"256gb (~32h|3200photos)","price":30}
   ],
   "Lens": [
-    {"name":"Basic","price":0.09},
+    {"name":"Basic","price":0},
     {"name":"Macro","price":4.99},
     {"name":"Fisheye","price":4.99},
     {"name":"Zoom (>10x)","price":14.99}
@@ -70,17 +70,18 @@
     {"name":"Mount","price":9.99},
     {"name":"Keychain","price":0.49},
     {"name":"Carry Strap","price":0.49},
-    {"name":"No Diffuser","price":-0.49},
+    {"name":"No Diffuser","price":0},
     {"name":"IR Lens (Permanent)","price":2.99}
   ],
   "Warranty": [
-    {"name":"Permanent (DEFECTS) (REPLACEMENT & REPAIR)","price":0.01},
+    {"name":"Permanent (DEFECTS) (REPLACEMENT & REPAIR)","price":0},
     {"name":"1 Year (ALL DAMAGES) (REPLACEMENT)","price":14.99},
     {"name":"1 Year (ALL DAMAGES) (REPAIR)","price":7.49},
     {"name":"Permanent (ALL DAMAGES) (REPLACEMENT)","price":29.99},
     {"name":"Permanent (ALL DAMAGES) (REPAIR)","price":14.99}
   ]
 }
+
 
 
 
