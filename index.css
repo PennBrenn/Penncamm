@@ -117,10 +117,27 @@ main { padding-top: calc(var(--header-height) + 12px); position:relative; z-inde
   backdrop-filter: blur(6px) saturate(120%);
   color: var(--para-color);
 }
-.sample .glass {
-  margin: -28px; /* cancel out the .glass padding */
-  margin-top: 0; /* keep some space above if you want */
-  width: calc(100% + 56px); /* 28px * 2 */
+
+/* samples */
+
+.sam {
+  min-height: 60vh;
+  padding: 48px 18px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.sam .sample {
+  display: grid;
+  gap: 12px;
+  width: min(1100px, 96%);
+  border-radius: 14px;
+  padding: 28px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 6px 30px rgba(0,0,0,0.6);
+  backdrop-filter: blur(6px) saturate(120%);
+  color: var(--para-color);
 }
 
 /* smaller void between sections */
@@ -242,5 +259,6 @@ section.panel + section.panel { margin-top: var(--panel-gap); }
   .title { font-size:34px; }
   .panel { padding:26px 12px; }
 }
+
 
 
