@@ -112,8 +112,16 @@
     {"name":"Carry Strap","price":0.49},
     {"name":"No Diffuser","price":-0.49},
     {"name":"IR Lens (Permanent)","price":2.99}
+  ],
+  "Warranty": [
+    {"name":"Permanent (DEFECTS) (REPLACEMENT & REPAIR)","price":0.01},
+    {"name":"1 Year (ALL DAMAGES) (REPLACEMENT)","price":14.99},
+    {"name":"1 Year (ALL DAMAGES) (REPAIR)","price":7.49},
+    {"name":"Permanent (ALL DAMAGES) (REPLACEMENT)","price":29.99},
+    {"name":"Permanent (ALL DAMAGES) (REPAIR)","price":14.99}
   ]
 }
+
 
 
 
