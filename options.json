@@ -1,9 +1,6 @@
 {
   "Wrap": [
-    {"name":"Tan Leather","price":1.99},
-    {"name":"Black Leather","price":1.99},
-    {"name":"Brown Leather","price":1.99},
-    {"name":"Blue Leather","price":1.99},
+    {"name":"Grey Cloth","price":0.39},
     {"name":"Black Foam","price":0.79},
     {"name":"White Foam","price":0.79},
     {"name":"Red Foam","price":0.79},
@@ -14,24 +11,18 @@
     {"name":"Purple Foam","price":0.79},
     {"name":"Pink Foam","price":0.79},
     {"name":"Brown Foam","price":0.79},
+    {"name":"Tan Leather","price":1.99},
+    {"name":"Black Leather","price":1.99},
+    {"name":"Brown Leather","price":1.99},
+    {"name":"Blue Leather","price":1.99},
     {"name":"Black Silicone","price":2.79},
     {"name":"White Silicone","price":2.79},
     {"name":"Clear Silicone","price":2.79},
-    {"name":"Carbon Fiber","price":14.99},
-    {"name":"Fiberglass","price":9.99},
     {"name":"Reflective","price":4.99},
-    {"name":"Grey Cloth","price":0.39}
+    {"name":"Fiberglass","price":9.99},
+    {"name":"Carbon Fiber","price":14.99}
   ],
   "Case": [
-    {"name":"Steel","price":2.79},
-    {"name":"Titanium","price":99.99},
-    {"name":"Iron (rusts)","price":2.79},
-    {"name":"Brass","price":2.79},
-    {"name":"Copper","price":2.79},
-    {"name":"Composite","price":2.79},
-    {"name":"Nickel Electroplate","price":7.99},
-    {"name":"Copper Electroplate","price":7.99},
-    {"name":"Clear Plastic","price":3.99},
     {"name":"Black Plastic","price":0.99},
     {"name":"White Plastic","price":1.99},
     {"name":"Red Plastic","price":1.99},
@@ -42,7 +33,16 @@
     {"name":"Purple Plastic","price":1.99},
     {"name":"Pink Plastic","price":1.99},
     {"name":"Brown Plastic","price":1.99},
-    {"name":"Color fade","price":1.99}
+    {"name":"Color fade","price":1.99},
+    {"name":"Steel","price":2.79},
+    {"name":"Titanium","price":99.99},
+    {"name":"Iron (rusts)","price":2.79},
+    {"name":"Brass","price":2.79},
+    {"name":"Copper","price":2.79},
+    {"name":"Composite","price":2.79},
+    {"name":"Nickel Electroplate","price":7.99},
+    {"name":"Copper Electroplate","price":7.99},
+    {"name":"Clear Plastic","price":3.99}
   ],
   "Storage": [
     {"name":"None","price":0.00},
@@ -61,50 +61,25 @@
   ],
   "Charger": [
     {"name":"None (Use own)","price":0.00},
-    {"name":"USBC to USBC","price":4.99},
-    {"name":"USBC to USBA","price":0.49}
+    {"name":"USBC to USBA","price":0.49},
+    {"name":"USBC to USBC","price":4.99}
   ],
   "Battery": [
-    {"name":"2000mah (>10h)","price":11.99},
-    {"name":"350mah (>2h)","price":2.79}
+    {"name":"350mah (>2h)","price":2.79},
+    {"name":"2000mah (>10h)","price":11.99}
   ],
   "Misc": [
-    {"name":"Mount","price":9.99},
+    {"name":"No Diffuser","price":0.09},
     {"name":"Keychain","price":0.49},
     {"name":"Carry Strap","price":0.49},
-    {"name":"No Diffuser","price":0.09},
-    {"name":"IR Lens (Permanent)","price":2.99}
+    {"name":"IR Lens (Permanent)","price":2.99},
+    {"name":"Mount","price":9.99}
   ],
   "Warranty": [
     {"name":"Permanent (DEFECTS) (REPLACEMENT & REPAIR)","price":0},
-    {"name":"1 Year (ALL DAMAGES) (REPLACEMENT)","price":14.99},
     {"name":"1 Year (ALL DAMAGES) (REPAIR)","price":7.49},
-    {"name":"Permanent (ALL DAMAGES) (REPLACEMENT)","price":29.99},
-    {"name":"Permanent (ALL DAMAGES) (REPAIR)","price":14.99}
+    {"name":"1 Year (ALL DAMAGES) (REPLACEMENT)","price":14.99},
+    {"name":"Permanent (ALL DAMAGES) (REPAIR)","price":14.99},
+    {"name":"Permanent (ALL DAMAGES) (REPLACEMENT)","price":29.99}
   ]
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
