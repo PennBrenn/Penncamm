@@ -313,7 +313,7 @@
       Lens: [],
       Charger: [],
       Battery: [],
-      Mounts: []
+      Misc: []
     };
 
     function money(n){ return `$${Number(n).toFixed(2)}`; }
@@ -338,7 +338,7 @@
         box.appendChild(title);
 
 // multiselect
-        if (cat === 'Lens' || cat === 'Mounts') {
+        if (cat === 'Lens' || cat === 'Misc') {
           const selectAll = document.createElement('button');
           selectAll.type = 'button';
           selectAll.className = 'select-all';
@@ -548,6 +548,7 @@
 </style>
 </body>
 </html>
+
 
 
 
