@@ -40,9 +40,9 @@
     {"name":"Brass","price":2.79},
     {"name":"Copper","price":2.79},
     {"name":"Composite","price":2.79},
+    {"name":"Clear Plastic","price":3.99},
     {"name":"Nickel Electroplate","price":7.99},
-    {"name":"Copper Electroplate","price":7.99},
-    {"name":"Clear Plastic","price":3.99}
+    {"name":"Copper Electroplate","price":7.99}
   ],
   "Storage": [
     {"name":"None","price":0.00},
@@ -83,4 +83,5 @@
     {"name":"Permanent (ALL DAMAGES) (REPLACEMENT)","price":29.99}
   ]
 }
+
 
