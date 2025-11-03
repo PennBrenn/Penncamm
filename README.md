@@ -1,8 +1,8 @@
-#PennCamm#
+# PennCamm
 Hello beepol of new pennland<br>
 It is much a pleasure to see you here!<br>
 I bet you are curios...<br>
-#What is PennCamm?
+## What is PennCamm?
 Welp, its a lil brand i made.<br>
 We do much things<br>
 But mostly make cameras<br>
