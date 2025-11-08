@@ -15,6 +15,7 @@
     {"name":"Black Leather","price":1.99},
     {"name":"Brown Leather","price":1.99},
     {"name":"Blue Leather","price":1.99},
+    {"name":"Red Velvet","price":2.79},
     {"name":"Black Silicone","price":2.79},
     {"name":"White Silicone","price":2.79},
     {"name":"Clear Silicone","price":2.79},
@@ -86,6 +87,7 @@
     {"name":"Permanent (ALL DAMAGES) (REPLACEMENT)","price":29.99}
   ]
 }
+
 
 
 
