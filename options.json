@@ -26,6 +26,7 @@
     {"name":"Black Plastic","price":0.99},
     {"name":"White Plastic","price":1.99},
     {"name":"Red Plastic","price":1.99},
+    {"name":"Glitter","price":1.99},
     {"name":"Orange Plastic","price":1.99},
     {"name":"Yellow Plastic","price":1.99},
     {"name":"Green Plastic","price":1.99},
@@ -35,6 +36,7 @@
     {"name":"Brown Plastic","price":1.99},
     {"name":"Color fade","price":1.99},
     {"name":"Steel","price":2.79},
+    {"name":"Blue Steel","price":2.79},
     {"name":"Titanium","price":99.99},
     {"name":"Iron (rusts)","price":2.79},
     {"name":"Brass","price":2.79},
@@ -83,6 +85,7 @@
     {"name":"Permanent (ALL DAMAGES) (REPLACEMENT)","price":29.99}
   ]
 }
+
 
 
 
