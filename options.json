@@ -27,6 +27,7 @@
     {"name":"White Plastic","price":1.99},
     {"name":"Red Plastic","price":1.99},
     {"name":"Glitter","price":1.99},
+    {"name":"Glow","price":1.99},
     {"name":"Orange Plastic","price":1.99},
     {"name":"Yellow Plastic","price":1.99},
     {"name":"Green Plastic","price":1.99},
@@ -85,6 +86,7 @@
     {"name":"Permanent (ALL DAMAGES) (REPLACEMENT)","price":29.99}
   ]
 }
+
 
 
 
