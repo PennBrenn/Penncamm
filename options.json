@@ -36,7 +36,7 @@
     {"name":"Purple Plastic","price":1.99},
     {"name":"Pink Plastic","price":1.99},
     {"name":"Brown Plastic","price":1.99},
-    {"name":"Color fade","price":1.99},
+    {"name":"Oil Spill","price":1.99},
     {"name":"Steel","price":2.79},
     {"name":"Blue Steel","price":2.79},
     {"name":"Titanium","price":99.99},
@@ -87,6 +87,7 @@
     {"name":"Permanent (ALL DAMAGES) (REPLACEMENT)","price":29.99}
   ]
 }
+
 
 
 
