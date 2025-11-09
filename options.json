@@ -80,11 +80,8 @@
     {"name":"Mount","price":9.99}
   ],
   "Warranty": [
-    {"name":"Permanent (DEFECTS) (REPLACEMENT & REPAIR)","price":0},
-    {"name":"1 Year (ALL DAMAGES) (REPAIR)","price":7.49},
-    {"name":"1 Year (ALL DAMAGES) (REPLACEMENT)","price":14.99},
-    {"name":"Permanent (ALL DAMAGES) (REPAIR)","price":14.99},
-    {"name":"Permanent (ALL DAMAGES) (REPLACEMENT)","price":29.99}
+    {"name":"30 Day Manufacturer Warranty","price":0},
+    {"name":"1 Year Extended Warranty","price":7.49}
   ]
 }
 
