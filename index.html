@@ -114,11 +114,11 @@
 
     <!-- foto -->
 <style>
-  /* Unique IDs so nothing conflicts with existing .glass or .sample-grid */
-  #samples-safe {
+  /* Scoped styles so they don't conflict with your main site */
+  #samples-panel {
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     padding: 48px 18px;
   }
 
@@ -131,46 +131,66 @@
     box-shadow: 0 6px 30px rgba(0,0,0,0.6);
     backdrop-filter: blur(6px) saturate(120%);
     color: var(--para-color);
-    overflow: hidden; /* prevents any content from spilling outside */
+    overflow: hidden;
+  }
+
+  #samples-header {
+    color: var(--title-color);
+    font-family: "Courier New", Courier, monospace;
+    font-size: 28px;
+    margin-bottom: 20px;
+    text-align: left;
   }
 
   #samples-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 14px;
-    margin-top: 14px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
   }
 
   #samples-grid figure {
-    background: rgba(0,0,0,0.2);
-    border-radius: 10px;
-    padding: 6px;
-    overflow: hidden; /* keeps each image fully inside its figure */
+    background: rgba(0, 0, 0, 0.25);
+    border-radius: 12px;
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  #samples-grid figure:hover {
+    transform: scale(1.02);
+    box-shadow: 0 6px 25px rgba(0,0,0,0.5);
   }
 
   #samples-grid img {
     width: 100%;
-    height: auto;
-    display: block;
-    border-radius: 8px;
-    object-fit: contain; /* ensures image fits without cropping */
+    height: 300px;
+    object-fit: cover;
+    border-radius: 10px;
   }
 
   #samples-grid figcaption {
     text-align: center;
-    font-size: 13px;
+    font-size: 14px;
     color: var(--para-color);
-    margin-top: 6px;
+    margin-top: 8px;
   }
 
-  @media (max-width:900px){
-    #samples-grid { grid-template-columns: repeat(2, 1fr); }
+  @media (max-width: 700px) {
+    #samples-grid {
+      grid-template-columns: 1fr;
+    }
+    #samples-grid img {
+      height: 240px;
+    }
   }
 </style>
 
-<section id="samples-safe" class="panel">
+<section id="samples-panel" class="panel">
   <div id="samples-glass">
-    <h2 class="section-title">Sample Photos — MKI Gen2</h2>
+    <h2 id="samples-header">Sample Photos — MKI Gen2</h2>
     <div id="samples-grid">
       <figure>
         <img src="sam.png" alt="Sam" />
@@ -191,6 +211,7 @@
     </div>
   </div>
 </section>
+
 
     <!-- the section with the feaures -->
     <section id="features" class="panel features">
@@ -606,4 +627,5 @@
 </style>
 </body>
 </html>
+
 
