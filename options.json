@@ -41,7 +41,7 @@
   ],
   "Charger": [
     {"name":"None (Use own)","price":0.00},
-    {"name":"USBC to USBA","price":0.99},
+    {"name":"USBC to USBA","price":0.99}
   ],
   "Battery": [
     {"name":"350mah","price":2.79},
@@ -62,4 +62,5 @@
     {"name":"1 Year Extended Warranty","price":4.99}
   ]
 }
+
 
