@@ -55,10 +55,11 @@
     {"name":"Carry Strap","price":0.49},
     {"name":"IR Lens (Permanent)","price":2.99},
     {"name":"Mount","price":9.99},
-    {"name":"Calc Attachment (TI 84)","price":9.99},
+    {"name":"Calc Attachment (TI 84)","price":9.99}
   ],
   "Warranty": [
     {"name":"30 Day Manufacturer Warranty","price":0},
     {"name":"1 Year Extended Warranty","price":4.99}
   ]
 }
+
