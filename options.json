@@ -70,7 +70,7 @@
   ],
   "Battery": [
     {"name":"350mah","price":2.79},
-    {"name":"700mah","price":5.99}
+    {"name":"700mah","price":5.99},
     {"name":"2000mah","price":11.99}
   ],
   "Misc": [
@@ -85,6 +85,7 @@
     {"name":"1 Year Extended Warranty","price":4.99}
   ]
 }
+
 
 
 
