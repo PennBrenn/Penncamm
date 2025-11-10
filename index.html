@@ -214,6 +214,8 @@
             <input id="customer-email" type="email" placeholder="you@example.com" />
             <label for="customer-phone">Phone</label>
             <input id="customer-phone" type="tel" placeholder="+1 555 555 5555" />
+            <label for="customer-phone">Address</label>
+            <input id="customer-address" type="tel" placeholder="1234 Silly dr." />
           </div>
 
           <div id="options-container" class="options-container">
@@ -456,15 +458,17 @@
     }
 
     function buildEmailPreview(total) {
-      const name = document.getElementById('customer-name').value || '[Your name]';
-      const email = document.getElementById('customer-email').value || '[Your email]';
+      const name = document.getElementById('customer-name').value || '[Name]';
+      const email = document.getElementById('customer-email').value || 'Email]';
       const phone = document.getElementById('customer-phone').value || '[Phone]';
+      const address = document.getElementById('customer-address').value || '[Address]';
       const notes = document.getElementById('notes').value || '';
 
       const lines = [];
       lines.push(`To: cam@pennbrenn.com`);
       lines.push(`From: ${name} <${email}>`);
       lines.push(`Phone: ${phone}`);
+      lines.push(`Phone: ${address}`);
       lines.push('');
       lines.push(`Subject: Penncamm custom quote request`);
       lines.push('');
@@ -548,6 +552,7 @@
 </style>
 </body>
 </html>
+
 
 
 
