@@ -50,7 +50,7 @@
   ],
   "Storage": [
     {"name":"None","price":0.00},
-    {"name":"Standard (>4 gb|class <10)","price":1.99},
+    {"name":"Penncamm Standard","price":1.99},
     {"name":"16gb (~1h|200photos)","price":10},
     {"name":"32gb (~3h|400photos)","price":15},
     {"name":"64gb (~6h|800photos)","price":20},
@@ -65,12 +65,13 @@
   ],
   "Charger": [
     {"name":"None (Use own)","price":0.00},
-    {"name":"USBC to USBA","price":0.49},
+    {"name":"USBC to USBA","price":0.99},
     {"name":"USBC to USBC","price":4.99}
   ],
   "Battery": [
-    {"name":"350mah (>2h)","price":2.79},
-    {"name":"2000mah (>10h)","price":11.99}
+    {"name":"350mah","price":2.79},
+    {"name":"700mah","price":5.99}
+    {"name":"2000mah","price":11.99}
   ],
   "Misc": [
     {"name":"No Diffuser","price":0.00},
@@ -84,6 +85,7 @@
     {"name":"1 Year Extended Warranty","price":4.99}
   ]
 }
+
 
 
 
