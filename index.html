@@ -214,7 +214,7 @@
             <input id="customer-email" type="email" placeholder="you@example.com" />
             <label for="customer-phone">Phone</label>
             <input id="customer-phone" type="tel" placeholder="+1 555 555 5555" />
-            <label for="customer-phone">Address</label>
+            <label for="customer-address">Address</label>
             <input id="customer-address" type="tel" placeholder="1234 Silly dr." />
           </div>
 
@@ -224,7 +224,7 @@
           </div>
 
           <div class="fixed-fees">
-            <div>Parts: <strong>$11.99</strong></div>
+            <div>Parts: <strong>$14.99</strong></div>
             <div>Labor: <strong>$9.99</strong></div>
             <div class="lead-time">Lead time: <strong>Up to 30 days</strong></div>
             <strong>Notice:</strong>If parts are matching, up to a 50% discount can be aplied to both parts.
@@ -443,7 +443,7 @@
       });
 
       // PRICE<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-      const parts = 11.99;
+      const parts = 14.99;
       const labor = 9.99;
       let total = parts + labor;
       Object.keys(selected).forEach(cat => {
@@ -465,17 +465,12 @@
       const notes = document.getElementById('notes').value || '';
 
       const lines = [];
+      lines.push(`Penncamm custom quote request`);
       lines.push(`To: cam@pennbrenn.com`);
       lines.push(`From: ${name} <${email}>`);
       lines.push(`Phone: ${phone}`);
-      lines.push(`Phone: ${address}`);
-      lines.push('');
-      lines.push(`Subject: Penncamm custom quote request`);
-      lines.push('');
-      lines.push(`Hello,`);
-      lines.push('');
-      lines.push(`I'd like a quote for a custom Penncamm with the following options:`);
-      lines.push('');
+      lines.push(`address: ${address}`);
+      lines.push(`Options:`);
 
       Object.keys(selected).forEach(cat => {
         if (selected[cat].length === 0) return;
@@ -483,24 +478,19 @@
         selected[cat].forEach(it => {
           lines.push(` - ${it.name} — ${money(it.price || 0)}`);
         });
-        lines.push('');
       });
 
-      lines.push(`Parts: ${money(11.99)}`);
+      lines.push(`Parts: ${money(14.99)}`);
       lines.push(`Labor: ${money(9.99)}`);
-      lines.push('');
       lines.push(`Estimated total: ${money(total)}`);
       lines.push('');
-      lines.push(`Lead time: up to 1 month.`);
-      lines.push('');
+      lines.push(`By puchasing this penncamm i agree to the terms of service.`);
       if (notes) {
         lines.push('Notes:');
         lines.push(notes);
         lines.push('');
       }
-      lines.push('Please let me know if you need more info. Thanks!');
-      lines.push('');
-      lines.push(`${name}`);
+      
 
       const emailText = lines.join('\n');
       document.getElementById('email-preview').value = emailText;
@@ -552,6 +542,7 @@
 </style>
 </body>
 </html>
+
 
 
 
