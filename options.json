@@ -31,7 +31,7 @@
   ],
   "Storage": [
     {"name":"None","price":0.00},
-    {"name":"Penncamm Standard 4GB","price":1.09},
+    {"name":"Penncamm Standard 4GB","price":1.09}
   ],
   "Lens": [
     {"name":"Basic","price":0.09},
@@ -62,5 +62,6 @@
     {"name":"1 Year Extended Warranty","price":4.99}
   ]
 }
+
 
 
