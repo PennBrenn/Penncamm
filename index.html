@@ -113,29 +113,84 @@
     </section>
 
     <!-- foto -->
-    <section id="samples" class="panel samples">
-      <div class="glass">
-        <h2 class="section-title">Sample Photos — MKI Gen2</h2>
-        <div class="sample-grid">
-          <figure>
-            <img src="sam.png" alt="Sam" />
-            <figcaption>Sam...</figcaption>
-          </figure>
-          <figure>
-            <img src="tree.jpg" alt="Branches" />
-            <figcaption>Where am i?</figcaption>
-          </figure>
-          <figure>
-            <img src="quiet.jpg" alt="Dark Street" />
-            <figcaption>Its so quiet-</figcaption>
-          </figure>
-          <figure>
-            <img src="hi.jpg" alt="Penncamm in mirror" />
-            <figcaption>Hi Penncamm!</figcaption>
-          </figure>
-        </div>
-      </div>
-    </section>
+<style>
+  /* Unique IDs so nothing conflicts with existing .glass or .sample-grid */
+  #samples-safe {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 48px 18px;
+  }
+
+  #samples-glass {
+    width: min(1100px, 96%);
+    border-radius: 14px;
+    padding: 28px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    border: 1px solid rgba(255,255,255,0.06);
+    box-shadow: 0 6px 30px rgba(0,0,0,0.6);
+    backdrop-filter: blur(6px) saturate(120%);
+    color: var(--para-color);
+    overflow: hidden; /* prevents any content from spilling outside */
+  }
+
+  #samples-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+    margin-top: 14px;
+  }
+
+  #samples-grid figure {
+    background: rgba(0,0,0,0.2);
+    border-radius: 10px;
+    padding: 6px;
+    overflow: hidden; /* keeps each image fully inside its figure */
+  }
+
+  #samples-grid img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 8px;
+    object-fit: contain; /* ensures image fits without cropping */
+  }
+
+  #samples-grid figcaption {
+    text-align: center;
+    font-size: 13px;
+    color: var(--para-color);
+    margin-top: 6px;
+  }
+
+  @media (max-width:900px){
+    #samples-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
+
+<section id="samples-safe" class="panel">
+  <div id="samples-glass">
+    <h2 class="section-title">Sample Photos — MKI Gen2</h2>
+    <div id="samples-grid">
+      <figure>
+        <img src="sam.png" alt="Sam" />
+        <figcaption>Sam...</figcaption>
+      </figure>
+      <figure>
+        <img src="tree.jpg" alt="Branches" />
+        <figcaption>Where am I?</figcaption>
+      </figure>
+      <figure>
+        <img src="quiet.jpg" alt="Dark Street" />
+        <figcaption>It’s so quiet-</figcaption>
+      </figure>
+      <figure>
+        <img src="hi.jpg" alt="Penncamm in mirror" />
+        <figcaption>Hi Penncamm!</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
 
     <!-- the section with the feaures -->
     <section id="features" class="panel features">
@@ -551,3 +606,4 @@
 </style>
 </body>
 </html>
+
