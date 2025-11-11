@@ -23,8 +23,8 @@
 
 #material-btn:hover {
   background: linear-gradient(180deg, rgba(70,94,115,0.45), rgba(70,94,115,0.15));
-  transform: scale(1.04);
-  box-shadow: 0 4px 20px rgba(70,94,115,0.4);
+  transform: scale(1.1);
+  box-shadow: 0 4px 20px rgba(70,94,115,0.1);
 }
 
 
@@ -252,6 +252,7 @@ section.panel + section.panel { margin-top: var(--panel-gap); }
   .title { font-size:34px; }
   .panel { padding:26px 12px; }
 }
+
 
 
 
