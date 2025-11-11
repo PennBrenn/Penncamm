@@ -46,7 +46,7 @@
   "Battery": [
     {"name":"350mah","price":2.99},
     {"name":"700mah","price":5.99},
-    {"name":"2000mah","price":11.99},
+    {"name":"2000mah","price":11.99}
   ],
   "Misc": [
     {"name":"No Diffuser","price":0.00},
@@ -61,6 +61,7 @@
     {"name":"1 Year Extended Warranty","price":4.99}
   ]
 }
+
 
 
 
