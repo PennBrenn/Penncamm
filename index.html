@@ -550,7 +550,7 @@
 
     function buildEmailPreview(total) {
       const name = document.getElementById('customer-name').value || '[Name]';
-      const email = document.getElementById('customer-email').value || 'Email]';
+      const email = document.getElementById('customer-email').value || '[Email]';
       const phone = document.getElementById('customer-phone').value || '[Phone]';
       const address = document.getElementById('customer-address').value || '[Address]';
       const notes = document.getElementById('notes').value || '';
@@ -558,7 +558,8 @@
       const lines = [];
       lines.push(`Penncamm custom quote request`);
       lines.push(`To: cam@pennbrenn.com`);
-      lines.push(`From: ${name} <${email}>`);
+      lines.push(`From: ${email}`);
+      lines.push(`From: ${name}`);
       lines.push(`Phone: ${phone}`);
       lines.push(`address: ${address}`);
       lines.push(`Options:`);
@@ -642,6 +643,7 @@
 </style>
 </body>
 </html>
+
 
 
 
