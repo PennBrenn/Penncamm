@@ -246,6 +246,56 @@
       </div>
     </section>
     
+<style>
+  /* --- Social Button Styles --- */
+  #socials {
+    text-align: center;
+    margin-top: 2em;
+  }
+
+  #socials .glass {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border-radius: 16px;
+    padding: 2rem;
+    display: inline-block;
+  }
+
+  #socials h2 {
+    color: var(--accent, #465e73);
+    margin-bottom: 1.5em;
+    letter-spacing: 0.5px;
+  }
+
+  #socials a {
+    display: inline-block;
+    color: #fff;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 12px;
+    padding: 0.8em 1.6em;
+    margin: 0.5em;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+    box-shadow: 0 0 12px rgba(0,0,0,0.4);
+  }
+
+  #socials a:hover {
+    transform: scale(1.08);
+    opacity: 0.95;
+    box-shadow: 0 0 20px rgba(0,0,0,0.6);
+  }
+
+  /* --- Instagram Gradient --- */
+  .insta {
+    background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+  }
+
+  /* --- Trustpilot Gradient --- */
+  .trust {
+    background: linear-gradient(135deg, #00b67a 0%, #009e6e 50%, #007a57 100%);
+  }
+</style>
+
 <section id="socials" class="panel socials">
   <div class="glass">
     <h2 class="section-title">Socials</h2>
@@ -259,6 +309,7 @@
     >
       Instagram
     </a>
+
     <a 
       id="social-trustpilot" 
       class="trust ghost" 
@@ -670,6 +721,7 @@
 </style>
 </body>
 </html>
+
 
 
 
