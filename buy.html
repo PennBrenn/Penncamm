@@ -6,609 +6,502 @@
 <title>PennCamm — Custom Quote Creator</title>
 <style>
   :root{
-    --bg:#0b0f12;
-    --panel:#0f1417;
-    --muted:#98a0a6;
-    --accent:#6ee7b7; /* temporary accent */
-    --card:#111418;
+    --bg:#0b0e12;
+    --panel:#0f1418;
+    --muted:#9aa4af;
+    --accent:#6ee7b7;
     --glass: rgba(255,255,255,0.03);
-    --radius:12px;
-    font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    --card:#0d1114;
+    --danger:#ff6b6b;
   }
-  *{box-sizing:border-box}
-  html,body{height:100%}
-  body{
-    margin:0;
-    background:linear-gradient(180deg,#050607 0%, #0b0f12 100%);
-    color:#d9e2e8;
-    -webkit-font-smoothing:antialiased;
-    -moz-osx-font-smoothing:grayscale;
-    padding:18px;
+  *{box-sizing:border-box;font-family:Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;}
+  body{margin:0;background:linear-gradient(180deg,#050607 0%, #0b0e12 100%);color:#e6eef3;min-height:100vh;display:flex;align-items:stretch;padding:18px;}
+  .app{max-width:1400px;margin:0 auto;width:100%;display:grid;grid-template-columns:540px 1fr;gap:18px;align-items:start;}
+  /* PREVIEW */
+  .preview {
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
+    border-radius:12px;padding:14px;position:relative;overflow:hidden;border:1px solid rgba(255,255,255,0.03);
   }
-
-  .app{
-    max-width:1200px;
-    margin:0 auto;
-    display:grid;
-    grid-template-columns: 1fr 420px;
-    gap:20px;
-    align-items:start;
-  }
-
-  /* Responsive */
-  @media (max-width:980px){
-    .app{grid-template-columns:1fr; padding-bottom: 40px;}
-    .right{order:2}
-    .left{order:1}
-  }
-
-  /* LEFT preview */
-  .preview-card{
-    background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
-    border-radius:var(--radius);
-    padding:18px;
-    box-shadow: 0 6px 30px rgba(0,0,0,0.6);
-  }
-
-  .preview-wrap{
-    width:100%;
-    /* keep square aspect ratio of the stacked images */
-    position:relative;
-    aspect-ratio:1/1;
-    background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.00));
-    border-radius:10px;
-    overflow:hidden;
-    border:1px solid rgba(255,255,255,0.03);
-  }
-
-  /* Each layered image fills the square */
-  .layer{
-    position:absolute;
-    inset:0;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    pointer-events:none;
-    transition:opacity .25s ease, transform .25s ease;
-  }
-  .layer img{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-    image-rendering:optimizeQuality;
-    user-select:none;
-  }
-  .layer.hidden{opacity:0; transform:scale(.99); visibility:hidden}
-  .layer.visible{opacity:1; visibility:visible}
-
-  /* right side controls */
-  .controls{
-    background:var(--panel);
-    border-radius:var(--radius);
-    padding:16px;
-    position:sticky;
-    top:18px;
-    max-height:calc(100vh - 36px);
-    overflow:auto;
-    border:1px solid rgba(255,255,255,0.03);
-  }
-
-  h1{margin:0 0 8px 0; font-size:20px}
-  .muted{color:var(--muted); font-size:13px; margin-bottom:12px}
-
-  .types{
-    display:flex;
-    gap:8px;
-    margin-bottom:12px;
-  }
-  .type-btn{
-    background:transparent;border:1px solid rgba(255,255,255,0.03);
-    padding:8px 12px;border-radius:10px;color:var(--muted);cursor:pointer;
-    font-weight:600; font-size:14px;
-  }
-  .type-btn.active{
-    background:linear-gradient(90deg, rgba(110,231,183,0.12), rgba(110,231,183,0.06));
-    border-color:rgba(110,231,183,0.28);
-    color:var(--accent);
-    box-shadow:0 6px 18px rgba(110,231,183,0.03);
-  }
-
-  /* subtype horizontal scroll */
-  .subtypes{
-    margin:12px 0;
-    display:flex;
-    gap:10px;
-    overflow-x:auto;
-    padding-bottom:8px;
-  }
-  .subtype-card{
-    min-width:120px;
-    background:var(--card);
-    border-radius:10px;
-    padding:10px;
-    border:1px solid rgba(255,255,255,0.025);
-    cursor:pointer;
-    text-align:center;
-    user-select:none;
-    font-weight:600;
-    font-size:13px;
-  }
-  .subtype-card.active{
-    border-color:rgba(110,231,183,0.18);
-    box-shadow:0 8px 20px rgba(0,0,0,0.6);
-    transform:translateY(-4px);
-  }
-
-  /* options grid */
-  .options-grid{
-    display:flex;
-    gap:10px;
-    flex-wrap:wrap;
-  }
-  .option-thumb{
-    width:72px;height:72px;border-radius:8px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.12));
-    display:flex;align-items:center;justify-content:center;cursor:pointer;border:1px solid rgba(255,255,255,0.03);
-    font-size:12px;padding:6px;text-align:center;
-  }
-  .option-thumb img{width:100%;height:100%;object-fit:cover;border-radius:6px}
-  .option-thumb.active{outline:3px solid rgba(110,231,183,0.14); transform:translateY(-3px)}
-
-  /* top controls row */
-  .top-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
-  .price{
-    font-weight:800;font-size:20px;color:var(--accent);
-  }
-
-  .summary{
-    margin-top:14px;padding:12px;border-radius:10px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.00));
-    border:1px solid rgba(255,255,255,0.02);
-    font-size:13px;color:var(--muted);
-  }
-
-  .small{font-size:12px;color:var(--muted)}
-  .btn{
-    padding:10px 14px;border-radius:10px;background:linear-gradient(90deg,var(--accent), rgba(110,231,183,0.7));
-    border:none;color:#02120e;font-weight:700;cursor:pointer;
-  }
-
-  footer{margin-top:14px;color:var(--muted);font-size:13px}
-
-  /* tiny responsive tweaks */
-  @media (max-width:420px){
-    .subtype-card{min-width:100px}
-    .option-thumb{width:64px;height:64px}
-  }
+  .preview-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+  .brand{font-weight:700;letter-spacing:1px}
+  .canvas-wrap{background:var(--card);border-radius:8px;padding:12px;display:flex;justify-content:center;align-items:center;height:calc(100vw * 0.5); /* responsive */ max-height:720px; min-height:360px; position:relative;}
+  .stack{width:100%;max-width:560px;aspect-ratio:1/1;position:relative;background:#091014;border-radius:6px;overflow:hidden;}
+  .stack img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none;transition:opacity .18s ease, filter .18s ease;opacity:0}
+  .stack img.visible{opacity:1}
+  /* tint overlay (temporary color) */
+  .stack .tint{position:absolute;inset:0;pointer-events:none;mix-blend-mode:overlay;opacity:0;transition:opacity .18s}
+  .stack.tinted .tint{opacity:0.25}
+  /* RIGHT PANEL */
+  .controls{background:var(--panel);padding:14px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);height:100%;display:flex;flex-direction:column;gap:12px;overflow:hidden}
+  .types{display:flex;flex-direction:column;gap:8px;overflow:auto;padding-right:6px}
+  .type-btn{background:transparent;border:1px solid transparent;padding:10px 12px;border-radius:8px;text-align:left;cursor:pointer;color:var(--muted);display:flex;justify-content:space-between;align-items:center}
+  .type-btn.active{border-color:rgba(255,255,255,0.06);color:#fff;background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent)}
+  .subtypes{display:flex;gap:10px;overflow:auto;padding:10px 4px}
+  .subtype{flex:0 0 auto;min-width:120px;padding:8px;border-radius:8px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.02);cursor:pointer;text-align:center}
+  .subtype.active{outline:2px solid rgba(110,231,183,0.12);box-shadow:0 6px 18px rgba(0,0,0,0.6)}
+  .options-grid{display:flex;flex-wrap:wrap;gap:8px;padding:6px 0;max-height:220px;overflow:auto}
+  .option{width:92px;height:92px;flex:0 0 auto;background:rgba(255,255,255,0.02);border-radius:8px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:6px;text-align:center;cursor:pointer;border:1px solid rgba(255,255,255,0.02)}
+  .option.selected{border-color:var(--accent);box-shadow:0 4px 16px rgba(110,231,183,0.06)}
+  .option small{display:block;color:var(--muted);font-size:12px;margin-top:6px}
+  .footer{margin-top:auto;display:flex;justify-content:space-between;gap:8px;align-items:center}
+  .price{font-weight:700;font-size:18px}
+  .btn{background:linear-gradient(90deg, rgba(255,255,255,0.03), transparent);border:1px solid rgba(255,255,255,0.06);padding:10px 12px;border-radius:10px;color:var(--accent);cursor:pointer}
+  .btn.ghost{background:transparent;color:var(--muted)}
+  .search{padding:8px;border-radius:8px;border:1px solid rgba(255,255,255,0.03);background:rgba(255,255,255,0.01);color:var(--muted)}
+  /* summary / selected list */
+  .selected-list{display:flex;flex-direction:column;gap:6px;max-height:160px;overflow:auto;padding:6px}
+  .selected-item{display:flex;justify-content:space-between;gap:8px;align-items:center;padding:6px;border-radius:6px;background:rgba(255,255,255,0.01);border:1px solid rgba(255,255,255,0.02)}
+  .sku{font-size:12px;color:var(--muted)}
+  /* responsive */
+  @media (max-width:980px){.app{grid-template-columns:1fr;}.canvas-wrap{height:60vw}}
 </style>
 </head>
 <body>
-
-<div class="app">
-  <!-- LEFT: Preview -->
-  <div class="left">
-    <div class="preview-card">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
-        <div>
-          <h1>PennCamm Visualizer</h1>
-          <div class="muted">Layered preview — 1000×1000 source images recommended</div>
-        </div>
-        <div class="small">Preview: <span id="viewMode">Exterior</span></div>
+<div class="app" id="app">
+  <div class="preview">
+    <div class="preview-header">
+      <div class="brand">PennCamm — Custom Quote Creator</div>
+      <div class="meta" id="metaSummary">Items: 0 • Total: $0.00</div>
+    </div>
+    <div class="canvas-wrap">
+      <div class="stack" id="stack" aria-live="polite" title="Layered preview">
+        <!-- images injected here -->
+        <div class="tint" id="tintLayer"></div>
       </div>
-
-      <div class="preview-wrap" id="previewWrap" aria-hidden="false">
-        <!-- layers will be injected here -->
-      </div>
-
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-top:12px">
-        <div class="small">Use the controls to the right to customize.</div>
-        <div><button class="btn" id="exportBtn">Export Quote</button></div>
+    </div>
+    <div style="display:flex;gap:8px;margin-top:10px;align-items:center">
+      <label style="font-size:13px;color:var(--muted)">Temporary tint:</label>
+      <input id="tintColor" type="color" value="#6ee7b7" style="height:34px;border-radius:6px"/>
+      <label style="font-size:13px;color:var(--muted);margin-left:6px"><input id="tintToggle" type="checkbox" checked/> enable</label>
+      <div style="margin-left:auto">
+        <button class="btn" id="downloadQuote">Export Quote (JSON)</button>
+        <button class="btn ghost" id="clearAll">Clear</button>
       </div>
     </div>
   </div>
 
-  <!-- RIGHT: Controls -->
-  <div class="right">
-    <div class="controls">
-      <div class="top-row">
-        <div>
-          <h1 id="productName">Custom Camera</h1>
-          <div class="muted" id="productDesc">Fully configurable camera — data-driven</div>
-        </div>
-        <div class="price" id="price">$0.00</div>
-      </div>
-
-      <div>
-        <div class="small">Select Type</div>
-        <div class="types" id="typeButtons"></div>
-      </div>
-
-      <div id="subtypeArea" style="margin-top:8px;display:none">
-        <div class="small">Subtypes</div>
-        <div class="subtypes" id="subtypesContainer"></div>
-      </div>
-
-      <div id="optionsArea" style="margin-top:10px;display:none">
-        <div class="small" id="optionsTitle">Options</div>
-        <div class="options-grid" id="optionsGrid" style="margin-top:8px"></div>
-      </div>
-
-      <div class="summary" id="summary">
-        <div style="font-weight:700;margin-bottom:8px">Summary</div>
-        <div id="summaryList" class="small">No selections yet.</div>
-      </div>
-
-      <footer>
-        <div class="small">Designed for ease of editing: update <code>data.json</code> to add/remove types, subtypes, options, prices, or image paths.</div>
-      </footer>
+  <div class="controls" id="controls">
+    <div style="display:flex;align-items:center;gap:8px">
+      <input id="search" class="search" placeholder="Search types / names / SKU" />
+      <div style="margin-left:auto;color:var(--muted);font-size:13px">Tip: Lenses & Misc are multi-select</div>
     </div>
+
+    <div style="display:flex;gap:12px;align-items:flex-start">
+      <div style="width:220px">
+        <div style="font-size:13px;color:var(--muted);margin-bottom:8px">Types</div>
+        <div class="types" id="typesList" role="list"></div>
+      </div>
+      <div style="flex:1;min-width:0">
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <div style="font-size:13px;color:var(--muted)">Subtypes</div>
+            <div style="font-size:12px;color:var(--muted)">Scroll →</div>
+          </div>
+          <div class="subtypes" id="subtypesRow"></div>
+          <div style="font-size:13px;color:var(--muted)">Options</div>
+          <div class="options-grid" id="optionsGrid"></div>
+        </div>
+      </div>
+    </div>
+
+    <div style="display:flex;gap:12px">
+      <div style="flex:1">
+        <div style="font-size:13px;color:var(--muted);margin-bottom:6px">Selected</div>
+        <div class="selected-list" id="selectedList"></div>
+      </div>
+      <div style="width:260px">
+        <div style="font-size:13px;color:var(--muted);margin-bottom:6px">Quote</div>
+        <div style="background:var(--glass);padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.02)">
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <div class="price" id="totalPrice">$0.00</div>
+            <div style="text-align:right">
+              <div style="font-size:12px;color:var(--muted)">Items: <span id="itemCount">0</span></div>
+              <div style="font-size:12px;color:var(--muted)">VAT/N/A</div>
+            </div>
+          </div>
+          <div style="margin-top:10px;display:flex;gap:8px">
+            <button class="btn" id="checkout">Create Quote</button>
+            <button class="btn ghost" id="downloadImage">Save Preview</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
 </div>
 
 <script>
 /*
-  DATA LOADING:
-  For demo purposes we load the JSON via fetch. If you're running locally, you may need to serve files from a local server (e.g. `npx http-server`).
-  If you prefer inline data, replace fetch(...) with a local object.
+  Behavior:
+  - Loads data.json (same folder) and builds types -> subtypes -> options.
+  - Clicking a type activates it and reveals subtypes horizontally.
+  - Clicking subtype shows options underneath.
+  - Options: clicking selects (single-select per type except Lens and Misc which allow multi).
+  - Selected SKUs are layered in left preview: images/<SKU>.png
+  - If the last-selected option has view:"interior", hide all other layers (show interior only).
+  - Temporary tint overlay controlled via color input and enable toggle.
+  - Export Quote -> downloads JSON with selections and totals.
+  - Easy to extend: edit data.json (array of items). Each item:
+    { "sku","type","subtype","name","price", "image":"images/SKU.png", "view": "exterior"|"interior" (optional) }
 */
 
-let DATA_URL = './data.json'; // you can change to './data.json' or inline object
+const DATA_FILE = 'data.json';
+let data = [];
+let types = []; // list of types
+let currentType = null;
+let currentSubtype = null;
+let selections = {}; // type -> selected SKU(s) (string or array)
 
-// App state
-const state = {
-  data: null,
-  baseProduct: {name:'Custom Camera', desc:'Fully configurable camera'},
-  selected: {
-    // per type: e.g. 'Main': {subtype:'Plastic', option:'black'}
-  },
-  lastSelectedType: null
-};
+const $ = id=>document.getElementById(id);
+const typesList = $('typesList');
+const subtypesRow = $('subtypesRow');
+const optionsGrid = $('optionsGrid');
+const stack = $('stack');
+const tintLayer = $('tintLayer');
+const tintColor = $('tintColor');
+const tintToggle = $('tintToggle');
+const metaSummary = $('metaSummary');
+const totalPriceEl = $('totalPrice');
+const itemCountEl = $('itemCount');
+const selectedList = $('selectedList');
+const downloadQuote = $('downloadQuote');
+const clearAll = $('clearAll');
+const search = $('search');
 
-function money(n){ return '$' + n.toFixed(2); }
+function money(n){ return '$' + Number(n||0).toFixed(2); }
 
-async function init(){
-  // fetch JSON
+async function loadData(){
   try{
-    const res = await fetch(DATA_URL);
-    if(!res.ok) throw new Error('Could not fetch data.json. If running locally, serve files over http(s).');
-    state.data = await res.json();
-  }catch(err){
-    console.error(err);
-    // fallback to default inline structure if fetch fails
-    state.data = inlineFallback();
+    const res = await fetch(DATA_FILE);
+    data = await res.json();
+  }catch(e){
+    console.error('Failed to load data.json', e);
+    data = [];
   }
-
-  // set product name/desc if provided
-  if(state.data.item) {
-    state.baseProduct = {name: state.data.item, desc: state.data.description || state.baseProduct.desc};
-    document.getElementById('productName').textContent = state.baseProduct.name;
-    document.getElementById('productDesc').textContent = state.baseProduct.desc;
-  }
-
-  renderTypeButtons();
-  createInitialLayers();
-  updatePriceAndSummary();
-  attachExport();
+  // build type/subtype structure
+  const typeMap = {};
+  data.forEach(it=>{
+    if(!typeMap[it.type]) typeMap[it.type] = {};
+    if(!typeMap[it.type][it.subtype]) typeMap[it.type][it.subtype] = [];
+    typeMap[it.type][it.subtype].push(it);
+  });
+  types = Object.keys(typeMap).map(t=>{
+    return { name: t, subtypes: Object.keys(typeMap[t]).map(st=>({ name: st, items: typeMap[t][st] })) };
+  });
+  renderTypes();
+  // by default select first type
+  if(types.length) selectType(types[0].name);
 }
 
-// render type buttons (Main, Secondary, Interior...)
-function renderTypeButtons(){
-  const types = state.data.types;
-  const container = document.getElementById('typeButtons');
-  container.innerHTML = '';
-  types.forEach(t=>{
+function renderTypes(filter){
+  typesList.innerHTML = '';
+  const filtered = filter ? types.filter(t=> t.name.toLowerCase().includes(filter) || t.subtypes.some(st=>st.name.toLowerCase().includes(filter))) : types;
+  filtered.forEach(t=>{
     const btn = document.createElement('button');
     btn.className = 'type-btn';
     btn.textContent = t.name;
-    btn.onclick = ()=>selectType(t.name);
-    container.appendChild(btn);
+    btn.onclick = ()=> selectType(t.name);
+    typesList.appendChild(btn);
   });
+  updateTypeActive();
 }
 
-// when a type is selected, show subtypes
 function selectType(typeName){
-  state.lastSelectedType = typeName;
-  // mark active type button
-  document.querySelectorAll('.type-btn').forEach(b=>b.classList.toggle('active', b.textContent===typeName));
-
-  const type = state.data.types.find(t=>t.name===typeName);
-  if(!type) return;
-
-  // show subtype area
-  const subArea = document.getElementById('subtypeArea');
-  subArea.style.display = 'block';
-  const subContainer = document.getElementById('subtypesContainer');
-  subContainer.innerHTML = '';
-
-  type.subtypes.forEach(st=>{
-    const card = document.createElement('div');
-    card.className = 'subtype-card';
-    card.textContent = st.name + (st.price ? ` (+${money(st.price)})` : '');
-    card.onclick = ()=>selectSubtype(typeName, st.name);
-    subContainer.appendChild(card);
-  });
-
-  // if user previously selected subtype for this type, re-open it; otherwise auto-select first subtype
-  const prev = state.selected[typeName];
-  if(prev && prev.subtype){
-    selectSubtype(typeName, prev.subtype);
-  } else {
-    selectSubtype(typeName, type.subtypes[0].name);
-  }
+  currentType = types.find(t=>t.name===typeName) || null;
+  updateTypeActive();
+  renderSubtypes();
+  optionsGrid.innerHTML = '';
+  currentSubtype = null;
 }
 
-// select subtype -> render options
-function selectSubtype(typeName, subtypeName){
-  // activate card
-  document.querySelectorAll('.subtype-card').forEach(card=>{
-    card.classList.toggle('active', card.textContent.startsWith(subtypeName));
+function updateTypeActive(){
+  Array.from(typesList.children).forEach(ch=>{
+    ch.classList.toggle('active', currentType && ch.textContent===currentType.name);
   });
+}
 
-  // store
-  if(!state.selected[typeName]) state.selected[typeName] = {};
-  state.selected[typeName].subtype = subtypeName;
+function renderSubtypes(){
+  subtypesRow.innerHTML = '';
+  if(!currentType) return;
+  currentType.subtypes.forEach(st=>{
+    const el = document.createElement('div');
+    el.className = 'subtype';
+    el.textContent = st.name + ' (' + st.items.length + ')';
+    el.onclick = ()=> selectSubtype(st.name);
+    subtypesRow.appendChild(el);
+  });
+  // auto-select first subtype
+  if(currentType.subtypes.length) selectSubtype(currentType.subtypes[0].name);
+  updateSubtypeActive();
+}
 
-  // show options
-  const type = state.data.types.find(t=>t.name===typeName);
-  const subtype = type.subtypes.find(s=>s.name===subtypeName);
-  const optionsGrid = document.getElementById('optionsGrid');
+function selectSubtype(name){
+  currentSubtype = (currentType && currentType.subtypes.find(s=>s.name===name)) || null;
+  updateSubtypeActive();
+  renderOptions();
+}
+
+function updateSubtypeActive(){
+  Array.from(subtypesRow.children).forEach(ch=>{
+    ch.classList.toggle('active', currentSubtype && ch.textContent.startsWith(currentSubtype.name));
+  });
+}
+
+function renderOptions(){
   optionsGrid.innerHTML = '';
-  document.getElementById('optionsArea').style.display = 'block';
-  document.getElementById('optionsTitle').textContent = `${typeName} → ${subtypeName} options`;
+  if(!currentSubtype) return;
+  currentSubtype.items.forEach(item=>{
+    const opt = document.createElement('div');
+    opt.className = 'option';
+    opt.title = item.sku + ' — ' + item.name;
+    const inner = document.createElement('div');
+    inner.style.fontSize='13px';
+    inner.style.fontWeight='600';
+    inner.textContent = item.name;
+    const sku = document.createElement('small');
+    sku.textContent = item.sku + ' • ' + money(item.price);
+    opt.appendChild(inner);
+    opt.appendChild(sku);
+    // click selects
+    opt.onclick = (e)=>{
+      handleOptionClick(item);
+      e.stopPropagation();
+    };
+    optionsGrid.appendChild(opt);
+  });
+  refreshOptionSelections();
+}
 
-  subtype.options.forEach(opt=>{
-    const cell = document.createElement('div');
-    cell.className = 'option-thumb';
-    if(opt.thumbnail){
-      const img = document.createElement('img');
-      img.src = opt.thumbnail;
-      img.alt = opt.name;
-      cell.appendChild(img);
-    } else {
-      cell.textContent = opt.name + (opt.price ? `\n+${money(opt.price)}` : '');
+function handleOptionClick(item){
+  const multiTypes = ['Lens','Misc']; // multi-select types
+  const isMulti = multiTypes.includes(item.type);
+  if(!selections[item.type]) selections[item.type] = isMulti ? [] : null;
+
+  if(isMulti){
+    // toggle in array
+    const arr = selections[item.type];
+    const idx = arr.indexOf(item.sku);
+    if(idx===-1) arr.push(item.sku);
+    else arr.splice(idx,1);
+  }else{
+    // single-select; toggle off if same
+    if(selections[item.type]===item.sku) selections[item.type]=null;
+    else selections[item.type]=item.sku;
+  }
+  refreshOptionSelections();
+  updatePreviewLayers();
+  updateSummary();
+}
+
+function refreshOptionSelections(){
+  Array.from(optionsGrid.children).forEach(opt=>{
+    opt.classList.remove('selected');
+  });
+  // for current subtype only, mark selected items
+  if(!currentSubtype) return;
+  const multiTypes = ['Lens','Misc'];
+  currentSubtype.items.forEach(item=>{
+    const isMulti = multiTypes.includes(item.type);
+    if(isMulti && selections[item.type] && selections[item.type].includes(item.sku)){
+      // find DOM node
+      Array.from(optionsGrid.children).forEach(opt=>{
+        if(opt.title && opt.title.startsWith(item.sku)) opt.classList.add('selected');
+      });
+    }else if(!isMulti && selections[item.type]===item.sku){
+      Array.from(optionsGrid.children).forEach(opt=>{
+        if(opt.title && opt.title.startsWith(item.sku)) opt.classList.add('selected');
+      });
     }
-    cell.onclick = ()=>selectOption(typeName, subtypeName, opt.name);
-    optionsGrid.appendChild(cell);
+  });
+}
+
+function updatePreviewLayers(){
+  // clear images then re-add in order of types for consistent stacking
+  const orderedTypes = types.map(t=>t.name);
+  // remove existing imgs
+  Array.from(stack.querySelectorAll('img')).forEach(img=>img.remove());
+  // prepare a list of selected items (flatten)
+  const selectedItems = [];
+  orderedTypes.forEach(tn=>{
+    const sel = selections[tn];
+    if(!sel) return;
+    if(Array.isArray(sel)) sel.forEach(sku=>{
+      const it = data.find(d=>d.sku===sku);
+      if(it) selectedItems.push(it);
+    });
+    else {
+      const it = data.find(d=>d.sku===sel);
+      if(it) selectedItems.push(it);
+    }
   });
 
-  // if previously selected option, reselect, else auto-select first
-  const prev = state.selected[typeName];
-  if(prev && prev.option){
-    const already = subtype.options.find(o=>o.name===prev.option);
-    if(already) {
-      selectOption(typeName, subtypeName, prev.option);
+  // If last selected option has view == 'interior', show only that interior image
+  if(selectedItems.length){
+    const last = selectedItems[selectedItems.length-1];
+    if(last && last.view === 'interior'){
+      // show only last
+      addLayerForItem(last);
       return;
     }
   }
-  selectOption(typeName, subtypeName, subtype.options[0].name);
+
+  // otherwise add all selected in order
+  selectedItems.forEach(it=> addLayerForItem(it));
 }
 
-// select option -> update state and visuals
-function selectOption(typeName, subtypeName, optionName){
-  if(!state.selected[typeName]) state.selected[typeName] = {};
-  state.selected[typeName].option = optionName;
-  state.selected[typeName].subtype = subtypeName;
-  state.lastSelectedType = typeName;
-
-  // highlight option thumb
-  document.querySelectorAll('.option-thumb').forEach(el=>{
-    // match by text or thumbnail alt
-    const img = el.querySelector('img');
-    const matches = img ? img.alt === optionName : el.textContent.trim().startsWith(optionName);
-    el.classList.toggle('active', matches);
-  });
-
-  // update image layers
-  updateLayersFromState();
-
-  // if interior is last selected type, show only interior; otherwise show exterior
-  const viewModeEl = document.getElementById('viewMode');
-  if(state.lastSelectedType.toLowerCase()==='interior'){
-    viewModeEl.textContent = 'Interior';
-    showInteriorOnly();
-  } else {
-    viewModeEl.textContent = 'Exterior';
-    showExterior();
-  }
-
-  updatePriceAndSummary();
-}
-
-// create preview layers for each type with placeholder images (will be updated)
-function createInitialLayers(){
-  const preview = document.getElementById('previewWrap');
-  preview.innerHTML = '';
-  // order layers as in data.types (first = bottom)
-  state.data.types.forEach((t, idx)=>{
-    const layer = document.createElement('div');
-    layer.className = 'layer hidden';
-    layer.dataset.type = t.name;
-    const img = document.createElement('img');
-    img.alt = t.name;
-    img.src = t.placeholder || ''; // placeholder or empty
-    layer.appendChild(img);
-    preview.appendChild(layer);
-  });
-}
-
-// update layers according to current selections
-function updateLayersFromState(){
-  // For each type, find image path for selected option (if any)
-  state.data.types.forEach(type=>{
-    const layerEl = document.querySelector('.layer[data-type="'+type.name+'"]');
-    const imgEl = layerEl.querySelector('img');
-    let path = type.placeholder || '';
-    const sel = state.selected[type.name];
-    if(sel && sel.subtype && sel.option){
-      const subtype = type.subtypes.find(s=>s.name===sel.subtype);
-      if(subtype){
-        const opt = subtype.options.find(o=>o.name===sel.option);
-        if(opt && opt.image) path = opt.image;
-      }
-    }
-    imgEl.src = path;
-    imgEl.alt = `${type.name} layer`;
-    // toggling visibility for now will be handled by view rules
-  });
-
-  // after images set, apply view rules (interior/exterior)
-  if(state.lastSelectedType && state.lastSelectedType.toLowerCase()==='interior'){
-    showInteriorOnly();
-  } else {
-    showExterior();
-  }
-}
-
-// show only interior layer
-function showInteriorOnly(){
-  document.querySelectorAll('.layer').forEach(l=>{
-    if(l.dataset.type.toLowerCase()==='interior'){
-      l.classList.remove('hidden'); l.classList.add('visible');
-    } else {
-      l.classList.remove('visible'); l.classList.add('hidden');
-    }
-  });
-}
-
-// show exterior layers (all except interior). Layers without a valid image are hidden.
-function showExterior(){
-  document.querySelectorAll('.layer').forEach(l=>{
-    const typeName = l.dataset.type.toLowerCase();
-    const img = l.querySelector('img');
-    const hasImg = img && img.src && !img.src.endsWith('/'); // basic check
-    if(typeName === 'interior'){
-      // hide interior in exterior view
-      l.classList.remove('visible'); l.classList.add('hidden');
-    } else {
-      if(hasImg){
-        l.classList.remove('hidden'); l.classList.add('visible');
-      } else {
-        l.classList.remove('visible'); l.classList.add('hidden');
-      }
-    }
-  });
-}
-
-// compute price based on selections and display
-function updatePriceAndSummary(){
-  const base = state.data.basePrice || 0;
-  let total = base;
-  let lines = [];
-  if(state.data.item) lines.push(`<strong>${state.data.item}</strong> — base ${money(base)}`);
-  Object.keys(state.selected).forEach(typeName=>{
-    const sel = state.selected[typeName];
-    if(!sel || !sel.subtype || !sel.option) return;
-    const type = state.data.types.find(t=>t.name===typeName);
-    const subtype = type.subtypes.find(s=>s.name===sel.subtype);
-    const opt = subtype.options.find(o=>o.name===sel.option);
-    const subtypePrice = subtype.price || 0;
-    const optPrice = opt.price || 0;
-    const add = subtypePrice + optPrice;
-    total += add;
-    lines.push(`${typeName}: ${subtype.name} / ${opt.name} ${add? '(' + money(add) + ')' : ''}`);
-  });
-
-  document.getElementById('price').textContent = money(total);
-  document.getElementById('summaryList').innerHTML = lines.length? lines.join('<br/>') : 'No selections yet.';
-}
-
-// Export quote as JSON (download)
-function attachExport(){
-  document.getElementById('exportBtn').onclick = ()=>{
-    const payload = {
-      product: state.baseProduct,
-      selections: state.selected,
-      price: document.getElementById('price').textContent,
-      timestamp: new Date().toISOString()
-    };
-    const blob = new Blob([JSON.stringify(payload,null,2)], {type:'application/json'});
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url; a.download = 'penncamm-quote.json'; document.body.appendChild(a); a.click();
-    a.remove();
-    URL.revokeObjectURL(url);
-  }
-}
-
-/* Inline fallback data used if fetch fails (so the demo still works).
-   You should replace data.json with your own file and images.
-*/
-function inlineFallback(){
-  return {
-    item: "PennCamm Model X",
-    description: "Demo camera for PennCamm customizer",
-    basePrice: 199.00,
-    types: [
-      {
-        name: "Main",
-        placeholder: "images/placeholder_main.png",
-        subtypes: [
-          {
-            name:"Plastic",
-            price: 0,
-            options:[
-              {name:"Black", price:0, image:"images/main_plastic_black.png", thumbnail:"images/th_main_plastic_black.png"},
-              {name:"White", price:0, image:"images/main_plastic_white.png", thumbnail:"images/th_main_plastic_white.png"}
-            ]
-          },
-          {
-            name:"Metal",
-            price:25,
-            options:[
-              {name:"Red", price:25, image:"images/main_metal_red.png", thumbnail:"images/th_main_metal_red.png"},
-              {name:"Green", price:25, image:"images/main_metal_green.png", thumbnail:"images/th_main_metal_green.png"}
-            ]
-          }
-        ]
-      },
-      {
-        name: "Secondary",
-        placeholder: "images/placeholder_secondary.png",
-        subtypes: [
-          {
-            name:"Plastic",
-            price:0,
-            options:[
-              {name:"Black", price:0, image:"images/sec_plastic_black.png", thumbnail:"images/th_sec_plastic_black.png"},
-              {name:"White", price:0, image:"images/sec_plastic_white.png", thumbnail:"images/th_sec_plastic_white.png"}
-            ]
-          },
-          {
-            name:"Metal",
-            price:10,
-            options:[
-              {name:"Red", price:10, image:"images/sec_metal_red.png", thumbnail:"images/th_sec_metal_red.png"},
-              {name:"Green", price:10, image:"images/sec_metal_green.png", thumbnail:"images/th_sec_metal_green.png"}
-            ]
-          }
-        ]
-      },
-      {
-        name: "Interior",
-        placeholder: "images/placeholder_interior.png",
-        subtypes: [
-          {
-            name:"Plastic",
-            price:0,
-            options:[
-              {name:"Black", price:0, image:"images/interior_plastic_black.png", thumbnail:"images/th_interior_plastic_black.png"},
-              {name:"White", price:0, image:"images/interior_plastic_white.png", thumbnail:"images/th_interior_plastic_white.png"}
-            ]
-          },
-          {
-            name:"Metal",
-            price:20,
-            options:[
-              {name:"Red", price:20, image:"images/interior_metal_red.png", thumbnail:"images/th_interior_metal_red.png"},
-              {name:"Green", price:20, image:"images/interior_metal_green.png", thumbnail:"images/th_interior_metal_green.png"}
-            ]
-          }
-        ]
-      }
-    ]
+function addLayerForItem(item){
+  const img = document.createElement('img');
+  img.dataset.sku = item.sku;
+  img.alt = item.sku + ' layer';
+  img.src = item.image || ('images/' + item.sku + '.png');
+  // show image once loaded to avoid flicker
+  img.onload = ()=> img.classList.add('visible');
+  img.onerror = ()=> {
+    // placeholder for missing images
+    img.classList.add('visible');
+    img.style.objectFit = 'contain';
+    img.style.background = '#081018';
+    img.style.filter='grayscale(0.6) brightness(.9)';
+    img.src = '';
   };
+  stack.appendChild(img);
 }
 
-// Start app
-init();
+function updateTint(){
+  const c = tintColor.value;
+  tintLayer.style.background = c;
+  if(tintToggle.checked) stack.classList.add('tinted');
+  else stack.classList.remove('tinted');
+}
+
+function updateSummary(){
+  let total = 0;
+  let count = 0;
+  const flat = [];
+  Object.keys(selections).forEach(t=>{
+    const sel = selections[t];
+    if(!sel) return;
+    if(Array.isArray(sel)){
+      sel.forEach(sku=>{
+        const it = data.find(d=>d.sku===sku);
+        if(it){ total += Number(it.price || 0); flat.push(it); count++; }
+      });
+    }else{
+      const it = data.find(d=>d.sku===sel);
+      if(it){ total += Number(it.price || 0); flat.push(it); count++; }
+    }
+  });
+  totalPriceEl.textContent = money(total);
+  metaSummary.textContent = 'Items: ' + count + ' • Total: ' + money(total);
+  itemCountEl.textContent = count;
+
+  // render selected list
+  selectedList.innerHTML = '';
+  flat.forEach(it=>{
+    const el = document.createElement('div');
+    el.className = 'selected-item';
+    el.innerHTML = '<div><div style="font-weight:600">'+it.name+'</div><div class="sku">'+it.sku+' • '+it.type+' • '+it.subtype+'</div></div><div style="text-align:right"><div style="font-weight:700">'+money(it.price)+'</div><small style="color:var(--muted)">'+(it.view||'exterior')+'</small></div>';
+    selectedList.appendChild(el);
+  });
+}
+
+downloadQuote.addEventListener('click', ()=>{
+  const payload = {
+    created: new Date().toISOString(),
+    items: getSelectedItems(),
+    total: totalPriceEl.textContent
+  };
+  const blob = new Blob([JSON.stringify(payload, null, 2)], {type:'application/json'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = 'penncamm-quote-'+Date.now()+'.json';
+  a.click();
+  URL.revokeObjectURL(url);
+});
+
+function getSelectedItems(){
+  const out = [];
+  Object.keys(selections).forEach(t=>{
+    const sel = selections[t];
+    if(!sel) return;
+    if(Array.isArray(sel)){
+      sel.forEach(sku=>{
+        const it = data.find(d=>d.sku===sku); if(it) out.push(it);
+      });
+    }else{
+      const it = data.find(d=>d.sku===sel); if(it) out.push(it);
+    }
+  });
+  return out;
+}
+
+clearAll.addEventListener('click', ()=>{
+  selections = {};
+  updatePreviewLayers();
+  updateSummary();
+  refreshOptionSelections();
+  // unselect type/subtype
+  currentType = null; currentSubtype = null;
+  updateTypeActive();
+  subtypesRow.innerHTML = ''; optionsGrid.innerHTML = '';
+});
+
+tintColor.addEventListener('input', updateTint);
+tintToggle.addEventListener('change', updateTint);
+
+$('checkout').addEventListener('click', ()=>{
+  alert('Quote created. Use Export Quote to download JSON.'); // placeholder
+});
+
+$('downloadImage').addEventListener('click', ()=>{
+  // simple capture: combine images already stacked onto canvas
+  const imgs = Array.from(stack.querySelectorAll('img.visible'));
+  if(!imgs.length){ alert('No layers to save'); return; }
+  // create canvas 1000x1000
+  const canvas = document.createElement('canvas');
+  canvas.width = 1000; canvas.height = 1000;
+  const ctx = canvas.getContext('2d');
+  // draw images in DOM order
+  const promises = imgs.map(img=>{
+    return new Promise(res=>{
+      const tmp = new Image();
+      tmp.crossOrigin = 'anonymous';
+      tmp.onload = ()=> { res(tmp); };
+      tmp.onerror = ()=> { res(null); };
+      tmp.src = img.src;
+    });
+  });
+  Promise.all(promises).then(imgs2=>{
+    imgs2.forEach(im=>{
+      if(im) ctx.drawImage(im,0,0,1000,1000);
+    });
+    // tint if enabled
+    if(tintToggle.checked){
+      ctx.globalCompositeOperation = 'overlay';
+      ctx.fillStyle = tintColor.value;
+      ctx.fillRect(0,0,1000,1000);
+      ctx.globalCompositeOperation = 'source-over';
+    }
+    const a = document.createElement('a');
+    a.href = canvas.toDataURL('image/png');
+    a.download = 'preview-'+Date.now()+'.png';
+    a.click();
+  });
+});
+
+search.addEventListener('input', (e)=>{
+  const q = e.target.value.trim().toLowerCase();
+  renderTypes(q);
+});
+
+function updateUIAfterLoad(){
+  updateTint();
+  updateSummary();
+}
+
+// initial load
+loadData().then(updateUIAfterLoad);
+
 </script>
 </body>
 </html>
