@@ -1,0 +1,133 @@
+{
+  "item": "PennCamm Model X",
+  "description": "Customizable camera — edit this JSON to add types, subtypes, options, prices, or image paths.",
+  "basePrice": 199.00,
+  "types": [
+    {
+      "name": "Main",
+      "placeholder": "images/placeholder_main.png",
+      "subtypes": [
+        {
+          "name": "Plastic",
+          "price": 0,
+          "options": [
+            {
+              "name": "Black",
+              "price": 0,
+              "image": "images/main_plastic_black.png",
+              "thumbnail": "images/th_main_plastic_black.png"
+            },
+            {
+              "name": "White",
+              "price": 0,
+              "image": "images/main_plastic_white.png",
+              "thumbnail": "images/th_main_plastic_white.png"
+            }
+          ]
+        },
+        {
+          "name": "Metal",
+          "price": 25,
+          "options": [
+            {
+              "name": "Red",
+              "price": 25,
+              "image": "images/main_metal_red.png",
+              "thumbnail": "images/th_main_metal_red.png"
+            },
+            {
+              "name": "Green",
+              "price": 25,
+              "image": "images/main_metal_green.png",
+              "thumbnail": "images/th_main_metal_green.png"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Secondary",
+      "placeholder": "images/placeholder_secondary.png",
+      "subtypes": [
+        {
+          "name": "Plastic",
+          "price": 0,
+          "options": [
+            {
+              "name": "Black",
+              "price": 0,
+              "image": "images/sec_plastic_black.png",
+              "thumbnail": "images/th_sec_plastic_black.png"
+            },
+            {
+              "name": "White",
+              "price": 0,
+              "image": "images/sec_plastic_white.png",
+              "thumbnail": "images/th_sec_plastic_white.png"
+            }
+          ]
+        },
+        {
+          "name": "Metal",
+          "price": 10,
+          "options": [
+            {
+              "name": "Red",
+              "price": 10,
+              "image": "images/sec_metal_red.png",
+              "thumbnail": "images/th_sec_metal_red.png"
+            },
+            {
+              "name": "Green",
+              "price": 10,
+              "image": "images/sec_metal_green.png",
+              "thumbnail": "images/th_sec_metal_green.png"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Interior",
+      "placeholder": "images/placeholder_interior.png",
+      "subtypes": [
+        {
+          "name": "Plastic",
+          "price": 0,
+          "options": [
+            {
+              "name": "Black",
+              "price": 0,
+              "image": "images/interior_plastic_black.png",
+              "thumbnail": "images/th_interior_plastic_black.png"
+            },
+            {
+              "name": "White",
+              "price": 0,
+              "image": "images/interior_plastic_white.png",
+              "thumbnail": "images/th_interior_plastic_white.png"
+            }
+          ]
+        },
+        {
+          "name": "Metal",
+          "price": 20,
+          "options": [
+            {
+              "name": "Red",
+              "price": 20,
+              "image": "images/interior_metal_red.png",
+              "thumbnail": "images/th_interior_metal_red.png"
+            },
+            {
+              "name": "Green",
+              "price": 20,
+              "image": "images/interior_metal_green.png",
+              "thumbnail": "images/th_interior_metal_green.png"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
