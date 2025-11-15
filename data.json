@@ -2,132 +2,264 @@
   "item": "PennCamm Model X",
   "description": "Customizable camera — edit this JSON to add types, subtypes, options, prices, or image paths.",
   "basePrice": 199.00,
-  "types": [
-    {
-      "name": "Main",
-      "placeholder": "images/placeholder_main.png",
-      "subtypes": [
-        {
-          "name": "Plastic",
-          "price": 0,
-          "options": [
-            {
-              "name": "Black",
-              "price": 0,
-              "image": "images/main_plastic_black.png",
-              "thumbnail": "images/th_main_plastic_black.png"
-            },
-            {
-              "name": "White",
-              "price": 0,
-              "image": "images/main_plastic_white.png",
-              "thumbnail": "images/th_main_plastic_white.png"
-            }
-          ]
-        },
-        {
-          "name": "Metal",
-          "price": 25,
-          "options": [
-            {
-              "name": "Red",
-              "price": 25,
-              "image": "images/main_metal_red.png",
-              "thumbnail": "images/th_main_metal_red.png"
-            },
-            {
-              "name": "Green",
-              "price": 25,
-              "image": "images/main_metal_green.png",
-              "thumbnail": "images/th_main_metal_green.png"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "name": "Secondary",
-      "placeholder": "images/placeholder_secondary.png",
-      "subtypes": [
-        {
-          "name": "Plastic",
-          "price": 0,
-          "options": [
-            {
-              "name": "Black",
-              "price": 0,
-              "image": "images/sec_plastic_black.png",
-              "thumbnail": "images/th_sec_plastic_black.png"
-            },
-            {
-              "name": "White",
-              "price": 0,
-              "image": "images/sec_plastic_white.png",
-              "thumbnail": "images/th_sec_plastic_white.png"
-            }
-          ]
-        },
-        {
-          "name": "Metal",
-          "price": 10,
-          "options": [
-            {
-              "name": "Red",
-              "price": 10,
-              "image": "images/sec_metal_red.png",
-              "thumbnail": "images/th_sec_metal_red.png"
-            },
-            {
-              "name": "Green",
-              "price": 10,
-              "image": "images/sec_metal_green.png",
-              "thumbnail": "images/th_sec_metal_green.png"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "name": "Interior",
-      "placeholder": "images/placeholder_interior.png",
-      "subtypes": [
-        {
-          "name": "Plastic",
-          "price": 0,
-          "options": [
-            {
-              "name": "Black",
-              "price": 0,
-              "image": "images/interior_plastic_black.png",
-              "thumbnail": "images/th_interior_plastic_black.png"
-            },
-            {
-              "name": "White",
-              "price": 0,
-              "image": "images/interior_plastic_white.png",
-              "thumbnail": "images/th_interior_plastic_white.png"
-            }
-          ]
-        },
-        {
-          "name": "Metal",
-          "price": 20,
-          "options": [
-            {
-              "name": "Red",
-              "price": 20,
-              "image": "images/interior_metal_red.png",
-              "thumbnail": "images/th_interior_metal_red.png"
-            },
-            {
-              "name": "Green",
-              "price": 20,
-              "image": "images/interior_metal_green.png",
-              "thumbnail": "images/th_interior_metal_green.png"
-            }
-          ]
-        }
-      ]
-    }
-  ]
+  "Wrap": {
+    "Cloth": [
+      { "sku": "WR-CL-GR", "name": "Grey", "image": "images/WR-CL-GR.png", "price": 0 },
+      { "sku": "WR-CL-RD", "name": "Red", "image": "images/WR-CL-RD.png", "price": 0 },
+      { "sku": "WR-CL-OR", "name": "Orange", "image": "images/WR-CL-OR.png", "price": 0 },
+      { "sku": "WR-CL-YE", "name": "Yellow", "image": "images/WR-CL-YE.png", "price": 0 },
+      { "sku": "WR-CL-GN", "name": "Green", "image": "images/WR-CL-GN.png", "price": 0 },
+      { "sku": "WR-CL-BL", "name": "Blue", "image": "images/WR-CL-BL.png", "price": 0 },
+      { "sku": "WR-CL-PL", "name": "Purple", "image": "images/WR-CL-PL.png", "price": 0 },
+      { "sku": "WR-CL-WH", "name": "White", "image": "images/WR-CL-WH.png", "price": 0 },
+      { "sku": "WR-CL-BK", "name": "Black", "image": "images/WR-CL-BK.png", "price": 0 }
+    ],
+    "Foam": [
+      { "sku": "WR-FO-GR", "name": "Grey", "image": "images/WR-FO-GR.png", "price": 0 },
+      { "sku": "WR-FO-RD", "name": "Red", "image": "images/WR-FO-RD.png", "price": 0 },
+      { "sku": "WR-FO-OR", "name": "Orange", "image": "images/WR-FO-OR.png", "price": 0 },
+      { "sku": "WR-FO-YE", "name": "Yellow", "image": "images/WR-FO-YE.png", "price": 0 },
+      { "sku": "WR-FO-GN", "name": "Green", "image": "images/WR-FO-GN.png", "price": 0 },
+      { "sku": "WR-FO-BL", "name": "Blue", "image": "images/WR-FO-BL.png", "price": 0 },
+      { "sku": "WR-FO-PL", "name": "Purple", "image": "images/WR-FO-PL.png", "price": 0 },
+      { "sku": "WR-FO-WH", "name": "White", "image": "images/WR-FO-WH.png", "price": 0 },
+      { "sku": "WR-FO-BK", "name": "Black", "image": "images/WR-FO-BK.png", "price": 0 }
+    ],
+    "Fabric": [
+      { "sku": "WR-FA-GR", "name": "Grey", "image": "images/WR-FA-GR.png", "price": 0 },
+      { "sku": "WR-FA-RD", "name": "Red", "image": "images/WR-FA-RD.png", "price": 0 },
+      { "sku": "WR-FA-OR", "name": "Orange", "image": "images/WR-FA-OR.png", "price": 0 },
+      { "sku": "WR-FA-YE", "name": "Yellow", "image": "images/WR-FA-YE.png", "price": 0 },
+      { "sku": "WR-FA-GN", "name": "Green", "image": "images/WR-FA-GN.png", "price": 0 },
+      { "sku": "WR-FA-BL", "name": "Blue", "image": "images/WR-FA-BL.png", "price": 0 },
+      { "sku": "WR-FA-PL", "name": "Purple", "image": "images/WR-FA-PL.png", "price": 0 },
+      { "sku": "WR-FA-WH", "name": "White", "image": "images/WR-FA-WH.png", "price": 0 },
+      { "sku": "WR-FA-BK", "name": "Black", "image": "images/WR-FA-BK.png", "price": 0 }
+    ],
+    "Leather": [
+      { "sku": "WR-LE-TN", "name": "Tan", "image": "images/WR-LE-TN.png", "price": 0 },
+      { "sku": "WR-LE-BR", "name": "Brown", "image": "images/WR-LE-BR.png", "price": 0 },
+      { "sku": "WR-LE-BK", "name": "Black", "image": "images/WR-LE-BK.png", "price": 0 },
+      { "sku": "WR-LE-PL", "name": "Purple", "image": "images/WR-LE-PL.png", "price": 0 }
+    ],
+    "Velvet": [
+      { "sku": "WR-VE-RD", "name": "Red", "image": "images/WR-VE-RD.png", "price": 0 },
+      { "sku": "WR-VE-BK", "name": "Black", "image": "images/WR-VE-BK.png", "price": 0 }
+    ],
+    "Fiber": [
+      { "sku": "WR-FI-CAR", "name": "Carbon", "image": "images/WR-FI-CAR.png", "price": 0 },
+      { "sku": "WR-FI-GLS", "name": "Glass", "image": "images/WR-FI-GLS.png", "price": 0 }
+    ],
+    "Reflective": [
+      { "sku": "WR-RE-REF", "name": "Reflective", "image": "images/WR-RE-REF.png", "price": 0 }
+    ]
+  },
+
+  "Upper Case": {
+    "Composite PLA": [
+      { "sku": "UC-CPLA-STL", "name": "Steel", "image": "images/UC-CPLA-STL.png", "price": 0 },
+      { "sku": "UC-CPLA-IRN", "name": "Iron (Rusts)", "image": "images/UC-CPLA-IRN.png", "price": 0 },
+      { "sku": "UC-CPLA-BRS", "name": "Brass", "image": "images/UC-CPLA-BRS.png", "price": 0 },
+      { "sku": "UC-CPLA-COP", "name": "Copper", "image": "images/UC-CPLA-COP.png", "price": 0 },
+      { "sku": "UC-CPLA-BRZ", "name": "Bronze", "image": "images/UC-CPLA-BRZ.png", "price": 0 }
+    ],
+    "Electroplate": [
+      { "sku": "UC-EP-NI", "name": "Nickel", "image": "images/UC-EP-NI.png", "price": 0 },
+      { "sku": "UC-EP-COP", "name": "Copper", "image": "images/UC-EP-COP.png", "price": 0 },
+      { "sku": "UC-EP-AL", "name": "Aluminum", "image": "images/UC-EP-AL.png", "price": 0 },
+      { "sku": "UC-EP-TIN", "name": "Tin", "image": "images/UC-EP-TIN.png", "price": 0 },
+      { "sku": "UC-EP-ZN", "name": "Zinc", "image": "images/UC-EP-ZN.png", "price": 0 },
+      { "sku": "UC-EP-IRN", "name": "Iron", "image": "images/UC-EP-IRN.png", "price": 0 }
+    ],
+    "SLS": [
+      { "sku": "UC-SLS-TI", "name": "Titanium", "image": "images/UC-SLS-TI.png", "price": 0 },
+      { "sku": "UC-SLS-STL", "name": "Steel", "image": "images/UC-SLS-STL.png", "price": 0 }
+    ],
+    "PLA": [
+      { "sku": "UC-PLA-BK", "name": "Black", "image": "images/UC-PLA-BK.png", "price": 0 },
+      { "sku": "UC-PLA-WH", "name": "White", "image": "images/UC-PLA-WH.png", "price": 0 },
+      { "sku": "UC-PLA-CLR", "name": "Clear", "image": "images/UC-PLA-CLR.png", "price": 0 },
+      { "sku": "UC-PLA-RD", "name": "Red", "image": "images/UC-PLA-RD.png", "price": 0 },
+      { "sku": "UC-PLA-OR", "name": "Orange", "image": "images/UC-PLA-OR.png", "price": 0 },
+      { "sku": "UC-PLA-YE", "name": "Yellow", "image": "images/UC-PLA-YE.png", "price": 0 },
+      { "sku": "UC-PLA-GN", "name": "Green", "image": "images/UC-PLA-GN.png", "price": 0 },
+      { "sku": "UC-PLA-BL", "name": "Blue", "image": "images/UC-PLA-BL.png", "price": 0 },
+      { "sku": "UC-PLA-PL", "name": "Purple", "image": "images/UC-PLA-PL.png", "price": 0 },
+      { "sku": "UC-PLA-PK", "name": "Pink", "image": "images/UC-PLA-PK.png", "price": 0 },
+      { "sku": "UC-PLA-MAR", "name": "Marble", "image": "images/UC-PLA-MAR.png", "price": 0 },
+      { "sku": "UC-PLA-OIL", "name": "Oil Spill", "image": "images/UC-PLA-OIL.png", "price": 0 },
+      { "sku": "UC-PLA-GLO", "name": "Glow In Dark", "image": "images/UC-PLA-GLO.png", "price": 0 }
+    ],
+    "Glitter PLA": [
+      { "sku": "UC-GPLA-BL", "name": "Blue", "image": "images/UC-GPLA-BL.png", "price": 0 },
+      { "sku": "UC-GPLA-GN", "name": "Green", "image": "images/UC-GPLA-GN.png", "price": 0 },
+      { "sku": "UC-GPLA-RD", "name": "Red", "image": "images/UC-GPLA-RD.png", "price": 0 },
+      { "sku": "UC-GPLA-BK", "name": "Black", "image": "images/UC-GPLA-BK.png", "price": 0 },
+      { "sku": "UC-GPLA-WH", "name": "White", "image": "images/UC-GPLA-WH.png", "price": 0 },
+      { "sku": "UC-GPLA-GD", "name": "Gold", "image": "images/UC-GPLA-GD.png", "price": 0 },
+      { "sku": "UC-GPLA-TL", "name": "Teal", "image": "images/UC-GPLA-TL.png", "price": 0 },
+      { "sku": "UC-GPLA-OR", "name": "Orange", "image": "images/UC-GPLA-OR.png", "price": 0 }
+    ],
+    "Glitter Fade PLA": [
+      { "sku": "UC-GFPLA-GDU", "name": "Gold Dust", "image": "images/UC-GFPLA-GDU.png", "price": 0 },
+      { "sku": "UC-GFPLA-STA", "name": "Stardust", "image": "images/UC-GFPLA-STA.png", "price": 0 },
+      { "sku": "UC-GFPLA-RBO", "name": "Rainbow", "image": "images/UC-GFPLA-RBO.png", "price": 0 },
+      { "sku": "UC-GFPLA-SUN", "name": "Sunrise", "image": "images/UC-GFPLA-SUN.png", "price": 0 },
+      { "sku": "UC-GFPLA-GN", "name": "Green", "image": "images/UC-GFPLA-GN.png", "price": 0 },
+      { "sku": "UC-GFPLA-BL", "name": "Blue", "image": "images/UC-GFPLA-BL.png", "price": 0 },
+      { "sku": "UC-GFPLA-PL", "name": "Purple", "image": "images/UC-GFPLA-PL.png", "price": 0 }
+    ],
+    "Thermochromic PLA": [
+      { "sku": "UC-TPLA-DGLI", "name": "Dark Green > Lime", "image": "images/UC-TPLA-DGLI.png", "price": 0 },
+      { "sku": "UC-TPLA-DGYE", "name": "Dark Green > Yellow", "image": "images/UC-TPLA-DGYE.png", "price": 0 },
+      { "sku": "UC-TPLA-RDYE", "name": "Red > Yellow", "image": "images/UC-TPLA-RDYE.png", "price": 0 },
+      { "sku": "UC-TPLA-RDOR", "name": "Red > Orange", "image": "images/UC-TPLA-RDOR.png", "price": 0 },
+      { "sku": "UC-TPLA-BKGR", "name": "Black > Gray", "image": "images/UC-TPLA-BKGR.png", "price": 0 }
+    ]
+  },
+
+  "Lower Case": {
+    "Composite PLA": [
+      { "sku": "LC-CPLA-STL", "name": "Steel", "image": "images/LC-CPLA-STL.png", "price": 0 },
+      { "sku": "LC-CPLA-IRN", "name": "Iron (Rusts)", "image": "images/LC-CPLA-IRN.png", "price": 0 },
+      { "sku": "LC-CPLA-BRS", "name": "Brass", "image": "images/LC-CPLA-BRS.png", "price": 0 },
+      { "sku": "LC-CPLA-COP", "name": "Copper", "image": "images/LC-CPLA-COP.png", "price": 0 },
+      { "sku": "LC-CPLA-BRZ", "name": "Bronze", "image": "images/LC-CPLA-BRZ.png", "price": 0 }
+    ],
+    "Electroplate": [
+      { "sku": "LC-EP-NI", "name": "Nickel", "image": "images/LC-EP-NI.png", "price": 0 },
+      { "sku": "LC-EP-COP", "name": "Copper", "image": "images/LC-EP-COP.png", "price": 0 },
+      { "sku": "LC-EP-AL", "name": "Aluminum", "image": "images/LC-EP-AL.png", "price": 0 },
+      { "sku": "LC-EP-TIN", "name": "Tin", "image": "images/LC-EP-TIN.png", "price": 0 },
+      { "sku": "LC-EP-ZN", "name": "Zinc", "image": "images/LC-EP-ZN.png", "price": 0 },
+      { "sku": "LC-EP-IRN", "name": "Iron", "image": "images/LC-EP-IRN.png", "price": 0 }
+    ],
+    "SLS": [
+      { "sku": "LC-SLS-TI", "name": "Titanium", "image": "images/LC-SLS-TI.png", "price": 0 },
+      { "sku": "LC-SLS-STL", "name": "Steel", "image": "images/LC-SLS-STL.png", "price": 0 }
+    ],
+    "PLA": [
+      { "sku": "LC-PLA-BK", "name": "Black", "image": "images/LC-PLA-BK.png", "price": 0 },
+      { "sku": "LC-PLA-WH", "name": "White", "image": "images/LC-PLA-WH.png", "price": 0 },
+      { "sku": "LC-PLA-CLR", "name": "Clear", "image": "images/LC-PLA-CLR.png", "price": 0 },
+      { "sku": "LC-PLA-RD", "name": "Red", "image": "images/LC-PLA-RD.png", "price": 0 },
+      { "sku": "LC-PLA-OR", "name": "Orange", "image": "images/LC-PLA-OR.png", "price": 0 },
+      { "sku": "LC-PLA-YE", "name": "Yellow", "image": "images/LC-PLA-YE.png", "price": 0 },
+      { "sku": "LC-PLA-GN", "name": "Green", "image": "images/LC-PLA-GN.png", "price": 0 },
+      { "sku": "LC-PLA-BL", "name": "Blue", "image": "images/LC-PLA-BL.png", "price": 0 },
+      { "sku": "LC-PLA-PL", "name": "Purple", "image": "images/LC-PLA-PL.png", "price": 0 },
+      { "sku": "LC-PLA-PK", "name": "Pink", "image": "images/LC-PLA-PK.png", "price": 0 },
+      { "sku": "LC-PLA-MAR", "name": "Marble", "image": "images/LC-PLA-MAR.png", "price": 0 },
+      { "sku": "LC-PLA-OIL", "name": "Oil Spill", "image": "images/LC-PLA-OIL.png", "price": 0 },
+      { "sku": "LC-PLA-GLO", "name": "Glow In Dark", "image": "images/LC-PLA-GLO.png", "price": 0 }
+    ],
+    "Glitter PLA": [
+      { "sku": "LC-GPLA-BL", "name": "Blue", "image": "images/LC-GPLA-BL.png", "price": 0 },
+      { "sku": "LC-GPLA-GN", "name": "Green", "image": "images/LC-GPLA-GN.png", "price": 0 },
+      { "sku": "LC-GPLA-RD", "name": "Red", "image": "images/LC-GPLA-RD.png", "price": 0 },
+      { "sku": "LC-GPLA-BK", "name": "Black", "image": "images/LC-GPLA-BK.png", "price": 0 },
+      { "sku": "LC-GPLA-WH", "name": "White", "image": "images/LC-GPLA-WH.png", "price": 0 },
+      { "sku": "LC-GPLA-GD", "name": "Gold", "image": "images/LC-GPLA-GD.png", "price": 0 },
+      { "sku": "LC-GPLA-TL", "name": "Teal", "image": "images/LC-GPLA-TL.png", "price": 0 },
+      { "sku": "LC-GPLA-OR", "name": "Orange", "image": "images/LC-GPLA-OR.png", "price": 0 }
+    ],
+    "Glitter Fade PLA": [
+      { "sku": "LC-GFPLA-GDU", "name": "Gold Dust", "image": "images/LC-GFPLA-GDU.png", "price": 0 },
+      { "sku": "LC-GFPLA-STA", "name": "Stardust", "image": "images/LC-GFPLA-STA.png", "price": 0 },
+      { "sku": "LC-GFPLA-RBO", "name": "Rainbow", "image": "images/LC-GFPLA-RBO.png", "price": 0 },
+      { "sku": "LC-GFPLA-SUN", "name": "Sunrise", "image": "images/LC-GFPLA-SUN.png", "price": 0 },
+      { "sku": "LC-GFPLA-GN", "name": "Green", "image": "images/LC-GFPLA-GN.png", "price": 0 },
+      { "sku": "LC-GFPLA-BL", "name": "Blue", "image": "images/LC-GFPLA-BL.png", "price": 0 },
+      { "sku": "LC-GFPLA-PL", "name": "Purple", "image": "images/LC-GFPLA-PL.png", "price": 0 }
+    ],
+    "Thermochromic PLA": [
+      { "sku": "LC-TPLA-DGLI", "name": "Dark Green > Lime", "image": "images/LC-TPLA-DGLI.png", "price": 0 },
+      { "sku": "LC-TPLA-DGYE", "name": "Dark Green > Yellow", "image": "images/LC-TPLA-DGYE.png", "price": 0 },
+      { "sku": "LC-TPLA-RDYE", "name": "Red > Yellow", "image": "images/LC-TPLA-RDYE.png", "price": 0 },
+      { "sku": "LC-TPLA-RDOR", "name": "Red > Orange", "image": "images/LC-TPLA-RDOR.png", "price": 0 },
+      { "sku": "LC-TPLA-BKGR", "name": "Black > Gray", "image": "images/LC-TPLA-BKGR.png", "price": 0 }
+    ]
+  },
+
+  "Storage": {
+    "PennCamm Standard 4GB": [
+      { "sku": "ST-PCS4G-NA", "name": "PennCamm Standard 4GB", "image": "images/ST-PCS4G-NA.png", "price": 0 }
+    ]
+  },
+
+  "Lens": {
+    "Pack": [
+      { "sku": "LN-PAK-BAS", "name": "Basic", "image": "images/LN-PAK-BAS.png", "price": 0 },
+      { "sku": "LN-PAK-MAC", "name": "Macro", "image": "images/LN-PAK-MAC.png", "price": 0 },
+      { "sku": "LN-PAK-FIS", "name": "Fisheye", "image": "images/LN-PAK-FIS.png", "price": 0 }
+    ],
+    "Single": [
+      { "sku": "LN-SIN-ZMX10", "name": "Zoom (>10x)", "image": "images/LN-SIN-ZMX10.png", "price": 0 }
+    ]
+  },
+
+  "Charger": {
+    "USBC": [
+      { "sku": "CH-USBC-C-A", "name": "USBC-USBA", "image": "images/CH-USBC-C-A.png", "price": 0 },
+      { "sku": "CH-USBC-C-C", "name": "USBC-USBC", "image": "images/CH-USBC-C-C.png", "price": 0 }
+    ]
+  },
+
+  "Battery": {
+    "Single Cell": [
+      { "sku": "BT-SC-350", "name": "350mah", "image": "images/BT-SC-350.png", "price": 0 },
+      { "sku": "BT-SC-2000", "name": "2000mah", "image": "images/BT-SC-2000.png", "price": 0 }
+    ],
+    "Double Cell": [
+      { "sku": "BT-DC-700", "name": "700mah", "image": "images/BT-DC-700.png", "price": 0 }
+    ]
+  },
+
+  "Misc": {
+    "Accessories": [
+      { "sku": "MI-ACC-KEY", "name": "Keychain", "image": "images/MI-ACC-KEY.png", "price": 0 },
+      { "sku": "MI-ACC-STR", "name": "Carry Strap", "image": "images/MI-ACC-STR.png", "price": 0 },
+      { "sku": "MI-ACC-MNT", "name": "Mount", "image": "images/MI-ACC-MNT.png", "price": 0 },
+      { "sku": "MI-ACC-CAL", "name": "Calc Attachment", "image": "images/MI-ACC-CAL.png", "price": 0 }
+    ]
+  },
+
+  "Parts": {
+    "Screws": [
+      { "sku": "PT-SCR-M3RH", "name": "M3-0.5 Roundhead Hex", "image": "images/PT-SCR-M3RH.png", "price": 0 },
+      { "sku": "PT-SCR-M3HS", "name": "M3-0.5 Handscrew", "image": "images/PT-SCR-M3HS.png", "price": 0 },
+      { "sku": "PT-SCR-M15ST", "name": "M1.5-0.4 Self Tap Philips", "image": "images/PT-SCR-M15ST.png", "price": 0 }
+    ],
+    "Electronics": [
+      { "sku": "PT-ELEC-PCB", "name": "PCB", "image": "images/PT-ELEC-PCB.png", "price": 0 },
+      { "sku": "PT-ELEC-CAM", "name": "Camera", "image": "images/PT-ELEC-CAM.png", "price": 0 },
+      { "sku": "PT-ELEC-LED", "name": "LED", "image": "images/PT-ELEC-LED.png", "price": 0 }
+    ],
+    "Interface": [
+      { "sku": "PT-INT-PB6", "name": "6x6x6 Push Button", "image": "images/PT-INT-PB6.png", "price": 0 },
+      { "sku": "PT-INT-PBS110", "name": "PBS-110", "image": "images/PT-INT-PBS110.png", "price": 0 }
+    ]
+  },
+
+  "Packing": {
+    "Sticker": [
+      { "sku": "PKG-STK-LG", "name": "Big", "image": "images/PKG-STK-LG.png", "price": 0 },
+      { "sku": "PKG-STK-SM", "name": "Small", "image": "images/PKG-STK-SM.png", "price": 0 },
+      { "sku": "PKG-STK-ID", "name": "ID", "image": "images/PKG-STK-ID.png", "price": 0 }
+    ],
+    "Outer": [
+      { "sku": "PKG-OUT-PAP", "name": "Paper", "image": "images/PKG-OUT-PAP.png", "price": 0 },
+      { "sku": "PKG-OUT-ZIP", "name": "Zip Bag", "image": "images/PKG-OUT-ZIP.png", "price": 0 },
+      { "sku": "PKG-OUT-BOX", "name": "Box", "image": "images/PKG-OUT-BOX.png", "price": 0 },
+      { "sku": "PKG-OUT-BUB", "name": "Bubble Bag", "image": "images/PKG-OUT-BUB.png", "price": 0 }
+    ],
+    "Inner": [
+      { "sku": "PKG-INN-BRP", "name": "Bubble Wrap", "image": "images/PKG-INN-BRP.png", "price": 0 }
+    ],
+    "Paper": [
+      { "sku": "PKG-PAP-INV", "name": "Invoice", "image": "images/PKG-PAP-INV.png", "price": 0 },
+      { "sku": "PKG-PAP-THX", "name": "Thank You", "image": "images/PKG-PAP-THX.png", "price": 0 },
+      { "sku": "PKG-PAP-INS", "name": "Instructions", "image": "images/PKG-PAP-INS.png", "price": 0 }
+    ]
+  }
 }
