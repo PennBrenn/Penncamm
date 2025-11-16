@@ -141,6 +141,7 @@
   {"sku":"UC-TPLA-RDOR","type":"Accent","subtype":"Thermochromic PLA","item":"Red > Orange","price":3.49,"image":"images/UC-TPLA-RDOR.png"},
   {"sku":"UC-TPLA-BKGR","type":"Accent","subtype":"Thermochromic PLA","item":"Black > Gray","price":3.49,"image":"images/UC-TPLA-BKGR.png"},
 
+  {"sku":"ST-PCS4G-NO","type":"Storage","subtype":"None","item":"","price":0.00,"image":"images/ST-PCS4G-NO.png"},
   {"sku":"ST-PCS4G-NA","type":"Storage","subtype":"PennCamm Standard 4GB","item":"","price":2.99,"image":"images/ST-PCS4G-NA.png"},
 
   {"sku":"LN-PAK-BAS","type":"Lens","subtype":"Pack","item":"Basic","price":4.99,"image":"images/LN-PAK-BAS.png"},
