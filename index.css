@@ -12,6 +12,28 @@
   -moz-osx-font-smoothing:grayscale;
 }
 
+html {
+  scrollbar-color: #444 #111; /* thumb, track (Firefox only) */
+  scrollbar-width: thin;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #111;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #444;
+  border-radius: 8px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #666;
+}
+
 #material-btn {
   background: linear-gradient(180deg, rgba(70,94,115,0.25), rgba(70,94,115,0.08));
   color: #fff !important;
@@ -253,6 +275,7 @@ section.panel + section.panel { margin-top: var(--panel-gap); }
   .title { font-size:34px; }
   .panel { padding:26px 12px; }
 }
+
 
 
 
