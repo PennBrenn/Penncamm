@@ -1,345 +1,415 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>PennCamm — Custom Quote Creator</title>
-  <style>
-    :root{
-      --bg:#07070a; --panel:#0f1316; --muted:#9aa3a8; --accent:#465e73; --glass:rgba(255,255,255,0.03);
-    }
-    html,body{height:100%;margin:0;background:var(--bg);color:var(--muted);font-family:Helvetica,Arial,sans-serif}
-    .app{display:flex;gap:20px;align-items:stretch;padding:18px;height:100%;box-sizing:border-box}
-    .left{flex:0 0 58%;min-width:320px;display:flex;flex-direction:column;align-items:center}
-    .viewer{background:#000;border-radius:8px;padding:12px;box-shadow:0 6px 30px rgba(0,0,0,0.7);width:100%;max-width:920px;display:flex;justify-content:center}
-    .stack{position:relative;width:100%;height:0;padding-bottom:100%;background:#111;overflow:hidden;border-radius:6px}
-    .stack img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;transition:opacity .18s linear;opacity:0}
-    .stack img.visible{opacity:1}
-    .right{flex:0 0 40%;min-width:300px;display:flex;flex-direction:column;gap:12px}
-    .panel{background:var(--panel);border-radius:10px;padding:12px;box-shadow:inset 0 1px 0 rgba(255,255,255,0.02)}
-    h2{color:#fafdff;font-family:Courier,monospace;margin:6px 0}
-    .types{display:flex;flex-direction:column;gap:6px;max-height:40vh;overflow:auto}
-    .type-btn{background:transparent;border:1px solid transparent;padding:10px 12px;text-align:left;border-radius:6px;color:var(--muted);cursor:pointer}
-    .type-btn.active{background:var(--glass);border-color:rgba(255,255,255,0.04);color:#fff}
-    .subtypes{display:flex;gap:8px;padding:8px 6px;overflow:auto}
-    .subchip{white-space:nowrap;padding:8px 12px;border-radius:999px;background:rgba(255,255,255,0.02);cursor:pointer;border:1px solid transparent}
-    .subchip.active{background:linear-gradient(90deg,var(--accent),#32464f);color:#fff}
-    .options-grid{display:flex;flex-direction:column;gap:8px;max-height:28vh;overflow:auto}
-    .option{display:flex;align-items:center;gap:8px;padding:8px;border-radius:6px;background:rgba(255,255,255,0.01);cursor:pointer}
-    .option input{transform:scale(1.1)}
-    .footer{display:flex;gap:10px;align-items:center;justify-content:space-between}
-    .quote-box{width:100%;height:110px;background:#050608;border-radius:8px;padding:8px;resize:none;color:var(--muted);font-family:monospace}
-    .btn{background:var(--accent);color:#fff;padding:10px 12px;border-radius:8px;border:0;cursor:pointer}
-    .muted{color:var(--muted);font-size:13px}
-    @media(max-width:900px){.app{flex-direction:column}.left,.right{flex:1 1 auto;width:100%}}
-  </style>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>PennCamm — Custom Quote Creator</title>
+<style>
+  :root{
+    --bg:#0b0f12;
+    --panel:#0f1417;
+    --muted:#9aa6b2;
+    --accent:#7be3ff;
+    --card:#0e1416;
+    --glass: rgba(255,255,255,0.03);
+  }
+  html,body{height:100%;margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial;color:#e6f0f2;background:linear-gradient(180deg,#050607 0%, #071019 100%);-webkit-font-smoothing:antialiased}
+  .app{display:flex;gap:20px;padding:18px;box-sizing:border-box;height:100vh;}
+  /* Left viewer */
+  .viewer{
+    flex:1 1 0;min-width:320px;max-width:720px;background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);border-radius:12px;padding:18px;box-sizing:border-box;position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;
+    border:1px solid rgba(255,255,255,0.03);
+    overflow:hidden;
+  }
+  .viewer .canvas{
+    width:100%;height:100%;max-height:820px;display:flex;align-items:center;justify-content:center;
+  }
+  .preview{
+    position:relative;width:min(92%,720px);aspect-ratio:1/1;background:linear-gradient(180deg,#0b1113,#071014);border-radius:8px;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,0.7);border:1px solid rgba(255,255,255,0.03);
+  }
+  .layer{
+    position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;
+  }
+  .layer img{max-width:100%;max-height:100%;width:100%;height:100%;object-fit:contain;image-rendering:pixelated;}
+  .placeholder{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;color:var(--muted);padding:20px;text-align:center}
+  /* Right panel */
+  .panel{width:420px;min-width:280px;max-width:480px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.01));border-radius:12px;padding:18px;box-sizing:border-box;border:1px solid rgba(255,255,255,0.03);display:flex;flex-direction:column;gap:12px}
+  .row{display:flex;gap:12px;align-items:center}
+  .types{display:flex;flex-direction:column;gap:8px;min-width:120px;max-height:60vh;overflow:auto;padding-right:6px}
+  .type-btn{background:var(--glass);border:1px solid rgba(255,255,255,0.03);padding:10px 12px;border-radius:8px;color:var(--muted);cursor:pointer;text-align:left;font-weight:600}
+  .type-btn.active{background:linear-gradient(90deg, rgba(123,227,255,0.06), rgba(123,227,255,0.02));color:var(--accent);box-shadow:0 6px 18px rgba(123,227,255,0.04)}
+  .subtypes{display:flex;gap:8px;overflow:auto;padding:8px 6px;background:transparent;border-radius:8px}
+  .subtype-btn{min-width:110px;padding:8px 10px;border-radius:8px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.02);color:var(--muted);cursor:pointer;white-space:nowrap}
+  .subtype-btn.active{outline:2px solid rgba(123,227,255,0.08);color:var(--accent)}
+  .options{display:flex;flex-wrap:wrap;gap:10px;padding:6px;max-height:38vh;overflow:auto}
+  .opt{flex:0 0 48%;min-width:140px;background:rgba(255,255,255,0.02);border-radius:8px;padding:10px;border:1px solid rgba(255,255,255,0.02);cursor:pointer;display:flex;align-items:center;gap:10px}
+  .opt.multi{flex:0 0 31%}
+  .opt img{width:48px;height:48px;object-fit:cover;border-radius:6px;border:1px solid rgba(255,255,255,0.04)}
+  .opt .meta{display:flex;flex-direction:column}
+  .opt .meta .name{font-weight:600;color:#e8f7fb}
+  .opt .meta .price{font-size:13px;color:var(--muted)}
+  .opt.selected{outline:2px solid rgba(123,227,255,0.12);box-shadow:0 8px 20px rgba(0,0,0,0.6)}
+  /* quote box */
+  .quote{background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.01));padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.02);font-size:14px;color:var(--muted)}
+  .quote .line{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px dashed rgba(255,255,255,0.02)}
+  .quote .total{font-size:18px;color:var(--accent);font-weight:700;padding-top:6px}
+  .emailBox{display:flex;flex-direction:column;gap:8px}
+  textarea#emailBody{width:100%;min-height:140px;background:transparent;border-radius:8px;padding:8px;border:1px solid rgba(255,255,255,0.03);color:#dbeff3;resize:vertical}
+  .btn{background:linear-gradient(90deg,var(--accent),#6ed1ff);color:#022;border:none;padding:10px 12px;border-radius:8px;cursor:pointer;font-weight:700}
+  .small{font-size:13px;color:var(--muted)}
+  footer{display:flex;gap:8px;align-items:center;justify-content:space-between;margin-top:6px}
+  /* responsiveness */
+  @media (max-width:1000px){ .app{flex-direction:column;padding:12px} .panel{width:100%;max-width:100%}}
+  /* scrollbar */
+  ::-webkit-scrollbar{height:8px;width:8px}
+  ::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.03);border-radius:8px}
+</style>
 </head>
 <body>
-  <div class="app">
-    <div class="left">
-      <div class="viewer panel">
-        <div class="stack" id="stack" aria-label="Product preview (layers)"></div>
-      </div>
-      <div style="margin-top:12px;width:100%;max-width:920px;display:flex;gap:10px;justify-content:space-between;align-items:center">
-        <div class="muted">All images are 1000×1000 and layered. Images located at <code>images/&lt;SKU&gt;.png</code></div>
-        <div class="muted">Dark theme • Temporary colors</div>
-      </div>
+<div class="app">
+  <div class="viewer" id="viewer">
+    <div style="width:100%;display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:10px">
+      <div class="small">PennCamm Customizer</div>
+      <div class="small">Dark theme · Temporary palette</div>
     </div>
-
-    <div class="right">
-      <div class="panel">
-        <h2>Customize — PennCamm</h2>
-        <div class="muted">Select a Type. Then choose a Subtype and an Option.</div>
-      </div>
-
-      <div class="panel">
-        <div class="types" id="types"></div>
-      </div>
-
-      <div class="panel">
-        <div id="subtypes" class="subtypes"></div>
-        <div id="options" class="options-grid" style="margin-top:8px"></div>
-      </div>
-
-      <div class="panel">
-        <div style="display:flex;gap:8px;align-items:center;margin-bottom:8px">
-          <button id="selectAll" class="btn">Select All (for Lenses & Misc)</button>
-          <div class="muted">Clear selections to reset</div>
-        </div>
-        <textarea id="quote" class="quote-box" placeholder="Quote (copy and email to cam@pennbrenn.com)"></textarea>
-        <div class="footer" style="margin-top:8px">
-          <div class="muted">Total: <strong id="total">$0.00</strong></div>
-          <div style="display:flex;gap:8px">
-            <button id="copyQuote" class="btn">Copy Quote</button>
-            <button id="reset" class="btn" style="background:#2b2f31">Reset</button>
-          </div>
+    <div class="canvas">
+      <div class="preview" id="preview">
+        <!-- layers get injected here -->
+        <div class="placeholder" id="placeholder">
+          <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 2l3 7h7l-5.5 4 2 7L12 17l-6.5 3 2-7L2 9h7l3-7z" stroke-width="0.8"/></svg>
+          <div style="font-weight:700">Select options to build your PennCamm</div>
+          <div class="small">Layers show stacked (1000×1000 px images). Name images by SKU: <code>images/SKU.png</code></div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Full options JSON (editable): -->
-  <script id="options-json" type="application/json">
-  [
-    {"sku":"WR-CL-GR","type":"Wrap","subtype":"Cloth","item":"Grey","price":0.99},
-    {"sku":"WR-CL-RD","type":"Wrap","subtype":"Cloth","item":"Red","price":0.99},
-    {"sku":"WR-CL-OR","type":"Wrap","subtype":"Cloth","item":"Orange","price":0.99},
-    {"sku":"WR-CL-YE","type":"Wrap","subtype":"Cloth","item":"Yellow","price":0.99},
-    {"sku":"WR-CL-GN","type":"Wrap","subtype":"Cloth","item":"Green","price":0.99},
-    {"sku":"WR-CL-BL","type":"Wrap","subtype":"Cloth","item":"Blue","price":0.99},
-    {"sku":"WR-CL-PL","type":"Wrap","subtype":"Cloth","item":"Purple","price":0.99},
-    {"sku":"WR-CL-WH","type":"Wrap","subtype":"Cloth","item":"White","price":0.99},
-    {"sku":"WR-CL-BK","type":"Wrap","subtype":"Cloth","item":"Black","price":0.99},
-    {"sku":"WR-FO-GR","type":"Wrap","subtype":"Foam","item":"Grey","price":0.99},
-    {"sku":"WR-FO-RD","type":"Wrap","subtype":"Foam","item":"Red","price":0.99},
-    {"sku":"WR-FO-OR","type":"Wrap","subtype":"Foam","item":"Orange","price":0.99},
-    {"sku":"WR-FO-YE","type":"Wrap","subtype":"Foam","item":"Yellow","price":0.99},
-    {"sku":"WR-FO-GN","type":"Wrap","subtype":"Foam","item":"Green","price":0.99},
-    {"sku":"WR-FO-BL","type":"Wrap","subtype":"Foam","item":"Blue","price":0.99},
-    {"sku":"WR-FO-PL","type":"Wrap","subtype":"Foam","item":"Purple","price":0.99},
-    {"sku":"WR-FO-WH","type":"Wrap","subtype":"Foam","item":"White","price":0.99},
-    {"sku":"WR-FO-BK","type":"Wrap","subtype":"Foam","item":"Black","price":0.99},
-    {"sku":"WR-FA-GR","type":"Wrap","subtype":"Fabric","item":"Grey","price":0.99},
-    {"sku":"WR-FA-RD","type":"Wrap","subtype":"Fabric","item":"Red","price":0.99},
-    {"sku":"WR-FA-OR","type":"Wrap","subtype":"Fabric","item":"Orange","price":0.99},
-    {"sku":"WR-FA-YE","type":"Wrap","subtype":"Fabric","item":"Yellow","price":0.99},
-    {"sku":"WR-FA-GN","type":"Wrap","subtype":"Fabric","item":"Green","price":0.99},
-    {"sku":"WR-FA-BL","type":"Wrap","subtype":"Fabric","item":"Blue","price":0.99},
-    {"sku":"WR-FA-PL","type":"Wrap","subtype":"Fabric","item":"Purple","price":0.99},
-    {"sku":"WR-FA-WH","type":"Wrap","subtype":"Fabric","item":"White","price":0.99},
-    {"sku":"WR-FA-BK","type":"Wrap","subtype":"Fabric","item":"Black","price":0.99},
-    {"sku":"WR-LE-TN","type":"Wrap","subtype":"Leather","item":"Tan","price":0.99},
-    {"sku":"WR-LE-BR","type":"Wrap","subtype":"Leather","item":"Brown","price":0.99},
-    {"sku":"WR-LE-BK","type":"Wrap","subtype":"Leather","item":"Black","price":0.99},
-    {"sku":"WR-LE-PL","type":"Wrap","subtype":"Leather","item":"Purple","price":0.99},
-    {"sku":"WR-VE-RD","type":"Wrap","subtype":"Velvet","item":"Red","price":0.99},
-    {"sku":"WR-VE-BK","type":"Wrap","subtype":"Velvet","item":"Black","price":0.99},
-    {"sku":"WR-FI-CAR","type":"Wrap","subtype":"Fiber","item":"Carbon","price":0.99},
-    {"sku":"WR-FI-GLS","type":"Wrap","subtype":"Fiber","item":"Glass","price":0.99},
-    {"sku":"WR-RE-REF","type":"Wrap","subtype":"Reflective","item":"Reflective","price":0.99},
-    {"sku":"UC-CPLA-STL","type":"Upper Case","subtype":"Composite PLA","item":"Steel","price":0.99},
-    {"sku":"UC-CPLA-IRN","type":"Upper Case","subtype":"Composite PLA","item":"Iron (Rusts)","price":0.99},
-    {"sku":"UC-CPLA-BRS","type":"Upper Case","subtype":"Composite PLA","item":"Brass","price":0.99},
-    {"sku":"UC-CPLA-COP","type":"Upper Case","subtype":"Composite PLA","item":"Copper","price":0.99},
-    {"sku":"UC-CPLA-BRZ","type":"Upper Case","subtype":"Composite PLA","item":"Bronze","price":0.99},
-    {"sku":"UC-EP-NI","type":"Upper Case","subtype":"Electroplate","item":"Nickel","price":0.99},
-    {"sku":"UC-EP-COP","type":"Upper Case","subtype":"Electroplate","item":"Copper","price":0.99},
-    {"sku":"UC-EP-AL","type":"Upper Case","subtype":"Electroplate","item":"Aluminum","price":0.99},
-    {"sku":"UC-EP-TIN","type":"Upper Case","subtype":"Electroplate","item":"Tin","price":0.99},
-    {"sku":"UC-EP-ZN","type":"Upper Case","subtype":"Electroplate","item":"Zinc","price":0.99},
-    {"sku":"UC-EP-IRN","type":"Upper Case","subtype":"Electroplate","item":"Iron","price":0.99},
-    {"sku":"UC-SLS-TI","type":"Upper Case","subtype":"SLS","item":"Titanium","price":0.99},
-    {"sku":"UC-SLS-STL","type":"Upper Case","subtype":"SLS","item":"Steel","price":0.99},
-    {"sku":"UC-PLA-BK","type":"Upper Case","subtype":"PLA","item":"Black","price":0.99},
-    {"sku":"UC-PLA-WH","type":"Upper Case","subtype":"PLA","item":"White","price":0.99},
-    {"sku":"UC-PLA-CLR","type":"Upper Case","subtype":"PLA","item":"Clear","price":0.99},
-    {"sku":"UC-PLA-RD","type":"Upper Case","subtype":"PLA","item":"Red","price":0.99},
-    {"sku":"UC-PLA-OR","type":"Upper Case","subtype":"PLA","item":"Orange","price":0.99},
-    {"sku":"UC-PLA-YE","type":"Upper Case","subtype":"PLA","item":"Yellow","price":0.99},
-    {"sku":"UC-PLA-GN","type":"Upper Case","subtype":"PLA","item":"Green","price":0.99},
-    {"sku":"UC-PLA-BL","type":"Upper Case","subtype":"PLA","item":"Blue","price":0.99},
-    {"sku":"UC-PLA-PL","type":"Upper Case","subtype":"PLA","item":"Purple","price":0.99},
-    {"sku":"UC-PLA-PK","type":"Upper Case","subtype":"PLA","item":"Pink","price":0.99},
-    {"sku":"UC-PLA-MAR","type":"Upper Case","subtype":"PLA","item":"Marble","price":0.99},
-    {"sku":"UC-PLA-OIL","type":"Upper Case","subtype":"PLA","item":"Oil Spill","price":0.99},
-    {"sku":"UC-PLA-GLO","type":"Upper Case","subtype":"PLA","item":"Glow In Dark","price":0.99},
-    {"sku":"UC-GPLA-BL","type":"Upper Case","subtype":"Glitter PLA","item":"Blue","price":0.99},
-    {"sku":"UC-GPLA-GN","type":"Upper Case","subtype":"Glitter PLA","item":"Green","price":0.99},
-    {"sku":"UC-GPLA-RD","type":"Upper Case","subtype":"Glitter PLA","item":"Red","price":0.99},
-    {"sku":"UC-GPLA-BK","type":"Upper Case","subtype":"Glitter PLA","item":"Black","price":0.99},
-    {"sku":"UC-GPLA-WH","type":"Upper Case","subtype":"Glitter PLA","item":"White","price":0.99},
-    {"sku":"UC-GPLA-GD","type":"Upper Case","subtype":"Glitter PLA","item":"Gold","price":0.99},
-    {"sku":"UC-GPLA-TL","type":"Upper Case","subtype":"Glitter PLA","item":"Teal","price":0.99},
-    {"sku":"UC-GPLA-OR","type":"Upper Case","subtype":"Glitter PLA","item":"Orange","price":0.99},
-    {"sku":"UC-GFPLA-GDU","type":"Upper Case","subtype":"Glitter Fade PLA","item":"Gold Dust","price":0.99},
-    {"sku":"UC-GFPLA-STA","type":"Upper Case","subtype":"Glitter Fade PLA","item":"Stardust","price":0.99},
-    {"sku":"UC-GFPLA-RBO","type":"Upper Case","subtype":"Glitter Fade PLA","item":"Rainbow","price":0.99},
-    {"sku":"UC-GFPLA-SUN","type":"Upper Case","subtype":"Glitter Fade PLA","item":"Sunrise","price":0.99},
-    {"sku":"UC-GFPLA-GN","type":"Upper Case","subtype":"Glitter Fade PLA","item":"Green","price":0.99},
-    {"sku":"UC-GFPLA-BL","type":"Upper Case","subtype":"Glitter Fade PLA","item":"Blue","price":0.99},
-    {"sku":"UC-GFPLA-PL","type":"Upper Case","subtype":"Glitter Fade PLA","item":"Purple","price":0.99},
-    {"sku":"UC-TPLA-DGLI","type":"Upper Case","subtype":"Thermochromic PLA","item":"Dark Green > Lime","price":0.99},
-    {"sku":"UC-TPLA-DGYE","type":"Upper Case","subtype":"Thermochromic PLA","item":"Dark Green > Yellow","price":0.99},
-    {"sku":"UC-TPLA-RDYE","type":"Upper Case","subtype":"Thermochromic PLA","item":"Red > Yellow","price":0.99},
-    {"sku":"UC-TPLA-RDOR","type":"Upper Case","subtype":"Thermochromic PLA","item":"Red > Orange","price":0.99},
-    {"sku":"UC-TPLA-BKGR","type":"Upper Case","subtype":"Thermochromic PLA","item":"Black > Gray","price":0.99},
-    {"sku":"LC-CPLA-STL","type":"Lower Case","subtype":"Composite PLA","item":"Steel","price":0.99},
-    {"sku":"LC-CPLA-IRN","type":"Lower Case","subtype":"Composite PLA","item":"Iron (Rusts)","price":0.99},
-    {"sku":"LC-CPLA-BRS","type":"Lower Case","subtype":"Composite PLA","item":"Brass","price":0.99},
-    {"sku":"LC-CPLA-COP","type":"Lower Case","subtype":"Composite PLA","item":"Copper","price":0.99},
-    {"sku":"LC-CPLA-BRZ","type":"Lower Case","subtype":"Composite PLA","item":"Bronze","price":0.99},
-    {"sku":"LC-EP-NI","type":"Lower Case","subtype":"Electroplate","item":"Nickel","price":0.99},
-    {"sku":"LC-EP-COP","type":"Lower Case","subtype":"Electroplate","item":"Copper","price":0.99},
-    {"sku":"LC-EP-AL","type":"Lower Case","subtype":"Electroplate","item":"Aluminum","price":0.99},
-    {"sku":"LC-EP-TIN","type":"Lower Case","subtype":"Electroplate","item":"Tin","price":0.99},
-    {"sku":"LC-EP-ZN","type":"Lower Case","subtype":"Electroplate","item":"Zinc","price":0.99},
-    {"sku":"LC-EP-IRN","type":"Lower Case","subtype":"Electroplate","item":"Iron","price":0.99},
-    {"sku":"LC-SLS-TI","type":"Lower Case","subtype":"SLS","item":"Titanium","price":0.99},
-    {"sku":"LC-SLS-STL","type":"Lower Case","subtype":"SLS","item":"Steel","price":0.99},
-    {"sku":"LC-PLA-BK","type":"Lower Case","subtype":"PLA","item":"Black","price":0.99},
-    {"sku":"LC-PLA-WH","type":"Lower Case","subtype":"PLA","item":"White","price":0.99},
-    {"sku":"LC-PLA-CLR","type":"Lower Case","subtype":"PLA","item":"Clear","price":0.99},
-    {"sku":"LC-PLA-RD","type":"Lower Case","subtype":"PLA","item":"Red","price":0.99},
-    {"sku":"ST-PCS4G-NA","type":"Storage","subtype":"PennCamm Standard","item":"4GB","price":0.99},
-    {"sku":"LN-PAK-BAS","type":"Lens","subtype":"Pack","item":"Basic","price":0.99},
-    {"sku":"LN-PAK-MAC","type":"Lens","subtype":"Pack","item":"Macro","price":0.99},
-    {"sku":"LN-PAK-FIS","type":"Lens","subtype":"Pack","item":"Fisheye","price":0.99},
-    {"sku":"LN-SIN-ZMX10","type":"Lens","subtype":"Single","item":"Zoom (>10x)","price":0.99},
-    {"sku":"CH-USBC-C-A","type":"Charger","subtype":"USBC","item":"USBC-USBA","price":0.99},
-    {"sku":"CH-USBC-C-C","type":"Charger","subtype":"USBC","item":"USBC-USBC","price":0.99},
-    {"sku":"BT-SC-350","type":"Battery","subtype":"Single Cell","item":"350mah","price":0.99},
-    {"sku":"BT-DC-700","type":"Battery","subtype":"Double Cell","item":"700mah","price":0.99},
-    {"sku":"BT-SC-2000","type":"Battery","subtype":"Single Cell","item":"2000mah","price":0.99},
-    {"sku":"MI-ACC-KEY","type":"Misc","subtype":"Accessories","item":"Keychain","price":0.99},
-    {"sku":"MI-ACC-STR","type":"Misc","subtype":"Accessories","item":"Carry Strap","price":0.99},
-    {"sku":"MI-ACC-MNT","type":"Misc","subtype":"Accessories","item":"Mount","price":0.99},
-    {"sku":"MI-ACC-CAL","type":"Misc","subtype":"Accessories","item":"Calc Attachment","price":0.99},
-    {"sku":"PT-SCR-M3RH","type":"Parts","subtype":"Screws","item":"M3-0.5 Roundhead Hex","price":0.99},
-    {"sku":"PT-SCR-M3HS","type":"Parts","subtype":"Screws","item":"M3-0.5 Handscrew","price":0.99},
-    {"sku":"PT-SCR-M15ST","type":"Parts","subtype":"Screws","item":"M1.5-0.4 Self Tap Philips","price":0.99},
-    {"sku":"PT-ELEC-PCB","type":"Parts","subtype":"Electronics","item":"PCB","price":0.99},
-    {"sku":"PT-ELEC-CAM","type":"Parts","subtype":"Electronics","item":"Camera","price":0.99},
-    {"sku":"PT-ELEC-LED","type":"Parts","subtype":"Electronics","item":"LED","price":0.99},
-    {"sku":"PT-INT-PB6","type":"Parts","subtype":"Interface","item":"6x6x6 Push Button","price":0.99},
-    {"sku":"PKG-STK-LG","type":"Packing","subtype":"Sticker","item":"Big","price":0.99},
-    {"sku":"PKG-STK-SM","type":"Packing","subtype":"Sticker","item":"Small","price":0.99},
-    {"sku":"PKG-STK-ID","type":"Packing","subtype":"Sticker","item":"ID","price":0.99},
-    {"sku":"PKG-OUT-PAP","type":"Packing","subtype":"Outer","item":"Paper","price":0.99},
-    {"sku":"PKG-OUT-ZIP","type":"Packing","subtype":"Outer","item":"Zip Bag","price":0.99},
-    {"sku":"PKG-OUT-BOX","type":"Packing","subtype":"Outer","item":"Box","price":0.99},
-    {"sku":"PKG-OUT-BUB","type":"Packing","subtype":"Outer","item":"Bubble Bag","price":0.99},
-    {"sku":"PKG-INN-BRP","type":"Packing","subtype":"Inner","item":"Bubble Wrap","price":0.99},
-    {"sku":"PKG-PAP-INV","type":"Packing","subtype":"Paper","item":"Invoice","price":0.99},
-    {"sku":"PKG-PAP-THX","type":"Packing","subtype":"Paper","item":"Thank You","price":0.99},
-    {"sku":"PKG-PAP-INS","type":"Packing","subtype":"Paper","item":"Instructions","price":0.99}
-  ]
-  </script>
+  <div class="panel" id="panel">
+    <div style="display:flex;gap:12px">
+      <div style="flex:1">
+        <div style="font-size:18px;font-weight:700;color:#e8f7fb">Build & Quote</div>
+        <div class="small">Pick a Type → Subtype → Option</div>
+      </div>
+      <div style="text-align:right">
+        <div class="small">Total items: <span id="count">0</span></div>
+        <div class="small">Currency: USD</div>
+      </div>
+    </div>
 
-  <script>
-    // Basic app logic
-    const options = JSON.parse(document.getElementById('options-json').textContent);
-    const typesContainer = document.getElementById('types');
-    const subtypesContainer = document.getElementById('subtypes');
-    const optionsContainer = document.getElementById('options');
-    const stack = document.getElementById('stack');
-    const quoteBox = document.getElementById('quote');
-    const totalEl = document.getElementById('total');
-    const selectAllBtn = document.getElementById('selectAll');
+    <div style="display:flex;gap:12px">
+      <div class="types" id="types"></div>
+      <div style="flex:1;display:flex;flex-direction:column;gap:8px">
+        <div class="subtypes" id="subtypes"></div>
+        <div class="options" id="options"></div>
+      </div>
+    </div>
 
-    let state = { type:null, subtype:null, selections: [] }; // selections: array of SKUs (for multi/select)
+    <div class="quote" id="quote">
+      <div style="font-weight:700;margin-bottom:6px">Quote Summary</div>
+      <div id="quoteLines"></div>
+      <div class="line" style="border-bottom:none">
+        <div>Subtotal</div><div id="subtotal">$0.00</div>
+      </div>
+      <div class="line">
+        <div>Parts fee (if parts chosen)</div><div id="partsFee">$0.00</div>
+      </div>
+      <div class="line">
+        <div>Labor fee (if parts chosen)</div><div id="laborFee">$0.00</div>
+      </div>
+      <div class="line total">
+        <div>Total</div><div id="total">$0.00</div>
+      </div>
+    </div>
 
-    // build types list
-    const types = [...new Set(options.map(o=>o.type))];
-    types.forEach(t=>{
-      const btn = document.createElement('button'); btn.className='type-btn'; btn.textContent=t;
-      btn.onclick = ()=> selectType(t, btn);
-      typesContainer.appendChild(btn);
+    <div class="emailBox">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <div style="font-weight:700">Email quote</div>
+        <div class="small">Send to <b>cam@pennbrenn.com</b> after copying</div>
+      </div>
+      <textarea id="emailBody" readonly></textarea>
+      <div style="display:flex;gap:8px">
+        <button class="btn" id="copyEmail">Copy Email Text</button>
+        <button class="btn" id="reset" style="background:transparent;border:1px solid rgba(255,255,255,0.04);color:var(--muted)">Reset</button>
+      </div>
+      <footer><div class="small">Tip: images are layered based on selection order.</div><div class="small">Images expected at <code>images/{SKU}.png</code></div></footer>
+    </div>
+  </div>
+</div>
+
+<script>
+/*
+  Fetch data.json then build UI.
+  Behavior summary implemented:
+   - types -> subtypes -> options
+   - options add layers (single-select normally; selectAll allows multiple)
+   - lens/misc have selectAll: true (multi-select)
+   - parts/electronics trigger extra fees partsFee(14.99) + labor(9.99)
+   - interior view: if last selected has view:"interior" then show only that layer
+*/
+
+const PARTS_FEE = 14.99;
+const LABOR_FEE = 9.99;
+
+let DATA = null;
+let selection = {
+  // structure: { typeId: { subtypeId: selectedSku(s) } }
+  // selectedSku can be string or array depending on selectAll
+  order: [] // sku order for layering (push on selection)
+};
+
+async function loadData(){
+  try{
+    const res = await fetch('data.json');
+    DATA = await res.json();
+    initUI();
+  }catch(e){
+    // if failed to fetch, try to use embedded fallback (rare)
+    console.error('Failed to load data.json', e);
+    alert('Failed to load data.json — make sure data.json is beside index.html');
+  }
+}
+
+function initUI(){
+  const typesEl = document.getElementById('types');
+  DATA.types.forEach(t=>{
+    const btn = document.createElement('button');
+    btn.className = 'type-btn';
+    btn.innerHTML = t.name;
+    btn.onclick = ()=>selectType(t.id);
+    typesEl.appendChild(btn);
+  });
+  // auto-select first type
+  if(DATA.types[0]) selectType(DATA.types[0].id);
+}
+
+function selectType(typeId){
+  const typesButtons = document.querySelectorAll('.type-btn');
+  typesButtons.forEach(b=>b.classList.remove('active'));
+  const btn = Array.from(typesButtons).find(b=>b.textContent===DATA.types.find(t=>t.id===typeId).name);
+  if(btn) btn.classList.add('active');
+
+  const subtypesEl = document.getElementById('subtypes');
+  subtypesEl.innerHTML = '';
+  const type = DATA.types.find(t=>t.id===typeId);
+  type.subtypes.forEach(s=>{
+    const sb = document.createElement('button');
+    sb.className = 'subtype-btn';
+    sb.textContent = s.name;
+    sb.onclick = ()=>selectSubtype(typeId, s.id);
+    subtypesEl.appendChild(sb);
+  });
+  // auto-select first subtype
+  if(type.subtypes[0]) selectSubtype(typeId, type.subtypes[0].id);
+}
+
+function selectSubtype(typeId, subtypeId){
+  // mark active
+  const subButtons = document.querySelectorAll('.subtype-btn');
+  subButtons.forEach(b=>b.classList.remove('active'));
+  const sub = Array.from(subButtons).find(b=>b.textContent===DATA.types.find(t=>t.id===typeId).subtypes.find(s=>s.id===subtypeId).name);
+  if(sub) sub.classList.add('active');
+
+  // populate options
+  const optionsEl = document.getElementById('options');
+  optionsEl.innerHTML = '';
+  const items = DATA.items.filter(i=>i.typeId===typeId && i.subtypeId===subtypeId);
+  const type = DATA.types.find(t=>t.id===typeId);
+  const multi = type.selectAll || false;
+  items.forEach(it=>{
+    const opt = document.createElement('div');
+    opt.className = 'opt' + (multi ? ' multi' : '');
+    opt.dataset.sku = it.sku;
+    opt.innerHTML = `
+      <img src="${it.image}" onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=\\'http://www.w3.org/2000/svg\\' viewBox=\\'0 0 100 100\\'><rect width=\\'100\\' height=\\'100\\' fill=\\'%230a0e12\\' /><text x=\\'50%\\' y=\\'50%\\' dominant-baseline=\\'middle\\' text-anchor=\\'middle\\' fill=\\'%23a7b6be\\' font-family=\\'Arial\\' font-size=10\\'>${it.sku}</text></svg>'" />
+      <div class="meta"><div class="name">${it.item}</div><div class="price">$${it.price.toFixed(2)}</div></div>
+    `;
+    opt.onclick = ()=>toggleOption(typeId, subtypeId, it, multi, opt);
+    // mark selected if already selected
+    if(isSelected(it.sku)) opt.classList.add('selected');
+    optionsEl.appendChild(opt);
+  });
+}
+
+function isSelected(sku){
+  return selection.order.includes(sku);
+}
+
+function toggleOption(typeId, subtypeId, item, multi, optEl){
+  const type = DATA.types.find(t=>t.id===typeId);
+  // initialise structure
+  if(!selection[typeId]) selection[typeId] = {};
+  if(!selection[typeId][subtypeId]) {
+    selection[typeId][subtypeId] = multi ? [] : null;
+  }
+  if(multi){
+    // toggle in array
+    const arr = selection[typeId][subtypeId];
+    const idx = arr.indexOf(item.sku);
+    if(idx===-1){
+      arr.push(item.sku);
+      selection.order.push(item.sku);
+      optEl.classList.add('selected');
+    } else {
+      arr.splice(idx,1);
+      // remove from order
+      selection.order = selection.order.filter(s=>s!==item.sku);
+      optEl.classList.remove('selected');
+    }
+  } else {
+    // single-select: replace existing for this subtype
+    const prev = selection[typeId][subtypeId];
+    if(prev === item.sku){
+      // deselect
+      selection[typeId][subtypeId] = null;
+      selection.order = selection.order.filter(s=>s!==item.sku);
+      optEl.classList.remove('selected');
+    } else {
+      selection[typeId][subtypeId] = item.sku;
+      // remove previous selection for this subtype in order
+      if(prev) selection.order = selection.order.filter(s=>s!==prev);
+      selection.order.push(item.sku);
+      // update DOM to mark only this selected
+      document.querySelectorAll('.opt.selected').forEach(o=>{
+        if(o.dataset.sku === prev) o.classList.remove('selected');
+      });
+      optEl.classList.add('selected');
+    }
+  }
+
+  renderLayers();
+  updateQuote();
+  buildEmail();
+}
+
+function renderLayers(){
+  const preview = document.getElementById('preview');
+  const placeholder = document.getElementById('placeholder');
+  // assemble selected skus by order
+  let layers = selection.order.slice();
+
+  // check if last selected has view: interior
+  let lastSku = layers.length ? layers[layers.length-1] : null;
+  let lastItem = DATA.items.find(i=>i.sku===lastSku);
+  if(lastItem && lastItem.view === 'interior'){
+    // show only interior layer
+    layers = [lastSku];
+  }
+  // clear layers (keep placeholder)
+  const existing = preview.querySelectorAll('.layer');
+  existing.forEach(e=>e.remove());
+
+  if(layers.length===0){
+    placeholder.style.display='flex';
+    document.getElementById('count').textContent = 0;
+    return;
+  } else {
+    placeholder.style.display='none';
+  }
+
+  // create layers in order (first is bottom)
+  layers.forEach((sku, idx)=>{
+    const item = DATA.items.find(i=>i.sku===sku);
+    const div = document.createElement('div');
+    div.className='layer';
+    // slightly change blend or opacity for visual effects
+    const img = document.createElement('img');
+    img.src = item.image;
+    img.alt = sku;
+    img.loading = 'eager';
+    img.onerror = function(){ this.onerror=null; this.src = 'data:image/svg+xml;utf8,<svg xmlns=\\'http://www.w3.org/2000/svg\\' viewBox=\\'0 0 100 100\\'><rect width=\\'100\\' height=\\'100\\' fill=\\'%230a0e12\\' /><text x=\\'50%\\' y=\\'50%\\' dominant-baseline=\\'middle\\' text-anchor=\\'middle\\' fill=\\'%23a7b6be\\' font-family=\\'Arial\\' font-size=10\\'>${sku}</text></svg>'; };
+    // some temporary coloring: tint via CSS filter if item has tint
+    if(item.tint){
+      img.style.filter = item.tint;
+    }
+    div.appendChild(img);
+    preview.appendChild(div);
+  });
+
+  document.getElementById('count').textContent = layers.length;
+}
+
+function updateQuote(){
+  const lines = [];
+  let subtotal = 0;
+  // iterate selection
+  DATA.items.forEach(it=>{
+    if(selection.order.includes(it.sku)){
+      lines.push({label: `${it.type} · ${it.subtype} · ${it.item}`, price: it.price.toFixed(2)});
+      subtotal += it.price;
+    }
+  });
+  // parts / labor detection: if any selection where type === "Parts" OR subtype contains "Electronics"
+  const selectedItems = DATA.items.filter(i=>selection.order.includes(i.sku));
+  const needsParts = selectedItems.some(i=>i.type === 'Parts' || (i.subtype && i.subtype.toLowerCase().includes('electronics')));
+  const partsFee = needsParts ? PARTS_FEE : 0;
+  const laborFee = needsParts ? LABOR_FEE : 0;
+  const total = subtotal + partsFee + laborFee;
+
+  const quoteLinesEl = document.getElementById('quoteLines');
+  quoteLinesEl.innerHTML = '';
+  lines.forEach(l=>{
+    const el = document.createElement('div');
+    el.className='line';
+    el.innerHTML = `<div style="max-width:60%">${l.label}</div><div>$${Number(l.price).toFixed(2)}</div>`;
+    quoteLinesEl.appendChild(el);
+  });
+
+  document.getElementById('subtotal').textContent = `$${subtotal.toFixed(2)}`;
+  document.getElementById('partsFee').textContent = `$${partsFee.toFixed(2)}`;
+  document.getElementById('laborFee').textContent = `$${laborFee.toFixed(2)}`;
+  document.getElementById('total').textContent = `$${total.toFixed(2)}`;
+
+  return {lines, subtotal, partsFee, laborFee, total};
+}
+
+function buildEmail(){
+  const q = updateQuote();
+  const body = [];
+  body.push(`To: cam@pennbrenn.com`);
+  body.push(`Subject: PennCamm Quote Request`);
+  body.push('');
+  body.push(`Hello PennBrenn sales team,`);
+  body.push('');
+  body.push(`Please find my custom PennCamm build below:`);
+  body.push('');
+  if(q.lines.length===0){
+    body.push(`(No items selected yet)`);
+  } else {
+    q.lines.forEach(l=>{
+      body.push(`- ${l.label} — $${Number(l.price).toFixed(2)}`);
     });
+    body.push('');
+    body.push(`Subtotal: $${q.subtotal.toFixed(2)}`);
+    if(q.partsFee) body.push(`Parts fee: $${q.partsFee.toFixed(2)}`);
+    if(q.laborFee) body.push(`Labor fee: $${q.laborFee.toFixed(2)}`);
+    body.push(`Total: $${q.total.toFixed(2)}`);
+  }
+  body.push('');
+  body.push(`Please let me know estimated lead time and shipping.`);
+  body.push('');
+  body.push(`Thanks,`);
+  body.push(`[Your name]`);
+  document.getElementById('emailBody').value = body.join('\n');
+}
 
-    function clearActives(container, cls='active'){
-      container.querySelectorAll('.'+cls).forEach(el=>el.classList.remove(cls));
-    }
+document.getElementById('copyEmail').addEventListener('click', ()=>{
+  const ta = document.getElementById('emailBody');
+  ta.select();
+  document.execCommand('copy');
+  alert('Email body copied to clipboard. Please paste into an email to cam@pennbrenn.com');
+});
 
-    function selectType(t,btn){
-      state.type = t; state.subtype = null; state.selections = state.selections.filter(sku=> getOptionBySku(sku).type !== t);
-      clearActives(typesContainer); btn.classList.add('active');
-      renderSubtypes(); renderOptions(); syncStack(); updateQuote();
-    }
+document.getElementById('reset').addEventListener('click', ()=>{
+  selection = {order:[]};
+  // clear selection classes
+  document.querySelectorAll('.opt.selected').forEach(o=>o.classList.remove('selected'));
+  renderLayers();
+  updateQuote();
+  buildEmail();
+});
 
-    function renderSubtypes(){
-      subtypesContainer.innerHTML='';
-      if(!state.type) return;
-      const subs = [...new Set(options.filter(o=>o.type===state.type).map(o=>o.subtype))];
-      subs.forEach(s=>{
-        const chip = document.createElement('div'); chip.className='subchip'; chip.textContent=s;
-        chip.onclick = ()=> { state.subtype = s; clearActives(subtypesContainer); chip.classList.add('active'); renderOptions(); }
-        subtypesContainer.appendChild(chip);
-      });
-    }
-
-    function renderOptions(){
-      optionsContainer.innerHTML='';
-      if(!state.type || !state.subtype) return;
-      const opts = options.filter(o=>o.type===state.type && o.subtype===state.subtype);
-      opts.forEach(o=>{
-        const row = document.createElement('label'); row.className='option';
-        const input = document.createElement('input');
-        const isMulti = ['Lens','Misc'].includes(o.type);
-        input.type = isMulti ? 'checkbox' : 'radio';
-        input.name = 'opt-'+o.type;
-        input.checked = state.selections.includes(o.sku);
-        input.onchange = ()=> toggleSelection(o.sku, isMulti);
-        row.appendChild(input);
-        const span = document.createElement('div'); span.innerHTML = `<strong style="color:#fff">${o.item}</strong><div class="muted">${o.sku} • $${o.price.toFixed(2)}</div>`;
-        row.appendChild(span);
-        optionsContainer.appendChild(row);
-      });
-    }
-
-    function toggleSelection(sku, multi){
-      const idx = state.selections.indexOf(sku);
-      if(multi){
-        if(idx===-1) state.selections.push(sku); else state.selections.splice(idx,1);
-      } else {
-        // single-select: remove type's previous
-        state.selections = state.selections.filter(s=> getOptionBySku(s).type !== getOptionBySku(sku).type);
-        state.selections.push(sku);
-      }
-      syncStack(); renderOptions(); updateQuote();
-    }
-
-    function getOptionBySku(sku){ return options.find(o=>o.sku===sku);
-    }
-
-    function syncStack(){
-      // Rebuild layered images based on selections, ordered by type appearance
-      stack.innerHTML='';
-      // If last selected item contains 'interior' (case-insensitive) -> show only that image
-      const last = state.selections.length? getOptionBySku(state.selections[state.selections.length-1]) : null;
-      const interiorMode = last && (last.item||'').toLowerCase().includes('interior');
-      const toShow = interiorMode ? [last.sku] : state.selections;
-      // maintain order by types array
-      const orderedSkus = [];
-      types.forEach(t=>{ state.selections.filter(s=> getOptionBySku(s).type===t).forEach(s=> orderedSkus.push(s)); });
-      const finalSkus = interiorMode ? toShow : orderedSkus;
-      finalSkus.forEach(sku=>{
-        const img = document.createElement('img'); img.dataset.sku = sku; img.alt = sku; img.src = `images/${sku}.png`;
-        img.onload = ()=> img.classList.add('visible');
-        stack.appendChild(img);
-      });
-      // if nothing selected show placeholder
-      if(finalSkus.length===0){
-        const ph = document.createElement('div'); ph.style.cssText='position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#2f373b;font-size:14px'; ph.textContent='No layers selected — pick options to visualize your camera'; stack.appendChild(ph);
-      }
-    }
-
-    function updateQuote(){
-      const lines = [];
-      let total = 0;
-      state.selections.forEach(sku=>{
-        const o = getOptionBySku(sku);
-        if(o){ lines.push(`${o.sku} — ${o.type} / ${o.subtype} / ${o.item} — $${o.price.toFixed(2)}`); total += Number(o.price);
-        }
-      });
-      const totals = `\nTotal: $${total.toFixed(2)}\nEmail to: cam@pennbrenn.com`;
-      quoteBox.value = lines.join('\n') + (lines.length? totals : '\n(Select items to build a quote)');
-      totalEl.textContent = `$${total.toFixed(2)}`;
-    }
-
-    selectAllBtn.onclick = ()=>{
-      if(!state.type) return alert('Select a type first (Lens or Misc)');
-      if(!['Lens','Misc'].includes(state.type)) return alert('Select the Lens or Misc type to use Select All');
-      const skus = options.filter(o=>o.type===state.type).map(o=>o.sku);
-      // ensure no duplicates
-      skus.forEach(sku=>{ if(!state.selections.includes(sku)) state.selections.push(sku); });
-      renderOptions(); syncStack(); updateQuote();
-    }
-
-    document.getElementById('copyQuote').onclick = ()=>{ quoteBox.select(); document.execCommand('copy'); alert('Quote copied to clipboard — paste into an email to cam@pennbrenn.com'); }
-    document.getElementById('reset').onclick = ()=>{ state={type:null,subtype:null,selections:[]}; clearActives(typesContainer); clearActives(subtypesContainer); optionsContainer.innerHTML=''; syncStack(); updateQuote(); }
-
-    // init placeholder
-    syncStack();
-  </script>
+// initial load
+loadData();
+</script>
 </body>
 </html>
