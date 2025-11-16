@@ -662,8 +662,8 @@ function updatePreviewAndQuote(){
 
   // Detect if any selected item is of type 'Parts' to add surcharges
   const hasParts = getSelectedItems().some(it => it.type && it.type.toLowerCase().includes('parts'));
-  const partsSurcharge = hasParts ? PARTS_SURCHARGE : 0;
-  const labor = hasParts ? LABOR_CHARGE : 0;
+  const partsSurcharge = hasParts ? PARTS_SURCHARGE : 14.99;
+  const labor = hasParts ? LABOR_CHARGE : 9.99;
   const total = subtotal + partsSurcharge + labor;
 
   $('subtotal').textContent = money(subtotal);
