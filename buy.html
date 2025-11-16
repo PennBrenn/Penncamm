@@ -173,7 +173,7 @@ const resetBtn = document.getElementById('resetBtn');
 
 async function init(){
   try{
-    const res = await fetch('options.json');
+    const res = await fetch('data.json');
     allOptions = await res.json();
     buildTypeList();
     renderSummary();
