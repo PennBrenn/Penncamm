@@ -1,5 +1,5 @@
 [
-  {"sku":"WR-CL-GR","type":"Wrap","subtype":"Cloth","item":"Grey","price":0.99,"image":"images/WR-CL-GR.png"},
+  {"sku":"WR-CL-GR","type":"Wrap","subtype":"Cloth","item":"Grey","price":0.99,"image":"images/1.png"},
   {"sku":"WR-CL-RD","type":"Wrap","subtype":"Cloth","item":"Red","price":0.99,"image":"images/WR-CL-RD.png"},
   {"sku":"WR-CL-OR","type":"Wrap","subtype":"Cloth","item":"Orange","price":0.99,"image":"images/WR-CL-OR.png"},
   {"sku":"WR-CL-YE","type":"Wrap","subtype":"Cloth","item":"Yellow","price":0.99,"image":"images/WR-CL-YE.png"},
@@ -36,7 +36,7 @@
   {"sku":"WR-FI-GLS","type":"Wrap","subtype":"Fiber","item":"Glass","price":0.99,"image":"images/WR-FI-GLS.png"},
   {"sku":"WR-RE-REF","type":"Wrap","subtype":"Reflective","item":"Reflective","price":0.99,"image":"images/WR-RE-REF.png"},
 
-  {"sku":"UC-CPLA-STL","type":"Upper Case","subtype":"Composite PLA","item":"Steel","price":0.99,"image":"images/UC-CPLA-STL.png"},
+  {"sku":"UC-CPLA-STL","type":"Upper Case","subtype":"Composite PLA","item":"Steel","price":0.99,"image":"2.png"},
   {"sku":"UC-CPLA-IRN","type":"Upper Case","subtype":"Composite PLA","item":"Iron (Rusts)","price":0.99,"image":"images/UC-CPLA-IRN.png"},
   {"sku":"UC-CPLA-BRS","type":"Upper Case","subtype":"Composite PLA","item":"Brass","price":0.99,"image":"images/UC-CPLA-BRS.png"},
   {"sku":"UC-CPLA-COP","type":"Upper Case","subtype":"Composite PLA","item":"Copper","price":0.99,"image":"images/UC-CPLA-COP.png"},
@@ -83,7 +83,7 @@
   {"sku":"UC-TPLA-RDOR","type":"Upper Case","subtype":"Thermochromic PLA","item":"Red > Orange","price":0.99,"image":"images/UC-TPLA-RDOR.png"},
   {"sku":"UC-TPLA-BKGR","type":"Upper Case","subtype":"Thermochromic PLA","item":"Black > Gray","price":0.99,"image":"images/UC-TPLA-BKGR.png"},
 
-  {"sku":"LC-CPLA-STL","type":"Lower Case","subtype":"Composite PLA","item":"Steel","price":0.99,"image":"images/LC-CPLA-STL.png"},
+  {"sku":"LC-CPLA-STL","type":"Lower Case","subtype":"Composite PLA","item":"Steel","price":0.99,"image":"images/3.png"},
   {"sku":"LC-CPLA-IRN","type":"Lower Case","subtype":"Composite PLA","item":"Iron (Rusts)","price":0.99,"image":"images/LC-CPLA-IRN.png"},
   {"sku":"LC-CPLA-BRS","type":"Lower Case","subtype":"Composite PLA","item":"Brass","price":0.99,"image":"images/LC-CPLA-BRS.png"},
   {"sku":"LC-CPLA-COP","type":"Lower Case","subtype":"Composite PLA","item":"Copper","price":0.99,"image":"images/LC-CPLA-COP.png"},
