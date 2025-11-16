@@ -50,7 +50,7 @@
   @media(max-width:980px){.app{flex-direction:column}.controls{width:100%;max-width:none}}
 
 html {
-  scrollbar-color: #444 #111; /* thumb, track (Firefox only) */
+  scrollbar-color: --bg --panel; /* thumb, track (Firefox only) */
   scrollbar-width: thin;
 }
 
@@ -59,16 +59,16 @@ html {
 }
 
 ::-webkit-scrollbar-track {
-  background: #111;
+  background: --bg;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #444;
+  background: --panel;
   border-radius: 8px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #666;
+  background: --accent;
 }
   
 </style>
