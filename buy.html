@@ -1,253 +1,143 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>PennCamm — Custom Quote Creator</title>
-<style>
-  :root{
-    --bg:#0b0c0f;
-    --panel:#0f1114;
-    --muted:#9aa3b2;
-    --accent:#6ad1ff; /* temporary accent */
-    --accent-2:#a86dff;
-    --card:#101214;
-    --glass: rgba(255,255,255,0.03);
-    --selected: rgba(106,209,255,0.12);
-  }
-  *{box-sizing:border-box;font-family:Inter,ui-sans-serif,system-ui,Segoe UI,Roboto,"Helvetica Neue",Arial;}
-  body{
-    margin:0;
-    min-height:100vh;
-    background:linear-gradient(180deg,#050507 0%, #0b0c0f 100%);
-    color:#e6eef6;
-    -webkit-font-smoothing:antialiased;
-    display:flex;
-    align-items:stretch;
-    padding:18px;
-    gap:18px;
-  }
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>PennCamm — Custom Quote Creator</title>
+  <meta name="description" content="PennCamm custom camera visualizer and quote creator" />
+  <style>
+    :root{
+      --bg:#0b0d10;
+      --panel:#0f1417;
+      --muted:#8a8f95;
+      --accent:#465e73;
+      --title:#fafdff;
+      --text:#d7d7dc;
+      --glass: rgba(255,255,255,0.03);
+      --radius:12px;
+      --gap:16px;
+      --mono: "Courier New", Courier, monospace;
+      --sans: Helvetica, Arial, sans-serif;
+    }
 
-  .container{
-    width:100%;
-    max-width:1300px;
-    margin:auto;
-    display:grid;
-    grid-template-columns: 1fr 420px;
-    gap:20px;
-    align-items:start;
-  }
-
-  /* Left preview */
-  .preview {
-    background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
-    border-radius:12px;
-    padding:20px;
-    display:flex;
-    gap:20px;
-    align-items:flex-start;
-  }
-  .preview-stage{
-    width:min(600px, calc(100% - 260px));
-    max-width:720px;
-    flex:1;
-    background:var(--card);
-    border-radius:10px;
-    padding:14px;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-  }
-  .stage-inner{
-    width:100%;
-    max-width:520px;
-    aspect-ratio:1/1;
-    background: #0b0e12;
-    border-radius:6px;
-    position:relative;
-    overflow:hidden;
-    box-shadow: 0 6px 30px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.02);
-  }
-  .layer{
-    position:absolute;
-    inset:0;
-    display:block;
-    width:100%;
-    height:100%;
-    object-fit:contain;
-    pointer-events:none;
-    transition: opacity 220ms ease, transform 260ms cubic-bezier(.2,.9,.2,1);
-    opacity:0;
-    transform:scale(1.01);
-    mix-blend-mode:normal;
-    will-change:opacity,transform;
-  }
-  .layer.visible{ opacity:1; transform:none; }
-
-  .controls{
-    width:260px;
-    display:flex;
-    flex-direction:column;
-    gap:12px;
-  }
-  .panel{
-    background:var(--panel);
-    border-radius:10px;
-    padding:12px;
-    box-shadow: 0 4px 14px rgba(0,0,0,0.6);
-  }
-
-  h1{font-size:18px;margin:0 0 8px 0}
-  .types-list{
-    display:flex;
-    flex-direction:column;
-    gap:8px;
-    max-height:440px;
-    overflow:auto;
-    padding-right:6px;
-  }
-  .type-btn{
-    background:var(--glass);
-    border:1px solid rgba(255,255,255,0.03);
-    color:var(--muted);
-    padding:10px 12px;
-    border-radius:8px;
-    text-align:left;
-    cursor:pointer;
-    font-weight:600;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:8px;
-  }
-  .type-btn.active{ background:linear-gradient(90deg, rgba(106,209,255,0.06), rgba(168,109,255,0.03)); color:var(--accent); border-color:rgba(106,209,255,0.14);}
-
-  .subtype-row{
-    margin-top:10px;
-    display:flex;
-    gap:8px;
-    overflow-x:auto;
-    padding-bottom:8px;
-  }
-  .subtype-item{
-    min-width:110px;
-    background:transparent;
-    border-radius:8px;
-    padding:8px;
-    border:1px solid rgba(255,255,255,0.03);
-    text-align:center;
-    cursor:pointer;
-    color:var(--muted);
-    font-weight:600;
-    white-space:nowrap;
-  }
-  .subtype-item.active{
-    background:linear-gradient(90deg,var(--selected), rgba(255,255,255,0.02));
-    color:var(--accent);
-    border-color: rgba(106,209,255,0.12);
-  }
-
-  .options-grid{
-    display:flex;
-    flex-wrap:wrap;
-    gap:8px;
-    margin-top:12px;
-  }
-  .option-tile{
-    width:calc(50% - 8px);
-    min-height:56px;
-    background:rgba(255,255,255,0.02);
-    border-radius:8px;
-    padding:8px;
-    display:flex;
-    gap:8px;
-    align-items:center;
-    cursor:pointer;
-    border:1px solid rgba(255,255,255,0.02);
-  }
-  .option-tile .swatch{
-    width:38px;height:38px;border-radius:6px;border:1px solid rgba(255,255,255,0.04);flex:0 0 38px;
-    display:flex;align-items:center;justify-content:center;font-size:11px;color:#111;
-  }
-  .option-tile.selected{
-    box-shadow: 0 6px 20px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.02);
-    border-color: rgba(106,209,255,0.12);
-    background:linear-gradient(180deg, rgba(106,209,255,0.04), rgba(168,109,255,0.02));
-  }
-  .option-meta{flex:1}
-  .small{font-size:12px;color:var(--muted)}
-
-  /* quote panel */
-  .quote{
-    display:flex;
-    flex-direction:column;
-    gap:10px;
-  }
-  .quote-list{max-height:220px;overflow:auto;padding:6px;border-radius:8px;background:rgba(255,255,255,0.02);}
-  .quote-row{display:flex;justify-content:space-between;padding:8px;border-bottom:1px dashed rgba(255,255,255,0.02)}
-  .total{display:flex;justify-content:space-between;padding:12px;font-weight:700;font-size:18px}
-
-  .btn{
-    background:linear-gradient(180deg,var(--accent),var(--accent-2));
-    color:#03121b;
-    border-radius:10px;
-    padding:10px 12px;
-    cursor:pointer;
-    border:none;font-weight:700;
-  }
-  .btn.ghost{ background:transparent;color:var(--accent);border:1px solid rgba(106,209,255,0.12); }
-
-  footer{margin-top:10px;font-size:12px;color:var(--muted)}
-
-  /* responsive */
-  @media (max-width:980px){
-    .container{ grid-template-columns:1fr; padding:10px; }
-    .controls{ width:100%; order:2; }
-    .preview{ order:1; }
-    .preview-stage{ max-width:100%; }
-  }
-</style>
+    html,body{height:100%;margin:0;background:linear-gradient(180deg,#050607 0%, #0d1113 100%);color:var(--text);font-family:var(--sans);-webkit-font-smoothing:antialiased}
+    .app{display:flex;gap:var(--gap);height:100vh;padding:18px;box-sizing:border-box}
+    /* Left: visualizer */
+    .viewer{
+      flex:1;min-width:300px;max-width:760px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.02));border-radius:var(--radius);padding:18px;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;overflow:hidden;
+      box-shadow: 0 6px 30px rgba(0,0,0,0.6);
+    }
+    .canvas-wrap{width:100%;max-width:640px;aspect-ratio:1/1;background:#071018;border-radius:8px;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}
+    .canvas-wrap img{position:absolute;left:0;top:0;width:100%;height:100%;object-fit:contain;image-rendering:pixelated;pointer-events:none;transition:opacity .18s linear, transform .25s ease}
+    .base-hint{position:absolute;left:12px;bottom:12px;color:var(--muted);font-size:12px}
+    /* Right: controls */
+    .controls{width:420px;max-width:45%;min-width:300px;background:var(--panel);border-radius:var(--radius);padding:18px;box-sizing:border-box;display:flex;flex-direction:column;gap:12px;overflow:auto}
+    .header{display:flex;align-items:center;justify-content:space-between;gap:12px}
+    .brand{display:flex;gap:12px;align-items:center}
+    .brand .logo{width:42px;height:42px;background:linear-gradient(135deg,var(--accent),#27404f);border-radius:8px;display:flex;align-items:center;justify-content:center;color:var(--title);font-family:var(--mono);font-weight:700}
+    h1{font-size:16px;margin:0;color:var(--title);font-family:var(--mono)}
+    .subtitle{font-size:12px;color:var(--muted)}
+    .content{display:flex;flex-direction:column;gap:12px}
+    .split{display:flex;gap:12px}
+    /* type list vertical */
+    .types{width:140px;background:var(--glass);padding:8px;border-radius:8px;display:flex;flex-direction:column;gap:8px}
+    .type-btn{padding:8px 10px;border-radius:8px;border:1px solid rgba(255,255,255,0.03);cursor:pointer;color:var(--text);font-weight:600;text-align:left;font-size:13px}
+    .type-btn.active{background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));outline:2px solid rgba(70,94,115,0.14)}
+    /* subtypes row scrollable */
+    .subtypes{flex:1;background:transparent;padding:8px;display:flex;gap:8px;overflow-x:auto;white-space:nowrap}
+    .subtype-pill{display:inline-block;padding:8px 12px;border-radius:999px;border:1px solid rgba(255,255,255,0.03);cursor:pointer;font-size:13px}
+    .subtype-pill.active{background:linear-gradient(90deg, rgba(70,94,115,0.14), rgba(70,94,115,0.06));box-shadow:0 4px 18px rgba(70,94,115,0.06)}
+    /* options grid */
+    .options-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(92px,1fr));gap:8px;padding:8px;background:var(--glass);border-radius:8px}
+    .option-card{padding:8px;border-radius:8px;background:rgba(255,255,255,0.01);cursor:pointer;border:1px solid rgba(255,255,255,0.02);display:flex;flex-direction:column;align-items:center;gap:6px;font-size:12px;min-height:72px;justify-content:center}
+    .option-card img{width:48px;height:48px;object-fit:contain;opacity:0.95}
+    .option-card.selected{outline:2px solid rgba(70,94,115,0.18);box-shadow:0 6px 24px rgba(70,94,115,0.06)}
+    /* selected summary */
+    .summary{background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(0,0,0,0.01));padding:10px;border-radius:8px;color:var(--muted);font-size:13px}
+    .summary .row{display:flex;justify-content:space-between;gap:8px}
+    .quote-box{width:100%;height:140px;background:#091216;border-radius:8px;padding:10px;color:var(--text);font-family:monospace;font-size:13px;resize:vertical;overflow:auto}
+    .controls-footer{display:flex;gap:8px;align-items:center}
+    button{background:var(--accent);color:var(--title);border:0;padding:8px 12px;border-radius:8px;cursor:pointer;font-weight:700}
+    .btn-ghost{background:transparent;border:1px solid rgba(255,255,255,0.04);color:var(--text);font-weight:600}
+    .muted{color:var(--muted);font-size:13px}
+    .small{font-size:12px;color:var(--muted)}
+    @media (max-width:980px){
+      .app{flex-direction:column;padding:12px}
+      .controls{width:100%;max-width:100%}
+      .viewer{max-width:unset}
+    }
+  </style>
 </head>
 <body>
-  <div class="container">
-    <div class="preview panel" aria-live="polite">
-      <div class="preview-stage">
-        <div class="stage-inner" id="stage">
-          <!-- layered images -->
+  <div class="app">
+    <div class="viewer" role="main" aria-label="Product Visualizer">
+      <div style="display:flex;flex-direction:column;align-items:center;gap:12px;width:100%;">
+        <div style="display:flex;gap:12px;align-items:center;">
+          <div style="font-family:var(--mono);color:var(--title);font-weight:700;font-size:14px">PennCamm</div>
+          <div class="small muted">Customizer</div>
+        </div>
+        <div class="canvas-wrap" id="canvas">
+          <!-- layered images injected here -->
+          <div class="base-hint">Images from images/&lt;SKU&gt;.png (1000×1000)</div>
         </div>
       </div>
+    </div>
 
-      <div class="controls">
-        <div class="panel">
-          <h1>PennCamm Customizer</h1>
-          <div class="small">Choose types on the left. Subtypes appear below the selected type. Options show after selecting subtype. Lenses & Misc default to ALL selected.</div>
+    <div class="controls" role="complementary" aria-label="Options">
+      <div class="header">
+        <div class="brand">
+          <div class="logo">PC</div>
+          <div>
+            <h1>PennCamm Customizer</h1>
+            <div class="subtitle">Dark theme • Layered previews</div>
+          </div>
+        </div>
+        <div class="muted small">Drag options on right • Images scale to device</div>
+      </div>
+
+      <div class="content">
+        <div class="split">
+          <div class="types" id="typeList" aria-label="Type list">
+            <!-- types inserted here -->
+          </div>
+
+          <div style="flex:1;display:flex;flex-direction:column;gap:8px;">
+            <div style="display:flex;align-items:center;gap:8px;">
+              <div class="muted small">Subtypes</div>
+              <div style="flex:1" class="subtypes" id="subtypeRow"></div>
+            </div>
+
+            <div class="options-grid" id="optionsGrid" aria-live="polite">
+              <!-- options inserted here -->
+            </div>
+          </div>
         </div>
 
-        <div class="panel">
-          <div style="display:flex;align-items:center;justify-content:space-between">
-            <strong>Types</strong>
-            <button id="resetBtn" class="btn ghost" title="Reset">Reset</button>
+        <div class="summary" id="summary">
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <div><strong>Quote Summary</strong></div>
+            <div class="small muted">All prices are in USD (sample)</div>
           </div>
-          <div class="types-list" id="typesList"></div>
+          <div class="row" style="margin-top:8px">
+            <div class="muted">Items</div>
+            <div id="count" class="muted">0</div>
+          </div>
+          <div class="row" style="margin-top:6px">
+            <div class="muted">Subtotal</div>
+            <div id="subtotal" class="muted">$0.00</div>
+          </div>
         </div>
 
-        <div class="panel" id="dynamicPanel" style="display:none">
-          <div id="subtypeContainer"></div>
-          <div id="optionsContainer" class="options-grid"></div>
+        <div>
+          <div class="small muted" style="margin-bottom:6px">Generated quote — copy & paste into an email to <strong>cam@pennbrenn.com</strong></div>
+          <textarea id="quoteBox" class="quote-box" readonly></textarea>
         </div>
 
-        <div class="panel quote">
-          <strong>Quote</strong>
-          <div class="quote-list" id="quoteList"></div>
-          <div class="total">
-            <div>Total</div>
-            <div id="totalAmt">$0.00</div>
-          </div>
-          <div style="display:flex;gap:8px">
-            <button id="emailBtn" class="btn">Compose Email</button>
-            <button id="downloadBtn" class="btn ghost">Download JSON</button>
-          </div>
-          <footer>When ready, email the quote to <strong>cam@pennbrenn.com</strong></footer>
+        <div class="controls-footer">
+          <button id="copyBtn">Copy quote</button>
+          <button id="resetBtn" class="btn-ghost">Reset</button>
+          <div style="flex:1"></div>
+          <div class="small muted">Images : <code>images/&lt;SKU&gt;.png</code></div>
         </div>
       </div>
     </div>
@@ -255,446 +145,305 @@
 
 <script>
 /*
-  PennCamm Custom Quote Creator
-  - Fetches data.json (fallback to embedded data)
-  - Types vertical menu
-  - Subtypes horizontal scroll reveal
-  - Options grid (tiles). Lenses & Misc = multi-select and default all selected
-  - Layer images: images/<SKU>.png (1000x1000). Layers follow selection order. If the last selected has subtype "Interior", only show that interior image.
-  - Quote & total
-  - Compose email to cam@pennbrenn.com
+  PennCamm Customizer
+  - loads options.json (local)
+  - populates types, subtypes, options
+  - images loaded from images/<sku>.png
+  - lens & misc types allow multi-select; other types single-select
+  - interior view: if selected option has view:'interior' -> only show that image
 */
 
-const DATA_URL = 'data.json'; // editable
-const IMG_BASE = 'images/';   // where images live; filenames are `${sku}.png`
-
-// fallbackData: paste your items here or keep as sample.
-const fallbackData = [
-  {"sku":"WR-CL-GR","type":"Wrap","subtype":"Cloth","item":"Grey","price":0.99},
-  {"sku":"WR-CL-RD","type":"Wrap","subtype":"Cloth","item":"Red","price":0.99},
-  {"sku":"WR-CL-BK","type":"Wrap","subtype":"Cloth","item":"Black","price":0.99},
-  {"sku":"WR-FO-RD","type":"Wrap","subtype":"Foam","item":"Red","price":0.99},
-  {"sku":"WR-FA-GN","type":"Wrap","subtype":"Fabric","item":"Green","price":0.99},
-  {"sku":"UC-PLA-BK","type":"Upper Case","subtype":"PLA","item":"Black","price":0.99},
-  {"sku":"UC-CPLA-STL","type":"Upper Case","subtype":"Composite PLA","item":"Steel","price":0.99},
-  {"sku":"LC-PLA-BL","type":"Lower Case","subtype":"PLA","item":"Blue","price":0.99},
-  {"sku":"ST-PCS4G-NA","type":"Storage","subtype":"PennCamm Standard","item":"4GB","price":0.99},
-  {"sku":"LN-PAK-BAS","type":"Lens","subtype":"Pack","item":"Basic","price":0.99},
-  {"sku":"LN-PAK-MAC","type":"Lens","subtype":"Pack","item":"Macro","price":0.99},
-  {"sku":"LN-SIN-ZMX10","type":"Lens","subtype":"Single","item":"Zoom (>10x)","price":0.99},
-  {"sku":"MI-ACC-KEY","type":"Misc","subtype":"Accessories","item":"Keychain","price":0.99},
-  {"sku":"MI-ACC-STR","type":"Misc","subtype":"Accessories","item":"Carry Strap","price":0.99},
-  {"sku":"PT-ELEC-CAM","type":"Parts","subtype":"Electronics","item":"Camera","price":0.99},
-  {"sku":"INT-INTERIOR-STD","type":"Interior","subtype":"Interior","item":"Standard Interior","price":1.99}
-];
-
-// runtime state
-let items = [];
-let types = []; // unique types
+let allOptions = [];
 let state = {
-  activeType: null,
-  activeSubtype: null,
-  // selected SKUs mapping for single-select types: type -> sku
-  // for multi-select types: type -> Set(sku)
-  selected: {},
-  // layer order: array of sku in the order they were selected (used to stack)
-  layerOrder: []
+  selectedType: null,
+  selectedSubtype: null,
+  selections: {}, // type -> selected sku(s) or sku for single
 };
 
-const typesListEl = document.getElementById('typesList');
-const subtypeContainer = document.getElementById('subtypeContainer');
-const optionsContainer = document.getElementById('optionsContainer');
-const dynamicPanel = document.getElementById('dynamicPanel');
-const stage = document.getElementById('stage');
-const quoteList = document.getElementById('quoteList');
-const totalAmt = document.getElementById('totalAmt');
+const multiSelectTypes = new Set(['Lens','Misc']); // must be multi-select (select all)
+const canvas = document.getElementById('canvas');
+const typeList = document.getElementById('typeList');
+const subtypeRow = document.getElementById('subtypeRow');
+const optionsGrid = document.getElementById('optionsGrid');
+const quoteBox = document.getElementById('quoteBox');
+const countEl = document.getElementById('count');
+const subtotalEl = document.getElementById('subtotal');
+const copyBtn = document.getElementById('copyBtn');
 const resetBtn = document.getElementById('resetBtn');
-const emailBtn = document.getElementById('emailBtn');
-const downloadBtn = document.getElementById('downloadBtn');
 
-const MULTI_SELECT_TYPES = new Set(['Lens','Lenses','Misc','Lenses & misc','Miscellaneous','Lens']); // treat lens/misc as multi-select
-
-// utilities
-function currency(n){ return '$' + Number(n || 0).toFixed(2); }
-function groupBy(arr, key){ return arr.reduce((acc,item)=>{ (acc[item[key]] = acc[item[key]]||[]).push(item); return acc}, {}) }
-
-// fetch data.json with fallback
-async function loadData(){
+async function init(){
   try{
-    const r = await fetch(DATA_URL, {cache:'no-store'});
-    if(!r.ok) throw new Error('no data.json');
-    const d = await r.json();
-    items = Array.isArray(d) ? d : d.items || [];
-  }catch(err){
-    console.warn('Using fallbackData (paste your full JSON into data.json or fallbackData).', err);
-    items = fallbackData;
+    const res = await fetch('options.json');
+    allOptions = await res.json();
+    buildTypeList();
+    renderSummary();
+    resetSelections();
+  }catch(e){
+    console.error('Failed to load options.json', e);
+    optionsGrid.innerHTML = '<div style="padding:12px;color:var(--muted)">Failed to load options.json — make sure it is next to the HTML file.</div>';
   }
-  init();
 }
 
-function init(){
-  // normalize items
-  items = items.map(i=>{
-    return {
-      sku: String(i.sku || i.SKU || i.Sku).trim(),
-      type: String(i.type || i.TYPE).trim(),
-      subtype: String(i.subtype || i.SUBTYPE).trim(),
-      item: String(i.item || i.ITEM || i.name || i.ITEM || i.ITEMNAME || '').trim(),
-      price: Number(i.price || i.PRICE || 0),
-      img: (i.image || i.imageLocation || i.img || `${IMG_BASE}${(i.sku || i.SKU)}.png`)
-    }
-  });
-
-  // set image path by default to IMG_BASE + sku + .png if not absolute
-  items.forEach(it=>{
-    if(!it.img || it.img.length===0) it.img = `${IMG_BASE}${it.sku}.png`;
-    else if(!it.img.includes('/') && !it.img.startsWith('data:')) it.img = `${IMG_BASE}${it.img}`;
-  });
-
-  types = Object.keys(groupBy(items,'type')).sort();
-
-  renderTypes();
-  // preset multi-select types default to all selected
-  for(const t of types){
-    if(MULTI_SELECT_TYPES.has(t)){
-      const skus = items.filter(i=>i.type===t).map(i=>i.sku);
-      state.selected[t] = new Set(skus);
-      // add to layerOrder (but keep order deterministic)
-      for(const s of skus) pushLayerOrder(s);
-    }
+function getTypes(){
+  const map = new Map();
+  for(const o of allOptions){
+    if(!map.has(o.type)) map.set(o.type, new Map());
+    const subMap = map.get(o.type);
+    if(!subMap.has(o.subtype)) subMap.set(o.subtype, []);
+    subMap.get(o.subtype).push(o);
   }
-
-  renderQuote();
-  renderStage();
+  return map; // type -> (subtype -> [options])
 }
 
-function renderTypes(){
-  typesListEl.innerHTML = '';
-  for(const t of types){
+function buildTypeList(){
+  typeList.innerHTML = '';
+  const typesMap = getTypes();
+  for(const [type, submap] of typesMap.entries()){
     const btn = document.createElement('button');
     btn.className = 'type-btn';
-    btn.textContent = t;
-    btn.onclick = ()=>selectType(t, btn);
-    typesListEl.appendChild(btn);
+    btn.textContent = type;
+    btn.addEventListener('click', ()=> selectType(type));
+    typeList.appendChild(btn);
   }
+  // auto select first
+  const first = typeList.querySelector('.type-btn');
+  if(first) first.click();
 }
 
-function selectType(type, btnEl){
-  state.activeType = type;
-  // highlight
-  for(const b of typesListEl.children){ b.classList.remove('active'); }
-  btnEl.classList.add('active');
-
-  // render subtypes for this type
-  const typeItems = items.filter(i=>i.type === type);
-  const subtypes = [...new Set(typeItems.map(i=>i.subtype))];
-
-  dynamicPanel.style.display = 'block';
-  subtypeContainer.innerHTML = '';
-  const heading = document.createElement('div');
-  heading.style.display='flex';
-  heading.style.justifyContent='space-between';
-  heading.innerHTML = `<strong style="margin-bottom:8px">${type}</strong><span class="small">${subtypes.length} subtypes</span>`;
-  subtypeContainer.appendChild(heading);
-
-  const row = document.createElement('div');
-  row.className = 'subtype-row';
-  for(const st of subtypes){
-    const el = document.createElement('div');
-    el.className = 'subtype-item';
-    el.textContent = st;
-    el.onclick = ()=>selectSubtype(type, st, el);
-    row.appendChild(el);
-  }
-  subtypeContainer.appendChild(row);
-
-  // auto-select first subtype unless something already selected for this type
-  const currentSub = state.activeSubtype;
-  if(currentSub && subtypes.includes(currentSub)){
-    // highlight that subtype
-    for(const n of row.children){ if(n.textContent===currentSub) n.classList.add('active'); }
-    renderOptions(type, currentSub);
+function selectType(type){
+  state.selectedType = type;
+  // UI active
+  [...typeList.querySelectorAll('.type-btn')].forEach(b=>b.classList.toggle('active', b.textContent===type));
+  // build subtypes
+  buildSubtypes(type);
+  // pick first subtype
+  const firstSubtype = subtypeRow.querySelector('.subtype-pill');
+  if(firstSubtype){
+    firstSubtype.click();
   } else {
-    // pick first
-    const first = subtypes[0];
-    if(first){ // select first
-      const firstEl = row.children[0];
-      firstEl.classList.add('active');
-      selectSubtype(type, first, firstEl);
-    }
+    optionsGrid.innerHTML = '<div class="small muted">No subtypes</div>';
   }
 }
 
-function selectSubtype(type, subtype, el){
-  state.activeSubtype = subtype;
-  // highlight
-  for(const e of el.parentElement.children) e.classList.remove('active');
-  el.classList.add('active');
-  renderOptions(type, subtype);
+function buildSubtypes(type){
+  subtypeRow.innerHTML = '';
+  const typesMap = getTypes();
+  const submap = typesMap.get(type) || new Map();
+  for(const [subtype, opts] of submap.entries()){
+    const pill = document.createElement('div');
+    pill.className = 'subtype-pill';
+    pill.textContent = subtype;
+    pill.addEventListener('click', ()=> selectSubtype(subtype));
+    subtypeRow.appendChild(pill);
+  }
+  // set horizontal scroll behavior
+  subtypeRow.scrollLeft = 0;
 }
 
-function renderOptions(type, subtype){
-  optionsContainer.innerHTML = '';
-  const opts = items.filter(i=>i.type===type && i.subtype===subtype);
-  if(opts.length===0){ optionsContainer.innerHTML = '<div class="small">No options</div>'; return; }
-
-  for(const o of opts){
-    const tile = document.createElement('div');
-    tile.className = 'option-tile';
-    // determine selected state
-    let isSelected = false;
-    if(MULTI_SELECT_TYPES.has(type)){
-      const set = state.selected[type] || new Set();
-      isSelected = set.has(o.sku);
-    } else {
-      isSelected = (state.selected[type] === o.sku);
-    }
-    if(isSelected) tile.classList.add('selected');
-
-    // swatch (try detect color from item string)
-    const sw = document.createElement('div');
-    sw.className = 'swatch';
-    sw.textContent = (o.item.length<=3? o.item : '');
-    // quick heuristic for color backgrounds for visual flair
-    const colorHint = o.item.toLowerCase();
-    const colorMap = {
-      red:'#ff6b6b', blue:'#5fb3ff', green:'#7fff9b', yellow:'#ffd166', orange:'#ff9f43', black:'#111', white:'#e9eef6', purple:'#b388ff', pink:'#ff85c0', gray:'#9aa3b2'
-    };
-    const hint = Object.keys(colorMap).find(k=>colorHint.includes(k));
-    if(hint){
-      sw.style.background = colorMap[hint];
-      sw.style.color = (hint==='black' || hint==='blue' ? '#fff' : '#08121b');
-    } else {
-      sw.style.background = 'linear-gradient(135deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01))';
-      sw.style.color = '#cbd6e0';
-      sw.textContent = o.item.length<=3 ? o.item : o.item[0];
-    }
-
-    const meta = document.createElement('div');
-    meta.className = 'option-meta';
-    meta.innerHTML = `<div style="font-weight:700">${o.item}</div><div class="small">${o.sku} • ${currency(o.price)}</div>`;
-
-    tile.appendChild(sw);
-    tile.appendChild(meta);
-
-    // click handler
-    tile.onclick = (ev)=>{
-      ev.preventDefault();
-      if(MULTI_SELECT_TYPES.has(type)){
-        // toggle selection in set
-        state.selected[type] = state.selected[type] || new Set();
-        if(state.selected[type].has(o.sku)){
-          state.selected[type].delete(o.sku);
-          removeLayerOrder(o.sku);
-        } else {
-          state.selected[type].add(o.sku);
-          pushLayerOrder(o.sku);
-        }
-      } else {
-        // single-select: if clicking same, deselect, otherwise set
-        if(state.selected[type] === o.sku){
-          state.selected[type] = null;
-          removeLayerOrder(o.sku);
-          tile.classList.remove('selected');
-        } else {
-          // remove previous selection for that type (if any)
-          const prev = state.selected[type];
-          if(prev) removeLayerOrder(prev);
-          state.selected[type] = o.sku;
-          pushLayerOrder(o.sku);
-        }
-      }
-      // update selected visuals
-      renderOptions(type, subtype);
-      renderQuote();
-      renderStage();
-    };
-
-    optionsContainer.appendChild(tile);
-  }
+function selectSubtype(subtype){
+  state.selectedSubtype = subtype;
+  [...subtypeRow.querySelectorAll('.subtype-pill')].forEach(p=>p.classList.toggle('active', p.textContent===subtype));
+  buildOptions(state.selectedType, subtype);
 }
 
-function pushLayerOrder(sku){
-  // remove if exists
-  state.layerOrder = state.layerOrder.filter(s=>s!==sku);
-  state.layerOrder.push(sku);
-}
-function removeLayerOrder(sku){
-  state.layerOrder = state.layerOrder.filter(s=>s!==sku);
-}
-
-function renderStage(){
-  // clear stage
-  stage.innerHTML = '';
-  // determine which SKUs are selected (respect multi)
-  const selectedSkus = [];
-  for(const t of Object.keys(state.selected)){
-    const val = state.selected[t];
-    if(val instanceof Set){
-      for(const s of val) selectedSkus.push(s);
-    } else if(val){
-      selectedSkus.push(val);
-    }
-  }
-  // keep the order from state.layerOrder but only those currently selected
-  const ordered = state.layerOrder.filter(sku => selectedSkus.includes(sku));
-
-  // If last selected option is Interior subtype -> only show that image
-  const lastSKU = ordered[ordered.length-1];
-  let lastIsInterior = false;
-  if(lastSKU){
-    const lastItem = items.find(i=>i.sku === lastSKU);
-    if(lastItem && lastItem.subtype && lastItem.subtype.toLowerCase()==='interior'){
-      lastIsInterior = true;
-    }
-  }
-
-  const toShow = lastIsInterior ? (lastSKU ? [lastSKU] : []) : ordered;
-
-  // order: first layers at bottom -> earlier in array = bottom, last = top
-  for(const sku of toShow){
-    const img = document.createElement('img');
-    img.className = 'layer';
-    img.alt = sku;
-    // local path logic: use IMG_BASE+sku+.png if img file absent
-    const item = items.find(i=>i.sku===sku);
-    img.src = item ? item.img : (IMG_BASE + sku + '.png');
-    img.onload = ()=>img.classList.add('visible');
-    img.onerror = ()=>{
-      // placeholder if missing
-      img.style.background = 'linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01))';
-      img.style.display = 'block';
-      img.classList.add('visible');
-      img.alt = sku + ' (missing)';
-    };
-    stage.appendChild(img);
-  }
-
-  // if no layers, show faint placeholder
-  if(toShow.length===0){
-    const ph = document.createElement('div');
-    ph.style.cssText = 'position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:14px';
-    ph.textContent = 'No layers selected — choose items to visualize your PennCamm';
-    stage.appendChild(ph);
-  }
-}
-
-function renderQuote(){
-  quoteList.innerHTML = '';
-  let total = 0;
-  const rows = [];
-
-  for(const t of types){
-    const sel = state.selected[t];
-    if(sel instanceof Set){
-      for(const s of [...sel]){
-        const it = items.find(i=>i.sku===s);
-        if(it){
-          rows.push(it);
-          total += it.price;
-        }
-      }
-    } else if(sel){
-      const it = items.find(i=>i.sku===sel);
-      if(it){
-        rows.push(it);
-        total += it.price;
-      }
-    }
-  }
-
-  if(rows.length===0){
-    quoteList.innerHTML = '<div class="small">No items in quote</div>';
-  } else {
-    for(const r of rows){
-      const row = document.createElement('div');
-      row.className = 'quote-row';
-      row.innerHTML = `<div><strong>${r.item}</strong><div class="small">${r.type} › ${r.subtype}</div></div><div>${currency(r.price)}</div>`;
-      quoteList.appendChild(row);
-    }
-  }
-  totalAmt.textContent = currency(total);
-}
-
-resetBtn.onclick = ()=>{
-  // clear selections except for multi selects, which default to all selected
-  state.selected = {};
-  state.layerOrder = [];
-  for(const t of types){
-    if(MULTI_SELECT_TYPES.has(t)){
-      const skus = items.filter(i=>i.type===t).map(i=>i.sku);
-      state.selected[t] = new Set(skus);
-      for(const s of skus) pushLayerOrder(s);
-    } else {
-      state.selected[t] = null;
-    }
-  }
-  // reset UI highlights
-  for(const b of typesListEl.children) b.classList.remove('active');
-  dynamicPanel.style.display = 'none';
-  renderStage();
-  renderQuote();
-  // clear subtype active
-  state.activeType = null;
-  state.activeSubtype = null;
-};
-
-emailBtn.onclick = ()=>{
-  // prepare mailto
-  const rows = [];
-  let total = 0;
-  for(const t of types){
-    const sel = state.selected[t];
-    if(sel instanceof Set){
-      for(const s of [...sel]){
-        const it = items.find(i=>i.sku===s);
-        if(it){ rows.push(it); total+=it.price; }
-      }
-    } else if(sel){
-      const it = items.find(i=>i.sku===sel);
-      if(it){ rows.push(it); total+=it.price; }
-    }
-  }
-  if(rows.length===0){
-    alert('Please select at least one option before composing an email.');
+function buildOptions(type, subtype){
+  optionsGrid.innerHTML = '';
+  const opts = allOptions.filter(o=>o.type===type && o.subtype===subtype);
+  if(!opts.length){
+    optionsGrid.innerHTML = '<div class="small muted">No options available.</div>';
     return;
   }
-  let body = `PennCamm Custom Quote\n\nSelected items:\n`;
-  for(const r of rows){
-    body += `• ${r.sku} — ${r.type} / ${r.subtype} / ${r.item} — ${currency(r.price)}\n`;
-  }
-  body += `\nTotal: ${currency(total)}\n\nNotes: \n\n--\nVisual preview: images are layered files: ${IMG_BASE}<SKU>.png\n`;
-  const subj = encodeURIComponent('PennCamm Custom Quote');
-  const mailto = `mailto:cam@pennbrenn.com?subject=${subj}&body=${encodeURIComponent(body)}`;
-  window.location.href = mailto;
-};
-
-// download current quote as JSON
-downloadBtn.onclick = ()=>{
-  const out = { quote: [], total:0, created: new Date().toISOString() };
-  for(const t of types){
-    const sel = state.selected[t];
-    if(sel instanceof Set){
-      for(const s of [...sel]){
-        const it = items.find(i=>i.sku===s);
-        if(it){ out.quote.push(it); out.total += it.price; }
+  for(const opt of opts){
+    const card = document.createElement('div');
+    card.className = 'option-card';
+    card.dataset.sku = opt.sku;
+    card.title = opt.item + ' — $' + (Number(opt.price)||0).toFixed(2);
+    const img = document.createElement('img');
+    img.src = `images/${opt.sku}.png`;
+    img.alt = opt.item;
+    img.onerror = ()=> { img.style.opacity = 0.25; img.style.filter = 'grayscale(80%)'; img.src = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400"><rect width="100%" height="100%" fill="%230b0d10"/><text x="50%" y="50%" fill="%238a8f95" font-size="20" text-anchor="middle" alignment-baseline="middle">No image</text></svg>'}
+    const label = document.createElement('div');
+    label.textContent = opt.item;
+    label.style.fontSize='12px';
+    label.style.textAlign='center';
+    card.appendChild(img);
+    card.appendChild(label);
+    // selection logic
+    card.addEventListener('click', (e)=>{
+      const isMulti = multiSelectTypes.has(type);
+      if(isMulti){
+        // toggle membership in array
+        if(!state.selections[type]) state.selections[type]= new Set();
+        const set = state.selections[type];
+        if(set.has(opt.sku)) set.delete(opt.sku);
+        else set.add(opt.sku);
+      } else {
+        // single select - clicking same will deselect
+        if(state.selections[type]===opt.sku) state.selections[type]=null;
+        else state.selections[type]=opt.sku;
       }
-    } else if(sel){
-      const it = items.find(i=>i.sku===sel);
-      if(it){ out.quote.push(it); out.total += it.price; }
+      refreshOptionUI();
+      renderCanvas();
+      renderSummary();
+      buildQuote();
+    });
+    optionsGrid.appendChild(card);
+  }
+  refreshOptionUI();
+}
+
+function refreshOptionUI(){
+  // update .selected classes in grid
+  const cards = optionsGrid.querySelectorAll('.option-card');
+  for(const c of cards){
+    const sku = c.dataset.sku;
+    const type = state.selectedType;
+    if(multiSelectTypes.has(type)){
+      const set = state.selections[type] || new Set();
+      c.classList.toggle('selected', set.has(sku));
+    } else {
+      c.classList.toggle('selected', state.selections[type] === sku);
     }
   }
-  const blob = new Blob([JSON.stringify(out,null,2)], {type:'application/json'});
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = 'penncamm-quote.json';
-  a.click();
-  URL.revokeObjectURL(url);
-};
+}
 
-// initial load
-loadData();
+function renderCanvas(){
+  // clear previous images
+  canvas.querySelectorAll('img').forEach(i=>i.remove());
+  // Determine layered images to show
+  // order: base (if exists), then selections in types order
+  const typesMap = getTypes();
+  // flatten selections to array of option objects in deterministic order (types order from typesMap)
+  const layers = [];
+  for(const [type, submap] of typesMap.entries()){
+    const sel = state.selections[type];
+    if(!sel) continue;
+    if(multiSelectTypes.has(type)){
+      // sel is a Set
+      for(const sku of sel instanceof Set ? [...sel] : []){
+        const opt = allOptions.find(o=>o.sku===sku);
+        if(opt) layers.push(opt);
+      }
+    } else {
+      const opt = allOptions.find(o=>o.sku===sel);
+      if(opt) layers.push(opt);
+    }
+  }
+  // Check for interior view: if last selected option has view==='interior', show only that
+  if(layers.length){
+    const last = layers[layers.length-1];
+    if(last && last.view === 'interior'){
+      const img = document.createElement('img');
+      img.src = `images/${last.sku}.png`;
+      img.alt = last.item;
+      canvas.appendChild(img);
+      return;
+    }
+  }
+  // otherwise show base first (if exists)
+  const base = allOptions.find(o => o.isBase);
+  if(base){
+    const img = document.createElement('img');
+    img.src = `images/${base.sku}.png`;
+    img.alt = base.item;
+    canvas.appendChild(img);
+  }
+  // add layers in order
+  for(const l of layers){
+    const img = document.createElement('img');
+    img.src = `images/${l.sku}.png`;
+    img.alt = l.item;
+    canvas.appendChild(img);
+  }
+}
+
+function renderSummary(){
+  // count and subtotal
+  let items = 0, subtotal = 0;
+  for(const t in state.selections){
+    const sel = state.selections[t];
+    if(!sel) continue;
+    if(multiSelectTypes.has(t)){
+      const arr = [...(sel instanceof Set ? sel : [])];
+      items += arr.length;
+      for(const sku of arr){
+        const o = allOptions.find(x=>x.sku===sku);
+        if(o) subtotal += Number(o.price||0);
+      }
+    } else {
+      const o = allOptions.find(x=>x.sku===sel);
+      if(o){ items++; subtotal += Number(o.price||0); }
+    }
+  }
+  countEl.textContent = items;
+  subtotalEl.textContent = '$' + subtotal.toFixed(2);
+}
+
+function buildQuote(){
+  const lines = [];
+  lines.push('PennCamm Custom Quote');
+  lines.push('----------------------');
+  let total = 0;
+  for(const t of Object.keys(getTypes())){
+    const sel = state.selections[t];
+    if(!sel) continue;
+    if(multiSelectTypes.has(t)){
+      const arr = [...(sel instanceof Set ? sel : [])];
+      if(arr.length){
+        lines.push(`${t}:`);
+        for(const sku of arr){
+          const o = allOptions.find(x=>x.sku===sku);
+          if(o){
+            lines.push(` - ${o.item} (${o.sku}) — $${Number(o.price||0).toFixed(2)}`);
+            total += Number(o.price||0);
+          }
+        }
+      }
+    } else {
+      const o = allOptions.find(x=>x.sku===sel);
+      if(o){
+        lines.push(`${t}: ${o.item} (${o.sku}) — $${Number(o.price||0).toFixed(2)}`);
+        total += Number(o.price||0);
+      }
+    }
+  }
+  lines.push('----------------------');
+  lines.push('Subtotal: $' + total.toFixed(2));
+  lines.push('');
+  lines.push('Please copy & paste this quote into an email and send to cam@pennbrenn.com');
+  quoteBox.value = lines.join('\\n');
+}
+
+// copy button
+copyBtn.addEventListener('click', async ()=>{
+  try{
+    await navigator.clipboard.writeText(quoteBox.value);
+    copyBtn.textContent = 'Copied!';
+    setTimeout(()=>copyBtn.textContent='Copy quote',1200);
+  }catch(e){
+    alert('Copy failed — select the quote box and copy manually.');
+  }
+});
+
+resetBtn.addEventListener('click', ()=>{
+  resetSelections();
+  renderCanvas();
+  renderSummary();
+  buildQuote();
+});
+
+function resetSelections(){
+  state.selections = {};
+  // initialize multi selects as empty sets for convenience
+  for(const t of Object.keys(getTypes())){
+    if(multiSelectTypes.has(t)) state.selections[t] = new Set();
+    else state.selections[t] = null;
+  }
+  renderCanvas();
+  buildQuote();
+}
+
+init();
 </script>
 </body>
 </html>
