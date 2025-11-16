@@ -146,7 +146,7 @@
 <script>
 /*
   PennCamm Customizer
-  - loads options.json (local)
+  - loads data.json (local)
   - populates types, subtypes, options
   - images loaded from images/<sku>.png
   - lens & misc types allow multi-select; other types single-select
@@ -179,8 +179,8 @@ async function init(){
     renderSummary();
     resetSelections();
   }catch(e){
-    console.error('Failed to load options.json', e);
-    optionsGrid.innerHTML = '<div style="padding:12px;color:var(--muted)">Failed to load options.json — make sure it is next to the HTML file.</div>';
+    console.error('Failed to load data.json', e);
+    optionsGrid.innerHTML = '<div style="padding:12px;color:var(--muted)">Failed to load data.json — make sure it is next to the HTML file.</div>';
   }
 }
 
