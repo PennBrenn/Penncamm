@@ -14,7 +14,6 @@
     {"id":"Packing","name":"Packing","selectAll":true}
   ],
   "items": [
-    /* Wrap -> Cloth colors */
     {"sku":"WR-CL-GR","typeId":"Wrap","type":"Wrap","subtypeId":"Cloth","subtype":"Cloth","item":"Grey","price":0.99,"image":"images/WR-CL-GR.png"},
     {"sku":"WR-CL-RD","typeId":"Wrap","type":"Wrap","subtypeId":"Cloth","subtype":"Cloth","item":"Red","price":0.99,"image":"images/WR-CL-RD.png"},
     {"sku":"WR-CL-OR","typeId":"Wrap","type":"Wrap","subtypeId":"Cloth","subtype":"Cloth","item":"Orange","price":0.99,"image":"images/WR-CL-OR.png"},
@@ -25,7 +24,6 @@
     {"sku":"WR-CL-WH","typeId":"Wrap","type":"Wrap","subtypeId":"Cloth","subtype":"Cloth","item":"White","price":0.99,"image":"images/WR-CL-WH.png"},
     {"sku":"WR-CL-BK","typeId":"Wrap","type":"Wrap","subtypeId":"Cloth","subtype":"Cloth","item":"Black","price":0.99,"image":"images/WR-CL-BK.png"},
 
-    /* Wrap -> Foam */
     {"sku":"WR-FO-GR","typeId":"Wrap","type":"Wrap","subtypeId":"Foam","subtype":"Foam","item":"Grey","price":0.99,"image":"images/WR-FO-GR.png"},
     {"sku":"WR-FO-RD","typeId":"Wrap","type":"Wrap","subtypeId":"Foam","subtype":"Foam","item":"Red","price":0.99,"image":"images/WR-FO-RD.png"},
     {"sku":"WR-FO-OR","typeId":"Wrap","type":"Wrap","subtypeId":"Foam","subtype":"Foam","item":"Orange","price":0.99,"image":"images/WR-FO-OR.png"},
@@ -36,7 +34,6 @@
     {"sku":"WR-FO-WH","typeId":"Wrap","type":"Wrap","subtypeId":"Foam","subtype":"Foam","item":"White","price":0.99,"image":"images/WR-FO-WH.png"},
     {"sku":"WR-FO-BK","typeId":"Wrap","type":"Wrap","subtypeId":"Foam","subtype":"Foam","item":"Black","price":0.99,"image":"images/WR-FO-BK.png"},
 
-    /* Wrap -> Fabric */
     {"sku":"WR-FA-GR","typeId":"Wrap","type":"Wrap","subtypeId":"Fabric","subtype":"Fabric","item":"Grey","price":0.99,"image":"images/WR-FA-GR.png"},
     {"sku":"WR-FA-RD","typeId":"Wrap","type":"Wrap","subtypeId":"Fabric","subtype":"Fabric","item":"Red","price":0.99,"image":"images/WR-FA-RD.png"},
     {"sku":"WR-FA-OR","typeId":"Wrap","type":"Wrap","subtypeId":"Fabric","subtype":"Fabric","item":"Orange","price":0.99,"image":"images/WR-FA-OR.png"},
@@ -47,31 +44,25 @@
     {"sku":"WR-FA-WH","typeId":"Wrap","type":"Wrap","subtypeId":"Fabric","subtype":"Fabric","item":"White","price":0.99,"image":"images/WR-FA-WH.png"},
     {"sku":"WR-FA-BK","typeId":"Wrap","type":"Wrap","subtypeId":"Fabric","subtype":"Fabric","item":"Black","price":0.99,"image":"images/WR-FA-BK.png"},
 
-    /* Wrap -> Leather */
     {"sku":"WR-LE-TN","typeId":"Wrap","type":"Wrap","subtypeId":"Leather","subtype":"Leather","item":"Tan","price":0.99,"image":"images/WR-LE-TN.png"},
     {"sku":"WR-LE-BR","typeId":"Wrap","type":"Wrap","subtypeId":"Leather","subtype":"Leather","item":"Brown","price":0.99,"image":"images/WR-LE-BR.png"},
     {"sku":"WR-LE-BK","typeId":"Wrap","type":"Wrap","subtypeId":"Leather","subtype":"Leather","item":"Black","price":0.99,"image":"images/WR-LE-BK.png"},
     {"sku":"WR-LE-PL","typeId":"Wrap","type":"Wrap","subtypeId":"Leather","subtype":"Leather","item":"Purple","price":0.99,"image":"images/WR-LE-PL.png"},
 
-    /* Wrap -> Velvet */
     {"sku":"WR-VE-RD","typeId":"Wrap","type":"Wrap","subtypeId":"Velvet","subtype":"Velvet","item":"Red","price":0.99,"image":"images/WR-VE-RD.png"},
     {"sku":"WR-VE-BK","typeId":"Wrap","type":"Wrap","subtypeId":"Velvet","subtype":"Velvet","item":"Black","price":0.99,"image":"images/WR-VE-BK.png"},
 
-    /* Wrap -> Fiber */
     {"sku":"WR-FI-CAR","typeId":"Wrap","type":"Wrap","subtypeId":"Fiber","subtype":"Fiber","item":"Carbon","price":0.99,"image":"images/WR-FI-CAR.png"},
     {"sku":"WR-FI-GLS","typeId":"Wrap","type":"Wrap","subtypeId":"Fiber","subtype":"Fiber","item":"Glass","price":0.99,"image":"images/WR-FI-GLS.png"},
 
-    /* Wrap -> Reflective */
     {"sku":"WR-RE-REF","typeId":"Wrap","type":"Wrap","subtypeId":"Reflective","subtype":"Reflective","item":"Reflective","price":0.99,"image":"images/WR-RE-REF.png"},
 
-    /* Upper Case — Composite PLA */
     {"sku":"UC-CPLA-STL","typeId":"UpperCase","type":"Upper Case","subtypeId":"Composite PLA","subtype":"Composite PLA","item":"Steel","price":0.99,"image":"images/UC-CPLA-STL.png"},
     {"sku":"UC-CPLA-IRN","typeId":"UpperCase","type":"Upper Case","subtypeId":"Composite PLA","subtype":"Composite PLA","item":"Iron (Rusts)","price":0.99,"image":"images/UC-CPLA-IRN.png"},
     {"sku":"UC-CPLA-BRS","typeId":"UpperCase","type":"Upper Case","subtypeId":"Composite PLA","subtype":"Composite PLA","item":"Brass","price":0.99,"image":"images/UC-CPLA-BRS.png"},
     {"sku":"UC-CPLA-COP","typeId":"UpperCase","type":"Upper Case","subtypeId":"Composite PLA","subtype":"Composite PLA","item":"Copper","price":0.99,"image":"images/UC-CPLA-COP.png"},
     {"sku":"UC-CPLA-BRZ","typeId":"UpperCase","type":"Upper Case","subtypeId":"Composite PLA","subtype":"Composite PLA","item":"Bronze","price":0.99,"image":"images/UC-CPLA-BRZ.png"},
 
-    /* Upper Case — Electroplate */
     {"sku":"UC-EP-NI","typeId":"UpperCase","type":"Upper Case","subtypeId":"Electroplate","subtype":"Electroplate","item":"Nickel","price":0.99,"image":"images/UC-EP-NI.png"},
     {"sku":"UC-EP-COP","typeId":"UpperCase","type":"Upper Case","subtypeId":"Electroplate","subtype":"Electroplate","item":"Copper","price":0.99,"image":"images/UC-EP-COP.png"},
     {"sku":"UC-EP-AL","typeId":"UpperCase","type":"Upper Case","subtypeId":"Electroplate","subtype":"Electroplate","item":"Aluminum","price":0.99,"image":"images/UC-EP-AL.png"},
@@ -79,11 +70,9 @@
     {"sku":"UC-EP-ZN","typeId":"UpperCase","type":"Upper Case","subtypeId":"Electroplate","subtype":"Electroplate","item":"Zinc","price":0.99,"image":"images/UC-EP-ZN.png"},
     {"sku":"UC-EP-IRN","typeId":"UpperCase","type":"Upper Case","subtypeId":"Electroplate","subtype":"Electroplate","item":"Iron","price":0.99,"image":"images/UC-EP-IRN.png"},
 
-    /* Upper Case — SLS */
     {"sku":"UC-SLS-TI","typeId":"UpperCase","type":"Upper Case","subtypeId":"SLS","subtype":"SLS","item":"Titanium","price":0.99,"image":"images/UC-SLS-TI.png"},
     {"sku":"UC-SLS-STL","typeId":"UpperCase","type":"Upper Case","subtypeId":"SLS","subtype":"SLS","item":"Steel","price":0.99,"image":"images/UC-SLS-STL.png"},
 
-    /* Upper Case — PLA & variants (a sample set) */
     {"sku":"UC-PLA-BK","typeId":"UpperCase","type":"Upper Case","subtypeId":"PLA","subtype":"PLA","item":"Black","price":0.99,"image":"images/UC-PLA-BK.png"},
     {"sku":"UC-PLA-WH","typeId":"UpperCase","type":"Upper Case","subtypeId":"PLA","subtype":"PLA","item":"White","price":0.99,"image":"images/UC-PLA-WH.png"},
     {"sku":"UC-PLA-CLR","typeId":"UpperCase","type":"Upper Case","subtypeId":"PLA","subtype":"PLA","item":"Clear","price":0.99,"image":"images/UC-PLA-CLR.png"},
@@ -98,7 +87,6 @@
     {"sku":"UC-PLA-OIL","typeId":"UpperCase","type":"Upper Case","subtypeId":"PLA","subtype":"PLA","item":"Oil Spill","price":0.99,"image":"images/UC-PLA-OIL.png"},
     {"sku":"UC-PLA-GLO","typeId":"UpperCase","type":"Upper Case","subtypeId":"PLA","subtype":"PLA","item":"Glow In Dark","price":0.99,"image":"images/UC-PLA-GLO.png"},
 
-    /* Upper Case — Glitter PLA examples */
     {"sku":"UC-GPLA-BL","typeId":"UpperCase","type":"Upper Case","subtypeId":"Glitter PLA","subtype":"Glitter PLA","item":"Blue","price":0.99,"image":"images/UC-GPLA-BL.png"},
     {"sku":"UC-GPLA-GN","typeId":"UpperCase","type":"Upper Case","subtypeId":"Glitter PLA","subtype":"Glitter PLA","item":"Green","price":0.99,"image":"images/UC-GPLA-GN.png"},
     {"sku":"UC-GPLA-RD","typeId":"UpperCase","type":"Upper Case","subtypeId":"Glitter PLA","subtype":"Glitter PLA","item":"Red","price":0.99,"image":"images/UC-GPLA-RD.png"},
@@ -108,20 +96,17 @@
     {"sku":"UC-GPLA-TL","typeId":"UpperCase","type":"Upper Case","subtypeId":"Glitter PLA","subtype":"Glitter PLA","item":"Teal","price":0.99,"image":"images/UC-GPLA-TL.png"},
     {"sku":"UC-GPLA-OR","typeId":"UpperCase","type":"Upper Case","subtypeId":"Glitter PLA","subtype":"Glitter PLA","item":"Orange","price":0.99,"image":"images/UC-GPLA-OR.png"},
 
-    /* Upper Case — Glitter Fade PLA examples */
     {"sku":"UC-GFPLA-GDU","typeId":"UpperCase","type":"Upper Case","subtypeId":"Glitter Fade PLA","subtype":"Glitter Fade PLA","item":"Gold Dust","price":0.99,"image":"images/UC-GFPLA-GDU.png"},
     {"sku":"UC-GFPLA-STA","typeId":"UpperCase","type":"Upper Case","subtypeId":"Glitter Fade PLA","subtype":"Glitter Fade PLA","item":"Stardust","price":0.99,"image":"images/UC-GFPLA-STA.png"},
     {"sku":"UC-GFPLA-RBO","typeId":"UpperCase","type":"Upper Case","subtypeId":"Glitter Fade PLA","subtype":"Glitter Fade PLA","item":"Rainbow","price":0.99,"image":"images/UC-GFPLA-RBO.png"},
     {"sku":"UC-GFPLA-SUN","typeId":"UpperCase","type":"Upper Case","subtypeId":"Glitter Fade PLA","subtype":"Glitter Fade PLA","item":"Sunrise","price":0.99,"image":"images/UC-GFPLA-SUN.png"},
 
-    /* Upper Case — Thermochromic PLA examples */
     {"sku":"UC-TPLA-DGLI","typeId":"UpperCase","type":"Upper Case","subtypeId":"Thermochromic PLA","subtype":"Thermochromic PLA","item":"Dark Green > Lime","price":0.99,"image":"images/UC-TPLA-DGLI.png"},
     {"sku":"UC-TPLA-DGYE","typeId":"UpperCase","type":"Upper Case","subtypeId":"Thermochromic PLA","subtype":"Thermochromic PLA","item":"Dark Green > Yellow","price":0.99,"image":"images/UC-TPLA-DGYE.png"},
     {"sku":"UC-TPLA-RDYE","typeId":"UpperCase","type":"Upper Case","subtypeId":"Thermochromic PLA","subtype":"Thermochromic PLA","item":"Red > Yellow","price":0.99,"image":"images/UC-TPLA-RDYE.png"},
     {"sku":"UC-TPLA-RDOR","typeId":"UpperCase","type":"Upper Case","subtypeId":"Thermochromic PLA","subtype":"Thermochromic PLA","item":"Red > Orange","price":0.99,"image":"images/UC-TPLA-RDOR.png"},
     {"sku":"UC-TPLA-BKGR","typeId":"UpperCase","type":"Upper Case","subtypeId":"Thermochromic PLA","subtype":"Thermochromic PLA","item":"Black > Gray","price":0.99,"image":"images/UC-TPLA-BKGR.png"},
 
-    /* Lower Case - mirror of UpperCase set (a subset shown) */
     {"sku":"LC-CPLA-STL","typeId":"LowerCase","type":"Lower Case","subtypeId":"Composite PLA","subtype":"Composite PLA","item":"Steel","price":0.99,"image":"images/LC-CPLA-STL.png"},
     {"sku":"LC-CPLA-IRN","typeId":"LowerCase","type":"Lower Case","subtypeId":"Composite PLA","subtype":"Composite PLA","item":"Iron (Rusts)","price":0.99,"image":"images/LC-CPLA-IRN.png"},
     {"sku":"LC-PLA-BK","typeId":"LowerCase","type":"Lower Case","subtypeId":"PLA","subtype":"PLA","item":"Black","price":0.99,"image":"images/LC-PLA-BK.png"},
@@ -131,31 +116,25 @@
     {"sku":"LC-GFPLA-RBO","typeId":"LowerCase","type":"Lower Case","subtypeId":"Glitter Fade PLA","subtype":"Glitter Fade PLA","item":"Rainbow","price":0.99,"image":"images/LC-GFPLA-RBO.png"},
     {"sku":"LC-TPLA-DGLI","typeId":"LowerCase","type":"Lower Case","subtypeId":"Thermochromic PLA","subtype":"Thermochromic PLA","item":"Dark Green > Lime","price":0.99,"image":"images/LC-TPLA-DGLI.png"},
 
-    /* Storage */
     {"sku":"ST-PCS4G-NA","typeId":"Storage","type":"Storage","subtypeId":"PennCamm Standard","subtype":"PennCamm Standard","item":"PennCamm Standard 4GB","price":0.99,"image":"images/ST-PCS4G-NA.png"},
 
-    /* Lens Pack / Lens options (selectAll = true for Lens type) */
     {"sku":"LN-PAK-BAS","typeId":"Lens","type":"Lens","subtypeId":"Pack","subtype":"Pack","item":"Basic Pack","price":0.99,"image":"images/LN-PAK-BAS.png"},
     {"sku":"LN-PAK-MAC","typeId":"Lens","type":"Lens","subtypeId":"Pack","subtype":"Pack","item":"Macro Pack","price":0.99,"image":"images/LN-PAK-MAC.png"},
     {"sku":"LN-PAK-FIS","typeId":"Lens","type":"Lens","subtypeId":"Pack","subtype":"Pack","item":"Fisheye Pack","price":0.99,"image":"images/LN-PAK-FIS.png"},
     {"sku":"LN-SIN-ZMX10","typeId":"Lens","type":"Lens","subtypeId":"Single","subtype":"Single","item":"Zoom (>10x)","price":0.99,"image":"images/LN-SIN-ZMX10.png"},
 
-    /* Charger */
     {"sku":"CH-USBC-C-A","typeId":"Charger","type":"Charger","subtypeId":"USBC","subtype":"USBC","item":"USBC-to-USBA","price":0.99,"image":"images/CH-USBC-C-A.png"},
     {"sku":"CH-USBC-C-C","typeId":"Charger","type":"Charger","subtypeId":"USBC","subtype":"USBC","item":"USBC-to-USBC","price":0.99,"image":"images/CH-USBC-C-C.png"},
 
-    /* Battery */
     {"sku":"BT-SC-350","typeId":"Battery","type":"Battery","subtypeId":"Single Cell","subtype":"Single Cell","item":"350mah","price":0.99,"image":"images/BT-SC-350.png"},
     {"sku":"BT-DC-700","typeId":"Battery","type":"Battery","subtypeId":"Double Cell","subtype":"Double Cell","item":"700mah","price":0.99,"image":"images/BT-DC-700.png"},
     {"sku":"BT-SC-2000","typeId":"Battery","type":"Battery","subtypeId":"Single Cell","subtype":"Single Cell","item":"2000mah","price":0.99,"image":"images/BT-SC-2000.png"},
 
-    /* Misc Accessories (selectAll true) */
     {"sku":"MI-ACC-KEY","typeId":"Misc","type":"Misc","subtypeId":"Accessories","subtype":"Accessories","item":"Keychain","price":0.99,"image":"images/MI-ACC-KEY.png"},
     {"sku":"MI-ACC-STR","typeId":"Misc","type":"Misc","subtypeId":"Accessories","subtype":"Accessories","item":"Carry Strap","price":0.99,"image":"images/MI-ACC-STR.png"},
     {"sku":"MI-ACC-MNT","typeId":"Misc","type":"Misc","subtypeId":"Accessories","subtype":"Accessories","item":"Mount","price":0.99,"image":"images/MI-ACC-MNT.png"},
     {"sku":"MI-ACC-CAL","typeId":"Misc","type":"Misc","subtypeId":"Accessories","subtype":"Accessories","item":"Calc Attachment","price":0.99,"image":"images/MI-ACC-CAL.png"},
 
-    /* Parts & Electronics */
     {"sku":"PT-SCR-M3RH","typeId":"Parts","type":"Parts","subtypeId":"Screws","subtype":"Screws","item":"M3-0.5 Roundhead Hex","price":0.99,"image":"images/PT-SCR-M3RH.png"},
     {"sku":"PT-SCR-M3HS","typeId":"Parts","type":"Parts","subtypeId":"Screws","subtype":"Screws","item":"M3-0.5 Handscrew","price":0.99,"image":"images/PT-SCR-M3HS.png"},
     {"sku":"PT-SCR-M15ST","typeId":"Parts","type":"Parts","subtypeId":"Screws","subtype":"Screws","item":"M1.5-0.4 Self Tap Philips","price":0.99,"image":"images/PT-SCR-M15ST.png"},
@@ -165,7 +144,6 @@
     {"sku":"PT-INT-PB6","typeId":"Parts","type":"Parts","subtypeId":"Interface","subtype":"Interface","item":"6x6x6 Push Button","price":0.99,"image":"images/PT-INT-PB6.png"},
     {"sku":"PT-INT-PBS110","typeId":"Parts","type":"Parts","subtypeId":"Interface","subtype":"Interface","item":"PBS-110","price":0.99,"image":"images/PT-INT-PBS110.png"},
 
-    /* Packing */
     {"sku":"PKG-STK-LG","typeId":"Packing","type":"Packing","subtypeId":"Sticker","subtype":"Sticker","item":"Big","price":0.99,"image":"images/PKG-STK-LG.png"},
     {"sku":"PKG-STK-SM","typeId":"Packing","type":"Packing","subtypeId":"Sticker","subtype":"Sticker","item":"Small","price":0.99,"image":"images/PKG-STK-SM.png"},
     {"sku":"PKG-STK-ID","typeId":"Packing","type":"Packing","subtypeId":"Sticker","subtype":"Sticker","item":"ID","price":0.99,"image":"images/PKG-STK-ID.png"},
