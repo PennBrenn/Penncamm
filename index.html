@@ -221,6 +221,11 @@
 
     <div class="accordion-list">
 
+
+
+
+
+    
       <!-- Build & Durability -->
       <div class="accordion-item">
         <button class="accordion-toggle">
@@ -298,6 +303,14 @@
   </div>
 </section>
 
+<script>
+  document.querySelectorAll('.accordion-toggle').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const item = btn.parentElement;
+    item.classList.toggle('active');
+  });
+});
+</script>
     
 <style>
   /* --- Social Button Styles --- */
@@ -777,33 +790,6 @@
     function openMailClient(e) {
     }
 
-
-
-//features tab
-
-    document.addEventListener("DOMContentLoaded", () => {
-  const accordions = document.querySelectorAll(".accordion-item");
-
-  accordions.forEach(item => {
-    const btn = item.querySelector(".accordion-toggle");
-
-    btn.addEventListener("click", () => {
-
-      // If this one is already open, close it and stop
-      if (item.classList.contains("active")) {
-        item.classList.remove("active");
-        return;
-      }
-
-      // Close all others
-      accordions.forEach(i => i.classList.remove("active"));
-
-      // Open the clicked one
-      item.classList.add("active");
-    });
-  });
-});
-
     
     // load on ready
     window.addEventListener('load', loadOptions);
@@ -833,6 +819,7 @@
 </style>
 </body>
 </html>
+
 
 
 
