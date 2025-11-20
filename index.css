@@ -12,6 +12,35 @@
   -moz-osx-font-smoothing:grayscale;
 }
 
+/* Combined About + Social layout */
+#about-social .combined-buttons {
+  margin-top: 1.8em;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+/* Give buttons consistent alignment */
+#about-social .combined-buttons a {
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* Slight tweak so social buttons and the normal button look unified */
+#about-social .btn {
+  background: var(--accent);
+  border: none;
+  box-shadow: 0 0 12px rgba(0,0,0,0.4);
+}
+
+@media (max-width: 520px) {
+  #about-social .combined-buttons {
+    flex-direction: column;
+  }
+}
+
+
+
 html {
   scrollbar-color: #444 #111; /* thumb, track (Firefox only) */
   scrollbar-width: thin;
@@ -357,6 +386,7 @@ section.panel + section.panel { margin-top: var(--panel-gap); }
   .title { font-size:34px; }
   .panel { padding:26px 12px; }
 }
+
 
 
 
