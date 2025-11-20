@@ -156,6 +156,88 @@ main { padding-top: calc(var(--header-height) + 12px); position:relative; z-inde
   color: var(--para-color);
 }
 
+/* Accordion Container */
+.accordion-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Each accordion item */
+.accordion-item {
+  border: 1px solid var(--glass-border);
+  border-radius: 10px;
+  background: rgba(255,255,255,0.015);
+  overflow: hidden;
+  transition: border 0.2s ease;
+}
+
+/* Toggle button */
+.accordion-toggle {
+  width: 100%;
+  background: transparent;
+  border: none;
+  padding: 14px 16px;
+  text-align: left;
+  color: var(--title-color);
+  font-family: "Courier New", Courier, monospace;
+  font-size: 16px;
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
+  backdrop-filter: blur(6px);
+  transition: background 0.2s ease;
+}
+
+.accordion-toggle:hover {
+  background: rgba(255,255,255,0.04);
+}
+
+/* Arrow */
+.accordion-toggle .arrow {
+  transition: transform 0.28s ease;
+}
+
+/* Content that expands */
+.accordion-content {
+  max-height: 0;
+  overflow: hidden;
+  padding: 0 16px;
+  opacity: 0;
+  transition: 
+    max-height 0.35s ease,
+    opacity 0.25s ease;
+}
+
+/* When item is active */
+.accordion-item.active .accordion-content {
+  max-height: 500px;
+  opacity: 1;
+  padding-bottom: 10px;
+}
+
+/* Rotate arrow on open */
+.accordion-item.active .arrow {
+  transform: rotate(90deg);
+}
+
+/* Bullet list styling */
+.accordion-content ul {
+  margin: 12px 0 0;
+  padding-left: 18px;
+  color: var(--para-color);
+}
+
+.accordion-content li {
+  margin: 6px 0;
+  font-size: 15px;
+  line-height: 1.4;
+}
+
+
+
+
+
 /* smaller void between sections */
 section.panel + section.panel { margin-top: var(--panel-gap); }
 
@@ -275,6 +357,7 @@ section.panel + section.panel { margin-top: var(--panel-gap); }
   .title { font-size:34px; }
   .panel { padding:26px 12px; }
 }
+
 
 
 
