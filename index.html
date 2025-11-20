@@ -320,22 +320,111 @@
 });
 </script>
     
-<section id="about-social" class="panel about">
+<style>
+  /* --- Social Button Styles --- */
+  #socials {
+    text-align: left;
+    margin-top: 2em;
+  }
+
+  #socials .glass {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border-radius: 16px;
+    padding: 2rem;
+    display: inline-block;
+  }
+
+  #socials h2 {
+    color: var(--title-color, #fafdff);
+    margin-bottom: 1.5em;
+    letter-spacing: 0.5px;
+  }
+
+  #socials a {
+    display: inline-block;
+    color: #fff;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 12px;
+    padding: 0.8em 1.6em;
+    margin: 0.5em;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+    box-shadow: 0 0 12px rgba(0,0,0,0.4);
+  }
+
+  #socials a:hover {
+    transform: scale(1.08);
+    opacity: 0.95;
+    box-shadow: 0 0 20px rgba(0,0,0,0.6);
+  }
+
+  /* individuals */
+  .insta {
+    background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+  }
+
+  .trust {
+    background: linear-gradient(135deg, #00b67a 0%, #007a57 100%);
+  }
+
+  .payhip {
+    background: linear-gradient(135deg, #ffffff 0%, #b0c4f0 50%, #5c6ac4 100%);
+    color: #111; /* make text readable on pale gradient */
+  }
+  .google {
+    background: linear-gradient(135deg, #174EA6 0%, #0D652D 25%, #FBBC04 75%, #A50E0E 100%);
+  }
+
+  /* small responsive tweaks so buttons look tidy */
+  #socials .combined-buttons {
+    margin-top: 1.25rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    align-items: center;
+  }
+
+  #socials .paragraph {
+    color: var(--para-color);
+    margin: 0 0 0.8rem 0;
+    max-width: 720px;
+  }
+
+  /* ensure .btn still looks consistent if used here */
+  #socials .btn {
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    padding: 0.7rem 1.1rem;
+    border-radius: 12px;
+    text-decoration: none;
+    display: inline-block;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.45);
+  }
+
+  @media (max-width:520px) {
+    #socials .combined-buttons { flex-direction: column; align-items: stretch; }
+    #socials .combined-buttons a { width: 100%; text-align:center; }
+    #socials .glass { width: 100%; display:block; padding:1.25rem; }
+  }
+</style>
+
+<section id="socials" class="panel socials">
   <div class="glass">
     <h2 class="section-title">About & Socials</h2>
 
     <p class="paragraph">
-      Hi, I'm William, creator of PennCamm. I started the project because I needed
-      a reliable, compact camera for an upcoming trip—and building one from scratch
-      seemed like the obvious solution. It has been exciting, challenging, sometimes
-      madness (Gen2 design…), but worth every moment.
+      Hi — I’m William, creator of PennCamm. I began this project because I needed a
+      reliable compact camera for an upcoming trip and figured building one would be
+      the fastest way to learn (and cure boredom). It’s been a wild mix of fun and
+      frustration—especially during Gen2 design—but the result is something I’m proud of.
     </p>
 
     <p class="paragraph">
-      If you'd like to follow progress, see behind-the-scenes updates, or leave a 
-      review that helps support the project, you can connect with us across 
-      the platforms below. We often post manufacturing previews, product updates,
-      discounts, and more.
+      If you want behind-the-scenes updates, manufacturing previews, discounts, or to
+      leave a review to support the project, follow or review us on the platforms below.
+      Your feedback helps the brand grow and reach more people.
     </p>
 
     <div class="combined-buttons">
@@ -344,6 +433,7 @@
         class="insta ghost" 
         href="https://www.instagram.com/penncammofficial/" 
         target="_blank" rel="noopener"
+        aria-label="Visit our Instagram (opens in new tab)"
       >Instagram</a>
 
       <a 
@@ -351,6 +441,7 @@
         class="trust ghost" 
         href="https://www.trustpilot.com/review/cam.pennbrenn.com" 
         target="_blank" rel="noopener"
+        aria-label="Read our Trustpilot reviews (opens in new tab)"
       >Trustpilot</a>
 
       <a 
@@ -358,6 +449,7 @@
         class="payhip ghost" 
         href="https://payhip.com/PennCamm" 
         target="_blank" rel="noopener"
+        aria-label="Visit our Payhip store (opens in new tab)"
       >Payhip</a>
 
       <a 
@@ -365,17 +457,19 @@
         class="google ghost" 
         href="https://photos.app.goo.gl/JzjZwhkmQQj8LL4k7" 
         target="_blank" rel="noopener"
+        aria-label="View our Photo Album (opens in new tab)"
       >Photo Album</a>
 
       <a 
         class="btn" 
         href="https://www.pennbrenn.com" 
         target="_blank" rel="noopener"
+        aria-label="Learn more about PennCamm (opens in new tab)"
       >Learn More</a>
     </div>
-
   </div>
 </section>
+
 
         <section id="merch" class="panel merch">
       <div class="glass">
@@ -769,6 +863,7 @@
 </style>
 </body>
 </html>
+
 
 
 
