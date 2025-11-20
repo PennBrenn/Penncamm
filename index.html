@@ -515,14 +515,16 @@
     const optionsContainer = document.getElementById('options-container');
     let OPTIONS = null;
     let selected = {
-      Wrap: [],
-      Case: [],
-      Storage: [],
-      Lens: [],
-      Charger: [],
-      Battery: [],
-      Misc: [],
-      Warranty: []
+        Primary: [],
+        Secondary: [],
+        Wrap: [],
+        Storage: [],
+        Lens: [],
+        Charger: [],
+        Battery: [],
+        Misc: [],
+        Accessories: [],
+        Warranty: []
     };
 
     function money(n){ return `$${Number(n).toFixed(2)}`; }
@@ -547,7 +549,7 @@
         box.appendChild(title);
 
 // multiselect
-        if (cat === 'Lens' || cat === 'Misc') {
+        if (cat === 'Lens' || cat === 'Misc' || cat === 'Accessories') {
           const selectAll = document.createElement('button');
           selectAll.type = 'button';
           selectAll.className = 'select-all';
@@ -626,13 +628,15 @@
     function updateSelection() {
       // reset
       selected = {
+        Primary: [],
+        Secondary: [],
         Wrap: [],
-        Case: [],
         Storage: [],
         Lens: [],
         Charger: [],
         Battery: [],
         Misc: [],
+        Accessories: [],
         Warranty: [],
       };
 
@@ -759,6 +763,7 @@
 </style>
 </body>
 </html>
+
 
 
 
