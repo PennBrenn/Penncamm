@@ -1,37 +1,51 @@
 {
-  "Wrap": [
+  "Primary": [
+    {"name":"Black","price":1.59},
+    {"name":"Color (Specify)","price":1.99},
+    {"name":"White","price":1.99},
+    {"name":"Glitter","price":1.99},
+    {"name":"Glow In the dark","price":1.99},
+    {"name":"Oil Spill","price":1.99},
+    {"name":"Heat Reactive","price":2.49},
+    {"name":"Steel","price":2.99},
+    {"name":"Iron (rusts)","price":2.99},
+    {"name":"Brass","price":2.99},
+    {"name":"Bronze","price":2.99},
+    {"name":"Copper","price":2.99},
+    {"name":"Clear","price":3.99},
+    {"name":"Electroplate (Specify)","price":7.99},
+    {"name":"CNC Steel","price":49.99}
+  ],
+    "Secondary": [
+    {"name":"Black","price":1.59},
+    {"name":"Color (Specify)","price":1.99},
+    {"name":"White","price":1.99},
+    {"name":"Glitter","price":1.99},
+    {"name":"Glow In the dark","price":1.99},
+    {"name":"Oil Spill","price":1.99},
+    {"name":"Heat Reactive","price":2.49},
+    {"name":"Steel","price":2.99},
+    {"name":"Iron (rusts)","price":2.99},
+    {"name":"Brass","price":2.99},
+    {"name":"Bronze","price":2.99},
+    {"name":"Copper","price":2.99},
+    {"name":"Clear","price":3.99},
+    {"name":"Electroplate (Specify)","price":7.99},
+    {"name":"CNC Steel","price":49.99}
+  ],
+    "Wrap": [
     {"name":"Grey Cloth","price":0.99},
-    {"name":"Black Foam","price":0.99},
-    {"name":"White Foam","price":0.99},
-    {"name":"Black Fabric","price":1.49},
     {"name":"Pink Fabric","price":1.49},
     {"name":"Tan Leather","price":1.99},
     {"name":"Brown Leather","price":1.99},
     {"name":"Black Leather","price":1.99},
-    {"name":"Red Velvet","price":2.99},
     {"name":"Reflective","price":2.99},
     {"name":"Fiberglass","price":9.99},
     {"name":"Carbon Fiber","price":14.99}
   ],
-  "Case": [
-    {"name":"Black Plastic","price":1.59},
-    {"name":"White Plastic","price":1.99},
-    {"name":"Glitter","price":1.99},
-    {"name":"Glow","price":1.99},
-    {"name":"Oil Spill","price":1.99},
-    {"name":"Steel","price":2.99},
-    {"name":"Iron (rusts)","price":2.99},
-    {"name":"Brass","price":2.99},
-    {"name":"Copper","price":2.99},
-    {"name":"Composite","price":2.99},
-    {"name":"Clear Plastic","price":3.99},
-    {"name":"Nickel Electroplate","price":7.99},
-    {"name":"Copper Electroplate","price":7.99},
-    {"name":"Titanium","price":99.99}
-  ],
   "Storage": [
     {"name":"None","price":0.00},
-    {"name":"Penncamm Standard 4GB","price":1.99}
+    {"name":"4GB","price":1.99}
   ],
   "Lens": [
     {"name":"Basic","price":0.00},
@@ -44,23 +58,24 @@
     {"name":"USBC to USBA","price":1.99}
   ],
   "Battery": [
-    {"name":"350mah","price":2.99},
-    {"name":"700mah","price":5.99},
-    {"name":"2000mah","price":11.99}
+    {"name":"500mah","price":5.99},
+    {"name":"2000mah","price":11.99},
   ],
   "Misc": [
-    {"name":"No Diffuser","price":0.00},
+    {"name":"Glow In The Dark Diffuser","price":0.00},
+    {"name":"IR Lens (Permanent)","price":2.99},
+  ],
+    "Accessories": [
     {"name":"Keychain","price":0.49},
     {"name":"Carry Strap","price":0.49},
-    {"name":"IR Lens (Permanent)","price":2.99},
-    {"name":"Mount","price":9.99},
-    {"name":"Calc Attachment (TI 84)","price":9.99}
+    {"name":"Necklace Attachment","price":0.49},
   ],
   "Warranty": [
-    {"name":"30 Day Manufacturer Warranty","price":0},
+    {"name":"7 Day Manufacturer Warranty","price":0},
     {"name":"1 Year Extended Warranty","price":4.99}
   ]
 }
+
 
 
 
