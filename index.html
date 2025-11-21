@@ -532,21 +532,131 @@
             <div class="email-actions">
               <button id="generate" class="btn">Generate Email</button>
               <button id="copy" class="btn ghost">Copy Email Text</button>
-              <div class="accordion">
-  <button class="accordion-header">
-    Pay with Card
-    <span class="accordion-icon">+</span>
-  </button>
-  <div class="accordion-content">
-<h2 id="thankyou" class="section-title">Get an Estimate</h2>
-    <a href="YOUR_PAYMENT_LINK_HERE" target="_blank" class="btn">
-      Go to Secure Payment
-    </a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+              
+
+<section id="features" class="panel features">
+  <div class="glass">
+    <h2 class="section-title">Features</h2>
+
+    <div class="accordion-list">
+
+
+
+
+
+    
+      <!-- Build & Durability -->
+      <div class="accordion-item">
+        <button class="accordion-toggle">
+          <span>Build & Durability</span>
+          <span class="arrow">▸</span>
+        </button>
+        <div class="accordion-content">
+          <ul>
+            <li>Stainless steel or reinforced polymer frame</li>
+            <li>Options for a carbon fiber wrap</li>
+            <li>Built to survive everyday use</li>
+            <li>Guaranteed throw tested</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Display -->
+      <div class="accordion-item">
+        <button class="accordion-toggle">
+          <span>Display & Camera</span>
+          <span class="arrow">▸</span>
+        </button>
+        <div class="accordion-content">
+          <ul>
+            <li>High-definition screen</li>
+            <li>Accurate color reproduction</li>
+            <li>Many Lenses to chose from</li>
+            <li>8MP sensor recording in FHD</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Ergonomics -->
+      <div class="accordion-item">
+        <button class="accordion-toggle">
+          <span>Ergonomics</span>
+          <span class="arrow">▸</span>
+        </button>
+        <div class="accordion-content">
+          <ul>
+            <li>Textured leather or fabric grip</li>
+            <li>Comfortable non-slip design</li>
+            <li>Easy to press buttons.</li>
+            <li>Simply swapable lenses</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Repairability -->
+      <div class="accordion-item">
+        <button class="accordion-toggle">
+          <span>Repairability</span>
+          <span class="arrow">▸</span>
+        </button>
+        <div class="accordion-content">
+          <ul>
+            <li>Designed to be serviceable</li>
+            <li>Repair support available</li>
+            <li>Extended warranty options</li>
+            <li>6 Screws for disassembly</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Tech -->
+      <div class="accordion-item">
+        <button class="accordion-toggle">
+          <span>Technology</span>
+          <span class="arrow">▸</span>
+        </button>
+        <div class="accordion-content">
+          <ul>
+            <li>Up to 2000mAh long-life battery</li>
+            <li>Minimal, intuitive interface</li>
+            <li>High-performance flash (Can glow in dark)</li>
+            <li>High speed auto exposure</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+
   </div>
-</div>
+</section>
 
 
-            </div>
+
+
+
+
+
+
+
+
+
+
+              
+              
             <label for="email-preview">Email preview (add custom modifications/questions here)</label>
             <textarea id="email-preview" rows="8"></textarea>
           </div>
@@ -570,90 +680,8 @@
     </footer>
   </main>
 
-  
-<style>
-.accordion {
-  width: 100%;
-  margin: 20px 0;
-  border-radius: 14px;
-  overflow: hidden;
-
-  /* Increase brightness so text becomes readable */
-  background: rgba(255,255,255,0.10);
-  border: 1px solid var(--glass-border);
-  backdrop-filter: blur(14px);
-}
-
-.accordion-header {
-  width: 100%;
-  background: rgba(255,255,255,0.12);  /* slightly brighter than body panels */
-  color: var(--title-color);
-  padding: 16px 20px;
-  font-size: 1.1rem;
-  text-align: left;
-  border: none;
-  outline: none;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  cursor: pointer;
-}
-
-.accordion-header:hover {
-  background: rgba(255,255,255,0.18);
-}
-
-.accordion-icon {
-  font-size: 1.4rem;
-  transition: transform 0.25s ease;
-}
-
-/* Content */
-.accordion-content {
-  max-height: 0;
-  overflow: hidden;
-  padding: 0 20px;
-
-  /* FORCE TEXT VISIBILITY */
-  color: var(--para-color);
-  transition: max-height 0.3s ease, padding 0.3s ease;
-}
-
-.accordion-content.open {
-  padding: 20px;
-}
-
-.accordion-content h3 {
-  color: var(--title-color);
-  margin-top: 0;
-}
-
-.accordion-content p,
-.accordion-content ul li {
-  color: var(--para-color);   /* readable gray from your theme */
-}
-
-</style>
-  
 <script>
-document.querySelectorAll(".accordion-header").forEach(header => {
-  header.addEventListener("click", () => {
-    const content = header.nextElementSibling;
-    const icon = header.querySelector(".accordion-icon");
 
-    // Toggle open class
-    content.classList.toggle("open");
-
-    if (content.classList.contains("open")) {
-      content.style.maxHeight = content.scrollHeight + "px";
-      icon.style.transform = "rotate(45deg)";
-    } else {
-      content.style.maxHeight = "0";
-      icon.style.transform = "rotate(0deg)";
-    }
-  });
-});
-  
     const header = document.getElementById('site-header');
     const navItems = Array.from(document.querySelectorAll('.nav-item'));
     const sections = Array.from(document.querySelectorAll('section.panel'));
@@ -943,6 +971,7 @@ document.querySelectorAll(".accordion-header").forEach(header => {
 </style>
 </body>
 </html>
+
 
 
 
