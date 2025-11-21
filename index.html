@@ -504,7 +504,7 @@
 <label for="customer-address">Address</label>
 <input id="customer-address" type="text" placeholder="1234 Silly Dr." autocomplete="street-address" />
 
-<label for="customer-address">Payment</label>
+<label for="customer-payment">Payment</label>
 <input id="customer-payment" type="text" placeholder="Cash/Card" autocomplete="cash" />
           </div>
 <a id="material-btn" class="btn ghost" 
@@ -758,7 +758,7 @@
       const email = document.getElementById('customer-email').value || '[Email]';
       const phone = document.getElementById('customer-phone').value || '[Phone]';
       const address = document.getElementById('customer-address').value || '[Address]';
-      const address = document.getElementById('customer-payment').value || '[Payment]';
+      const Payment = document.getElementById('customer-payment').value || '[Payment]';
       const notes = document.getElementById('notes').value || '';
 
       const lines = [];
@@ -767,8 +767,8 @@
       lines.push(`From: ${email}`);
       lines.push(`From: ${name}`);
       lines.push(`Phone: ${phone}`);
-      lines.push(`address: ${address}`);
-      lines.push(`address: ${payment}`);
+      lines.push(`Address: ${address}`);
+      lines.push(`Payment: ${payment}`);
       lines.push(`Options:`);
 
       Object.keys(selected).forEach(cat => {
@@ -851,6 +851,7 @@
 </style>
 </body>
 </html>
+
 
 
 
