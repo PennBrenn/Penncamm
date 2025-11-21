@@ -532,15 +532,38 @@
             <div class="email-actions">
               <button id="generate" class="btn">Generate Email</button>
               <button id="copy" class="btn ghost">Copy Email Text</button>
-              <a 
-  id="copy" 
-  class="btn ghost" 
-  href="https://gl.me/u/GWqmZ8skMh4D" 
-  target="_blank" 
-  rel="noopener"
->
-  Pay With Card
-</a>
+<!-- BACKDROP -->
+<div id="popup-backdrop" class="popup-backdrop"></div>
+
+<!-- FIRST POPUP -->
+<div id="popup-1" class="popup">
+  <h2>Pay With Card</h2>
+  <p>Please read this carefully before proceeding.</p>
+
+  <ul>
+    <li>Payment is processed securely.</li>
+    <li>You will be redirected to the card checkout page after confirming.</li>
+    <li>Contact cam@pennbrenn.com for help.</li>
+  </ul>
+
+  <button id="open-second-popup" class="btn">Continue</button>
+  <button id="close-popup-1" class="btn ghost">Cancel</button>
+</div>
+
+<!-- SECOND POPUP -->
+<div id="popup-2" class="popup">
+  <h2>Ready to Pay?</h2>
+  <p>Click below to open the checkout page.</p>
+
+  <a 
+    href="https://gl.me/u/GWqmZ8skMh4D"
+    target="_blank" 
+    class="btn"
+  >Open Payment</a>
+
+  <button id="close-popup-2" class="btn ghost">Close</button>
+</div>
+
             </div>
             <label for="email-preview">Email preview (add custom modifications/questions here)</label>
             <textarea id="email-preview" rows="8"></textarea>
@@ -567,6 +590,52 @@
 
   <script>
 
+<script>
+  const payBtn = document.querySelector('a[href="https://gl.me/u/GWqmZ8skMh4D"]');
+
+  const popup1 = document.getElementById("popup-1");
+  const popup2 = document.getElementById("popup-2");
+  const backdrop = document.getElementById("popup-backdrop");
+
+  const openSecond = document.getElementById("open-second-popup");
+  const close1 = document.getElementById("close-popup-1");
+  const close2 = document.getElementById("close-popup-2");
+
+  // Open the first popup instead of going to the URL
+  payBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    popup1.style.display = "block";
+    backdrop.style.display = "block";
+  });
+
+  // Move to second popup
+  openSecond.addEventListener("click", () => {
+    popup1.style.display = "none";
+    popup2.style.display = "block";
+  });
+
+  // Close first
+  close1.addEventListener("click", () => {
+    popup1.style.display = "none";
+    backdrop.style.display = "none";
+  });
+
+  // Close second
+  close2.addEventListener("click", () => {
+    popup2.style.display = "none";
+    backdrop.style.display = "none";
+  });
+
+  // Clicking backdrop closes everything
+  backdrop.addEventListener("click", () => {
+    popup1.style.display = "none";
+    popup2.style.display = "none";
+    backdrop.style.display = "none";
+  });
+</script>
+
+
+    
     const header = document.getElementById('site-header');
     const navItems = Array.from(document.querySelectorAll('.nav-item'));
     const sections = Array.from(document.querySelectorAll('section.panel'));
@@ -856,6 +925,7 @@
 </style>
 </body>
 </html>
+
 
 
 
