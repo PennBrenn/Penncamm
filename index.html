@@ -585,16 +585,17 @@
   margin: 20px 0;
   border-radius: 14px;
   overflow: hidden;
-  border: 1px solid rgba(255,255,255,0.08);
-  background: rgba(255,255,255,0.05);
-  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.15);
+  background: rgba(255,255,255,0.10);   /* More visible glass */
+  backdrop-filter: blur(12px);
 }
 
+/* Header */
 .accordion-header {
   width: 100%;
-  background: rgba(255,255,255,0.05);
-  color: white;
-  padding: 15px 20px;
+  background: rgba(255,255,255,0.12);   /* Slightly brighter for contrast */
+  color: #ffffff;
+  padding: 16px 20px;
   font-size: 1.1rem;
   text-align: left;
   border: none;
@@ -606,7 +607,7 @@
 }
 
 .accordion-header:hover {
-  background: rgba(255,255,255,0.08);
+  background: rgba(255,255,255,0.18);
 }
 
 .accordion-icon {
@@ -614,11 +615,12 @@
   transition: transform 0.25s ease;
 }
 
+/* Content area */
 .accordion-content {
   max-height: 0;
   overflow: hidden;
   padding: 0 20px;
-  color: white;
+  color: #ffffff;                       /* Ensure text is fully white */
   transition: max-height 0.3s ease, padding 0.3s ease;
 }
 
@@ -626,8 +628,16 @@
   padding: 20px;
 }
 
+/* Text inside */
 .accordion-content h3 {
   margin-top: 0;
+  color: #ffffff;
+}
+
+.accordion-content p,
+.accordion-content ul li {
+  color: #ffffff;                       /* Force visible text */
+  opacity: 0.95;                        /* Slight softening */
 }
 
 </style>
@@ -940,6 +950,7 @@ document.querySelectorAll(".accordion-header").forEach(header => {
 </style>
 </body>
 </html>
+
 
 
 
