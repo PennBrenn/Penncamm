@@ -585,16 +585,17 @@
   margin: 20px 0;
   border-radius: 14px;
   overflow: hidden;
-  border: 1px solid rgba(255,255,255,0.15);
-  background: rgba(255,255,255,0.10);   /* More visible glass */
-  backdrop-filter: blur(12px);
+
+  /* Increase brightness so text becomes readable */
+  background: rgba(255,255,255,0.10);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(14px);
 }
 
-/* Header */
 .accordion-header {
   width: 100%;
-  background: rgba(255,255,255,0.12);   /* Slightly brighter for contrast */
-  color: #ffffff;
+  background: rgba(255,255,255,0.12);  /* slightly brighter than body panels */
+  color: var(--title-color);
   padding: 16px 20px;
   font-size: 1.1rem;
   text-align: left;
@@ -615,12 +616,14 @@
   transition: transform 0.25s ease;
 }
 
-/* Content area */
+/* Content */
 .accordion-content {
   max-height: 0;
   overflow: hidden;
   padding: 0 20px;
-  color: #ffffff;                       /* Ensure text is fully white */
+
+  /* FORCE TEXT VISIBILITY */
+  color: var(--para-color);
   transition: max-height 0.3s ease, padding 0.3s ease;
 }
 
@@ -628,16 +631,14 @@
   padding: 20px;
 }
 
-/* Text inside */
 .accordion-content h3 {
+  color: var(--title-color);
   margin-top: 0;
-  color: #ffffff;
 }
 
 .accordion-content p,
 .accordion-content ul li {
-  color: #ffffff;                       /* Force visible text */
-  opacity: 0.95;                        /* Slight softening */
+  color: var(--para-color);   /* readable gray from your theme */
 }
 
 </style>
@@ -950,6 +951,7 @@ document.querySelectorAll(".accordion-header").forEach(header => {
 </style>
 </body>
 </html>
+
 
 
 
