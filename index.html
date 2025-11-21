@@ -503,14 +503,11 @@
 
 <label for="customer-address">Address</label>
 <input id="customer-address" type="text" placeholder="1234 Silly Dr." autocomplete="street-address" />
-
-<label for="customer-payment">Payment</label>
-<input id="customer-payment" type="text" placeholder="Cash/Card" autocomplete="cash" />
           </div>
 <a id="material-btn" class="btn ghost" 
    href="https://docs.google.com/spreadsheets/d/1t8GuPmQTD5rpYl0SmdKfXX6JCIt4-1mVY-l724QitlI/edit?usp=sharing"
    target="_blank" rel="noopener">
-  Sample Photos / Item Stock
+  Sample Photos
 </a>
           <div id="options-container" class="options-container">
             <!-- Options after json loaded -->
@@ -534,10 +531,10 @@
             <div class="email-actions">
               <button id="generate" class="btn">Generate Order</button>
               <button id="copy" class="btn ghost">Copy Order Info</button>
+              <br>
             <label for="email-preview">Order Box</label>
             <textarea id="email-preview" rows="8"></textarea>
           </div>
-            <p>Now, you can proceed to the next step.</p>
         </form>
       </div>
     </section>
@@ -758,7 +755,6 @@
       const email = document.getElementById('customer-email').value || '[Email]';
       const phone = document.getElementById('customer-phone').value || '[Phone]';
       const address = document.getElementById('customer-address').value || '[Address]';
-      const Payment = document.getElementById('customer-payment').value || '[Payment]';
       const notes = document.getElementById('notes').value || '';
 
       const lines = [];
@@ -768,7 +764,6 @@
       lines.push(`From: ${name}`);
       lines.push(`Phone: ${phone}`);
       lines.push(`Address: ${address}`);
-      lines.push(`Payment: ${payment}`);
       lines.push(`Options:`);
 
       Object.keys(selected).forEach(cat => {
@@ -851,6 +846,7 @@
 </style>
 </body>
 </html>
+
 
 
 
