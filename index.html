@@ -503,6 +503,9 @@
 
 <label for="customer-address">Address</label>
 <input id="customer-address" type="text" placeholder="1234 Silly Dr." autocomplete="street-address" />
+
+<label for="customer-address">Payment</label>
+<input id="customer-payment" type="text" placeholder="Cash/Card" autocomplete="cash" />
           </div>
 <a id="material-btn" class="btn ghost" 
    href="https://docs.google.com/spreadsheets/d/1t8GuPmQTD5rpYl0SmdKfXX6JCIt4-1mVY-l724QitlI/edit?usp=sharing"
@@ -517,149 +520,24 @@
           <div class="fixed-fees">
             <div>Parts: <strong>$14.99</strong></div>
             <div>Labor: <strong>$9.99</strong></div>
-            <div class="lead-time">Lead time: <strong>Up to 30 days</strong></div>
-            <strong>Notice:</strong>If parts are matching, up to a 50% discount can be aplied to both parts.
+            <div class="lead-time">Lead time: <strong>&le; 30 Days | ~ 3 days</strong></div>
           </div>
 
           <div class="preview-and-total">
             <div class="total">
-              <div>Maximum Price:<p>&nbsp;<small>(Discounts applied after contact)</small></p></div>
+              <div>Price:</div>
               <div id="total-value" class="total-value">$0.00</div>
             </div>
 
             <label for="notes">Questions / Custom Modifications</label>
             <textarea id="notes" rows="4" placeholder="Add any special requests or questions..."></textarea>
             <div class="email-actions">
-              <button id="generate" class="btn">Generate Email</button>
-              <button id="copy" class="btn ghost">Copy Email Text</button>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-              
-
-<section id="features" class="panel features">
-  <div class="glass">
-    <h2 class="section-title">Features</h2>
-
-    <div class="accordion-list">
-
-
-
-
-
-    
-      <!-- Build & Durability -->
-      <div class="accordion-item">
-        <button class="accordion-toggle">
-          <span>Build & Durability</span>
-          <span class="arrow">▸</span>
-        </button>
-        <div class="accordion-content">
-          <ul>
-            <li>Stainless steel or reinforced polymer frame</li>
-            <li>Options for a carbon fiber wrap</li>
-            <li>Built to survive everyday use</li>
-            <li>Guaranteed throw tested</li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- Display -->
-      <div class="accordion-item">
-        <button class="accordion-toggle">
-          <span>Display & Camera</span>
-          <span class="arrow">▸</span>
-        </button>
-        <div class="accordion-content">
-          <ul>
-            <li>High-definition screen</li>
-            <li>Accurate color reproduction</li>
-            <li>Many Lenses to chose from</li>
-            <li>8MP sensor recording in FHD</li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- Ergonomics -->
-      <div class="accordion-item">
-        <button class="accordion-toggle">
-          <span>Ergonomics</span>
-          <span class="arrow">▸</span>
-        </button>
-        <div class="accordion-content">
-          <ul>
-            <li>Textured leather or fabric grip</li>
-            <li>Comfortable non-slip design</li>
-            <li>Easy to press buttons.</li>
-            <li>Simply swapable lenses</li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- Repairability -->
-      <div class="accordion-item">
-        <button class="accordion-toggle">
-          <span>Repairability</span>
-          <span class="arrow">▸</span>
-        </button>
-        <div class="accordion-content">
-          <ul>
-            <li>Designed to be serviceable</li>
-            <li>Repair support available</li>
-            <li>Extended warranty options</li>
-            <li>6 Screws for disassembly</li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- Tech -->
-      <div class="accordion-item">
-        <button class="accordion-toggle">
-          <span>Technology</span>
-          <span class="arrow">▸</span>
-        </button>
-        <div class="accordion-content">
-          <ul>
-            <li>Up to 2000mAh long-life battery</li>
-            <li>Minimal, intuitive interface</li>
-            <li>High-performance flash (Can glow in dark)</li>
-            <li>High speed auto exposure</li>
-          </ul>
-        </div>
-      </div>
-
-    </div>
-
-  </div>
-</section>
-
-
-
-
-
-
-
-
-
-
-
-
-              
-              
-            <label for="email-preview">Email preview (add custom modifications/questions here)</label>
+              <button id="generate" class="btn">Generate Order</button>
+              <button id="copy" class="btn ghost">Copy Order Info</button>
+            <label for="email-preview">Order Box</label>
             <textarea id="email-preview" rows="8"></textarea>
           </div>
+            <p>Now, you can proceed to the next step.</p>
         </form>
       </div>
     </section>
@@ -880,6 +758,7 @@
       const email = document.getElementById('customer-email').value || '[Email]';
       const phone = document.getElementById('customer-phone').value || '[Phone]';
       const address = document.getElementById('customer-address').value || '[Address]';
+      const address = document.getElementById('customer-payment').value || '[Payment]';
       const notes = document.getElementById('notes').value || '';
 
       const lines = [];
@@ -889,6 +768,7 @@
       lines.push(`From: ${name}`);
       lines.push(`Phone: ${phone}`);
       lines.push(`address: ${address}`);
+      lines.push(`address: ${payment}`);
       lines.push(`Options:`);
 
       Object.keys(selected).forEach(cat => {
@@ -971,6 +851,7 @@
 </style>
 </body>
 </html>
+
 
 
 
