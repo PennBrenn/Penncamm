@@ -532,8 +532,27 @@
             <div class="email-actions">
               <button id="generate" class="btn">Generate Email</button>
               <button id="copy" class="btn ghost">Copy Email Text</button>
-              <button id="pay-with-card" class="btn">Pay with Card</button>
-              <div id="pay-backdrop" class="pay-backdrop"></div>
+              <div class="accordion">
+  <button class="accordion-header">
+    Pay with Card
+    <span class="accordion-icon">+</span>
+  </button>
+
+  <div class="accordion-content">
+    <h3>How to Pay</h3>
+    <p>Please read the instructions before proceeding to payment:</p>
+    <ul>
+      <li>Make sure your quote is finalized.</li>
+      <li>Use the same email you entered in the form.</li>
+      <li>You will receive a confirmation after payment.</li>
+    </ul>
+
+    <a href="YOUR_PAYMENT_LINK_HERE" target="_blank" class="btn">
+      Go to Secure Payment
+    </a>
+  </div>
+</div>
+
 
             </div>
             <label for="email-preview">Email preview (add custom modifications/questions here)</label>
@@ -559,56 +578,56 @@
     </footer>
   </main>
 
-  <div id="pay-popup-1" class="pay-popup">
-  <h3>How to Pay</h3>
-  <p>Please read the instructions before proceeding to payment.</p>
-  <ul>
-    <li>Make sure your quote is finalized.</li>
-    <li>Use the same email you entered in the form.</li>
-    <li>After payment, you will receive confirmation.</li>
-  </ul>
-  <button id="open-pay-popup-2" class="btn ghost">Continue</button>
-  <button id="close-pay-popup-1" class="btn ghost">Close</button>
-</div>
-
-<!-- POPUP 2: Link to Third-Party Payment -->
-<div id="pay-popup-2" class="pay-popup">
-  <h3>Proceed to Payment</h3>
-  <p>Click below to pay securely via our payment partner.</p>
-  <a href="YOUR_PAYMENT_LINK_HERE" target="_blank" class="btn">Go to Payment</a>
-  <button id="close-pay-popup-2" class="btn ghost">Close</button>
-</div>
   
 <style>
-.pay-backdrop {
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.6);
-  display: none;
-  z-index: 2000;
+.accordion {
+  width: 100%;
+  margin: 20px 0;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.08);
+  background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(10px);
 }
 
-.pay-popup {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: min(90%, 400px);
+.accordion-header {
+  width: 100%;
   background: rgba(255,255,255,0.05);
   color: white;
-  border: 1px solid rgba(255,255,255,0.08);
+  padding: 15px 20px;
+  font-size: 1.1rem;
+  text-align: left;
+  border: none;
+  outline: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+
+.accordion-header:hover {
+  background: rgba(255,255,255,0.08);
+}
+
+.accordion-icon {
+  font-size: 1.4rem;
+  transition: transform 0.25s ease;
+}
+
+.accordion-content {
+  max-height: 0;
+  overflow: hidden;
+  padding: 0 20px;
+  color: white;
+  transition: max-height 0.3s ease, padding 0.3s ease;
+}
+
+.accordion-content.open {
   padding: 20px;
-  border-radius: 14px;
-  display: none;
-  backdrop-filter: blur(10px);
-  z-index: 2100;
 }
-.pay-popup h3 {
+
+.accordion-content h3 {
   margin-top: 0;
-}
-.pay-popup .btn {
-  margin-top: 12px;
-  width: 100%;
 }
 
 </style>
@@ -616,48 +635,29 @@
   <script>
 
 <script>
-  const payBtn = document.querySelector('a[href="https://gl.me/u/GWqmZ8skMh4D"]');
 
-  const popup1 = document.getElementById("popup-1");
-  const popup2 = document.getElementById("popup-2");
-  const backdrop = document.getElementById("popup-backdrop");
+<script>
+document.querySelectorAll(".accordion-header").forEach(header => {
+  header.addEventListener("click", () => {
+    const content = header.nextElementSibling;
+    const icon = header.querySelector(".accordion-icon");
 
-  const openSecond = document.getElementById("open-second-popup");
-  const close1 = document.getElementById("close-popup-1");
-  const close2 = document.getElementById("close-popup-2");
+    // Toggle open class
+    content.classList.toggle("open");
 
-  // Open the first popup instead of going to the URL
-  payBtn.addEventListener("click", (e) => {
-    e.preventDefault();
-    popup1.style.display = "block";
-    backdrop.style.display = "block";
+    if (content.classList.contains("open")) {
+      content.style.maxHeight = content.scrollHeight + "px";
+      icon.style.transform = "rotate(45deg)";
+    } else {
+      content.style.maxHeight = "0";
+      icon.style.transform = "rotate(0deg)";
+    }
   });
+});
+</script>
 
-  // Move to second popup
-  openSecond.addEventListener("click", () => {
-    popup1.style.display = "none";
-    popup2.style.display = "block";
-  });
 
-  // Close first
-  close1.addEventListener("click", () => {
-    popup1.style.display = "none";
-    backdrop.style.display = "none";
-  });
-
-  // Close second
-  close2.addEventListener("click", () => {
-    popup2.style.display = "none";
-    backdrop.style.display = "none";
-  });
-
-  // Clicking backdrop closes everything
-  backdrop.addEventListener("click", () => {
-    popup1.style.display = "none";
-    popup2.style.display = "none";
-    backdrop.style.display = "none";
-  });
-    
+  
     const header = document.getElementById('site-header');
     const navItems = Array.from(document.querySelectorAll('.nav-item'));
     const sections = Array.from(document.querySelectorAll('section.panel'));
@@ -947,6 +947,7 @@
 </style>
 </body>
 </html>
+
 
 
 
