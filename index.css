@@ -21,6 +21,22 @@
     --color-b: #465e73;
 }
 
+:root {
+    --accent-color: #ff5c00; /* your accent color */
+}
+
+a {
+    color: var(--accent-color);
+}
+
+a:hover {
+    color: var(--accent-color);
+    opacity: 0.8; /* optional subtle hover */
+}
+
+
+
+
 /* no touch pleas */
 @keyframes bgColorShift {
     from {
@@ -802,6 +818,7 @@ section.panel+section.panel {
 .email-actions+label {
     margin-top: 8px;
 }
+
 
 
 
