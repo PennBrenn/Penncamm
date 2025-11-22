@@ -26,6 +26,17 @@ html, body {
     margin: 0;
 }
 
+.payment-options {
+    display: flex;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+/* Make both accordion items evenly fill space */
+.payment-options .accordion-item {
+    flex: 1;
+}
+
 /* no touch pleas */
 @keyframes bgColorShift {
     from {
@@ -793,4 +804,5 @@ section.panel+section.panel {
 .email-actions+label {
     margin-top: 8px;
 }
+
 
