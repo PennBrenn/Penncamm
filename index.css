@@ -361,6 +361,60 @@ section.panel + section.panel { margin-top: var(--panel-gap); }
 
 
 
+/* --- Order Preview Fix --- */
+
+/* Container inside Buy section */
+.preview-and-total {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 20px;
+  width: 100%;
+}
+
+/* Total box layout */
+.preview-and-total .total {
+  display: flex;
+  justify-content: space-between;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--title-color);
+}
+
+/* Textareas (notes + email preview) */
+#notes,
+#email-preview {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  border-radius: 10px;
+  padding: 12px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.08);
+  color: var(--para-color);
+  resize: vertical;
+}
+
+/* Buttons row */
+.email-actions {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+/* Make buttons behave nicely */
+.email-actions .btn,
+.email-actions .ghost {
+  flex: 1;
+  min-width: 160px;
+  text-align: center;
+}
+
+/* Label above order box */
+.email-actions + label {
+  margin-top: 8px;
+}
 
 
 
