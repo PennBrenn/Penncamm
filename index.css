@@ -21,10 +21,6 @@
     --color-b: #465e73;
 }
 
-:root {
-    --accent-color: #ff5c00; /* your accent color */
-}
-
 a {
     color: var(--accent-color);
 }
@@ -818,6 +814,7 @@ section.panel+section.panel {
 .email-actions+label {
     margin-top: 8px;
 }
+
 
 
 
