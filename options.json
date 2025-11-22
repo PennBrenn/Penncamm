@@ -61,8 +61,11 @@
     {"name":"500mah","price":5.99},
     {"name":"2000mah","price":11.99}
   ],
-  "Misc": [
-    {"name":"Glow In The Dark Diffuser","price":0.00},
+  "Diffuser": [
+    {"name":"Standard Clear Diffuser","price":0.00},
+    {"name":"Glow In The Dark Diffuser","price":0.99},
+    {"name":"Smoked Diffuser","price":0.99},
+    {"name":"Blacked Out Diffuser","price":0.99},
     {"name":"IR Lens (Permanent)","price":2.99}
   ],
     "Accessories": [
@@ -75,6 +78,7 @@
     {"name":"1 Year Extended Warranty","price":4.99}
   ]
 }
+
 
 
 
