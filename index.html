@@ -408,7 +408,7 @@
     let OPTIONS = null;
     let selected = {
       Primary: [], Secondary: [], Wrap: [], Storage: [], Lens: [], Charger: [],
-      Battery: [], Misc: [], Accessories: [], Warranty: []
+      Battery: [], Diffuser: [], Accessories: [], Warranty: []
     };
 
     function money(n) { return `$${Number(n).toFixed(2)}`; }
@@ -434,7 +434,7 @@
         box.appendChild(title);
 
         /* Multi-select categories */
-        if (['Lens', 'Misc', 'Accessories'].includes(cat)) {
+        if (['Lens', 'Accessories'].includes(cat)) {
           const selectAll = document.createElement('button');
           selectAll.type = 'button';
           selectAll.className = 'select-all';
@@ -521,7 +521,7 @@
     function updateSelection() {
       selected = {
         Primary: [], Secondary: [], Wrap: [], Storage: [], Lens: [], Charger: [],
-        Battery: [], Misc: [], Accessories: [], Warranty: []
+        Battery: [], Diffuser: [], Accessories: [], Warranty: []
       };
 
       const inputs = optionsContainer.querySelectorAll('input');
@@ -616,6 +616,7 @@
 
 </body>
 </html>
+
 
 
 
