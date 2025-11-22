@@ -32,6 +32,21 @@ html, body {
     margin-top: 20px;
 }
 
+.payment-options {
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: space-between;
+    align-items: stretch;
+    gap: 16px;
+}
+
+/* Make each accordion take half the width */
+.payment-options .accordion-item {
+    flex: 1 1 0;
+    width: 50%;
+}
+
+
 /* Make both accordion items evenly fill space */
 .payment-options .accordion-item {
     flex: 1;
@@ -804,5 +819,6 @@ section.panel+section.panel {
 .email-actions+label {
     margin-top: 8px;
 }
+
 
 
