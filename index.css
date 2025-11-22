@@ -401,8 +401,8 @@ main {
 }
 
 /* Toggle button */
-.accordion-toggle {
-    width: 100%;
+.accordion-toggle {    /* penis */
+    width: auto;
     background: transparent;
     border: none;
     padding: 14px 16px;
@@ -788,6 +788,7 @@ section.panel+section.panel {
 .email-actions+label {
     margin-top: 8px;
 }
+
 
 
 
