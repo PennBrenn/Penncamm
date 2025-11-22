@@ -21,37 +21,6 @@
     --color-b: #465e73;
 }
 
-html, body {
-    height: 100%;
-    margin: 0;
-}
-
-.payment-options {
-    display: flex;
-    gap: 12px;
-    margin-top: 20px;
-}
-
-.payment-options {
-    display: flex !important;
-    flex-direction: row !important;
-    justify-content: space-between;
-    align-items: stretch;
-    gap: 16px;
-}
-
-/* Make each accordion take half the width */
-.payment-options .accordion-item {
-    flex: 1 1 0;
-    width: 50%;
-}
-
-
-/* Make both accordion items evenly fill space */
-.payment-options .accordion-item {
-    flex: 1;
-}
-
 /* no touch pleas */
 @keyframes bgColorShift {
     from {
@@ -819,6 +788,7 @@ section.panel+section.panel {
 .email-actions+label {
     margin-top: 8px;
 }
+
 
 
 
