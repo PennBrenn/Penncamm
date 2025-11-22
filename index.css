@@ -384,6 +384,20 @@ main {
     color: var(--para-color);
 }
 
+
+#pay-options {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    gap: 16px; /* optional spacing */
+}
+
+#pay-options .accordion-item {
+    flex: 1;          /* fill available space equally */
+    width: 0;         /* prevents Bootstrap from forcing full width */
+}
+
+
 /* Accordion Container */
 .accordion-list {
     display: flex;
@@ -401,8 +415,8 @@ main {
 }
 
 /* Toggle button */
-.accordion-toggle {    /* penis */
-    width: auto;
+.accordion-toggle { 
+    width: 100%;
     background: transparent;
     border: none;
     padding: 14px 16px;
@@ -788,6 +802,7 @@ section.panel+section.panel {
 .email-actions+label {
     margin-top: 8px;
 }
+
 
 
 
