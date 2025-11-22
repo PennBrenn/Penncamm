@@ -41,7 +41,6 @@ body {
     place-items: center;
     color: white;
     font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-    animation: bgColorShift 10s linear infinite alternate;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -793,3 +792,4 @@ section.panel+section.panel {
 .email-actions+label {
     margin-top: 8px;
 }
+
