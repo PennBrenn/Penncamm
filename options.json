@@ -8,13 +8,11 @@
     {"name":"Oil Spill","price":1.99},
     {"name":"Heat Reactive","price":2.49},
     {"name":"Steel","price":2.99},
-    {"name":"Iron (rusts)","price":2.99},
     {"name":"Brass","price":2.99},
     {"name":"Bronze","price":2.99},
     {"name":"Copper","price":2.99},
     {"name":"Clear","price":3.99},
-    {"name":"Electroplate (Specify)","price":7.99},
-    {"name":"CNC Steel","price":49.99}
+    {"name":"Electroplate (Specify)","price":7.99}
   ],
     "Secondary": [
     {"name":"Black","price":1.59},
@@ -25,13 +23,11 @@
     {"name":"Oil Spill","price":1.99},
     {"name":"Heat Reactive","price":2.49},
     {"name":"Steel","price":2.99},
-    {"name":"Iron (rusts)","price":2.99},
     {"name":"Brass","price":2.99},
     {"name":"Bronze","price":2.99},
     {"name":"Copper","price":2.99},
     {"name":"Clear","price":3.99},
-    {"name":"Electroplate (Specify)","price":7.99},
-    {"name":"CNC Steel","price":49.99}
+    {"name":"Electroplate (Specify)","price":7.99}
   ],
     "Wrap": [
     {"name":"Grey Cloth","price":0.99},
@@ -45,7 +41,7 @@
   ],
   "Storage": [
     {"name":"None","price":0.00},
-    {"name":"4GB","price":1.99}
+    {"name":"4GB","price":2.99}
   ],
   "Lens": [
     {"name":"Basic","price":0.00},
@@ -54,8 +50,8 @@
     {"name":"Zoom (>10x)","price":14.99}
   ],
   "Charger": [
-    {"name":"None (Use own)","price":0.00},
-    {"name":"USBC to USBA","price":1.99}
+    {"name":"None)","price":0.00},
+    {"name":"USB-C","price":1.99}
   ],
   "Battery": [
     {"name":"500mah","price":5.99},
@@ -66,7 +62,6 @@
     {"name":"Glow In The Dark Diffuser","price":0.99},
     {"name":"Smoked Diffuser","price":0.99},
     {"name":"Blacked Out Diffuser","price":0.99},
-    {"name":"IR Lens (Permanent)","price":2.99}
   ],
     "Accessories": [
     {"name":"Keychain","price":0.49},
